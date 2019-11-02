@@ -1,0 +1,16 @@
+﻿@model Modells.Models.Picture
+@{
+    ViewBag.Title = "Test";
+}
+
+@*<p>@Html.Display("pictureTitle")</p>*@
+
+<div class="cadre">
+        <div class="picture" style="background-image: url('@Model.pictureStandardSizeUrl');">this is the image !</div>
+        <div class="tagExifs"><button type="button" class="btn btn-primary">carre1</button></div>
+        <div class="tagZoom">carre2</div>
+        <div class="tagGet">carre3</div>
+        <div class="tagStats">carre4</div>
+</div>
+@*<p>@Html.Display("pictureDescription")</p>*@
+
