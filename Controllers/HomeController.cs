@@ -10,7 +10,13 @@ namespace Modells.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            Picture pic = new Picture();
+
+            pic.pictureId = 1;
+            pic.pictureTitle = "Route";
+            pic.pictureDescription = "Une jolie route en automne";
+            pic.pictureStandardSizeUrl = "../images/route.jpg";
+            return View(pic);
         }
 
         public ActionResult About()
