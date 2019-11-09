@@ -1,8 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@*<!DOCTYPE html> = Instruction to the web browser about what version of HTML: current version is HTML5.*@
+<!DOCTYPE html>
 <html>
 <head>
+    @*Encoding type for HTML page as "Universal Character Set Transformation Format - 8 bits"*@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    @*Settings for adaptative design & zoom level*@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Modells</title>
     @Styles.Render("~/Content/css")
@@ -13,40 +16,12 @@
     <header>Header For Modells</header>
     @*End Of Header*@
     @*Star Of Navigation Bar*@
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
+    <nav class="navbar border border-light bg-transparent">
+        @*Display the logo*@
+        <a class="navbar-brand" href="#">
+            <img src="~/Content/Images/modells.jpg" width="205" height="55" class="d-inline-block align-top" alt="modells">
+        </a>
+        Hello I Am The Nav Bar !
     </nav>
     @*End Of Navigation Bar*@
     @*Star Of Main Content*@
@@ -56,7 +31,7 @@
     @*End Of Main Content*@
     @*Start Of Footer*@
     <footer>
-        <p>&copy; @DateTime.Now.Year - Modells</p>
+        &copy; @DateTime.Now.Year - Modells
     </footer>
     @*End Of Footer*@
     @Scripts.Render("~/bundles/jquery")
