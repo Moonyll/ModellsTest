@@ -7,30 +7,46 @@
     <meta charset="utf-8" />
     @*Settings for adaptative design & zoom level*@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*Load CSS for FontAwesome Icons*@
+    <link href="~/Content/Icons/css/all.css" rel="stylesheet">
     <title>@ViewBag.Title - Modells</title>
+    @*Load the CSS bundles styles.*@
     @Styles.Render("~/Content/css")
+    @*Load the modernizr / jquery / popper bundles scripts.*@
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
 </head>
 <body>
     @*Start Of Header*@
-    <header>Header For Modells</header>
+    <header class="bg-transparent border border-dark">Header For Modells</header>
     @*End Of Header*@
-    @*Star Of Navigation Bar*@
-    <nav class="navbar border border-light bg-transparent">
+    @*Start Of Navigation Bar*@
+    <nav class="navbar bg-transparent border border-dark">
         @*Display the logo*@
-        <a class="navbar-brand" href="#">
-            <img src="~/Content/Images/modells.jpg" width="205" height="55" class="d-inline-block align-top" alt="modells">
+        <a class="navbar-brand h-auto" href="#">
+            <img src="~/Content/Images/modells.jpg" class="img-fluid img-thumbnail d-block mx-auto" alt="modells" />
         </a>
         Hello I Am The Nav Bar !
+        <i class="far fa-image"></i>
+        <i class="far fa-images"></i>
+        <i class="fas fa-info"></i>
+        <i class="far fa-flag"></i>
+        <i class="fas fa-download"></i>
+        <i class="fas fa-eye"></i>
+        <i class="fas fa-search"></i>
+        <i class="fas fa-camera"></i>
+        <i class="far fa-heart"></i>
+        <i class="fas fa-plus"></i>
     </nav>
     @*End Of Navigation Bar*@
-    @*Star Of Main Content*@
-    <main class="container body-content">
+    @*Start Of Main Content*@
+    <main class="bg-success">
         @RenderBody()
     </main>
     @*End Of Main Content*@
     @*Start Of Footer*@
-    <footer>
+    <footer class="bg-transparent border border-dark">
         &copy; @DateTime.Now.Year - Modells
     </footer>
     @*End Of Footer*@

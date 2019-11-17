@@ -2,11 +2,14 @@
 @{
     ViewBag.Title = "Test";
 }
-<div class="cadre">
-        <div class="picture" style="background-image: url('@Model.pictureStandardSizeUrl');">this is the image !</div>
-        <div class="tagExifs"><button type="button" class="btn btn-primary">carre1</button></div>
-        <div class="tagZoom">carre2</div>
-        <div class="tagGet">carre3</div>
-        <div class="tagStats">carre4</div>
-</div>
+@Html.ActionLink("Return Home", "Index")
 
+<div><button type="button" class="btn"><i class="fas fa-info"></i> Infos Exifs</button></div>
+<button type="button" class="btn"><i class="fas fa-eye"></i></button>
+<button type="button" class="btn"><i class="fas fa-download"></i></button>
+
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-dark"> <i class="far fa-heart"></i></button>
+    <button type="button" class="btn btn-dark"><i class="far fa-star"></i></button>
+    <button type="button" class="btn btn-dark"><i class="far fa-comment"></i></button>
+</div>
