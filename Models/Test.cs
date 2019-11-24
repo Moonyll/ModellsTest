@@ -11,6 +11,7 @@ namespace Modells.Models
     public string pictureTitle { get; set;}
     public string pictureDescription { get; set; }
     public string pictureStandardSizeUrl { get; set; }
+    public int picturePage { get; set; }
 
     }
 }

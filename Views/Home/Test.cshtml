@@ -1,15 +1,21 @@
-﻿@model Modells.Models.Picture
+﻿
 @{
     ViewBag.Title = "Test";
 }
-@Html.ActionLink("Return Home", "Index")
+<h2>Welcome i am the page n°@ViewBag.Page</h2>
 
-<div><button type="button" class="btn"><i class="fas fa-info"></i> Infos Exifs</button></div>
-<button type="button" class="btn"><i class="fas fa-eye"></i></button>
-<button type="button" class="btn"><i class="fas fa-download"></i></button>
+    @for (int i = 0; i <= ViewBag.totalPages; i++)
+    {
 
-<div class="btn-group" role="group">
-    <button type="button" class="btn btn-dark"> <i class="far fa-heart"></i></button>
-    <button type="button" class="btn btn-dark"><i class="far fa-star"></i></button>
-    <button type="button" class="btn btn-dark"><i class="far fa-comment"></i></button>
-</div>
+            @Html.ActionLink("Page n° " + i, "Test", new { id = i })
+    }
+
+@*<div><button type="button" class="btn"><i class="fas fa-info"></i> Infos Exifs</button></div>
+    <button type="button" class="btn"><i class="fas fa-eye"></i></button>
+    <button type="button" class="btn"><i class="fas fa-download"></i></button>
+
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-dark"> <i class="far fa-heart"></i></button>
+        <button type="button" class="btn btn-dark"><i class="far fa-star"></i></button>
+        <button type="button" class="btn btn-dark"><i class="far fa-comment"></i></button>
+    </div>*@

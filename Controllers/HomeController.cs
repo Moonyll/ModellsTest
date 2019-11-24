@@ -32,17 +32,20 @@ namespace Modells.Controllers
 
             return View();
         }
-        public ActionResult Test()
+        public ActionResult Test(int? id)
         {
-            ViewBag.Message = "Test Modells page.";
-
-            Picture pic = new Picture();
-            
-            pic.pictureId = 1;
-            pic.pictureTitle = "Route";
-            pic.pictureDescription = "Une jolie route en automne";
-            pic.pictureStandardSizeUrl = "../images/route.jpg";
-            return View(pic);
+            int numberOfTotalPics = 100;
+            int numberOfPicsToDisplayPerPage = 8;
+            decimal n = numberOfTotalPics / numberOfPicsToDisplayPerPage;
+            decimal numberOfPages = Math.Ceiling(n);
+            ViewBag.totalPages = numberOfPages;
+            ViewBag.Page = id;
+            return View(id);
         }
+        public ActionResult pictureDetails()
+        {
+            return View();
+        }
+
     }
-}
+} 
