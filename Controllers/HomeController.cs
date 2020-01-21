@@ -32,15 +32,17 @@ namespace Modells.Controllers
 
             return View();
         }
-        public ActionResult Test(int? id)
+        public ActionResult Test(int? pageToDisplay)
         {
+            // Nombre total d'image :
             int numberOfTotalPics = 100;
+            
             int numberOfPicsToDisplayPerPage = 8;
             decimal n = numberOfTotalPics / numberOfPicsToDisplayPerPage;
             decimal numberOfPages = Math.Ceiling(n);
             ViewBag.totalPages = numberOfPages;
-            ViewBag.Page = id;
-            return View(id);
+            ViewBag.Page = pageToDisplay;
+            return View(pageToDisplay);
         }
         public ActionResult pictureDetails()
         {

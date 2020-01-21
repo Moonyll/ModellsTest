@@ -4,10 +4,10 @@
 }
 <h2>Welcome i am the page n°@ViewBag.Page</h2>
 
-    @for (int i = 0; i <= ViewBag.totalPages; i++)
+    @for (int page = 1; page <= ViewBag.totalPages; page++)
     {
 
-            @Html.ActionLink("Page n° " + i, "Test", new { id = i })
+            @Html.ActionLink("Page n° " + page, "Test", new { pageToDisplay = page })
     }
 
 @*<div><button type="button" class="btn"><i class="fas fa-info"></i> Infos Exifs</button></div>

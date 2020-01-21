@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="modellsModelT" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="adminId" />
+    </Key>
+    <Property Name="adminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adminLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="adminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="adminEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="adminPictureUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="picture" Relationship="Self.picture_category_FK" FromRole="category" ToRole="picture" />
+  </EntityType>
+  <EntityType Name="comments">
+    <Key>
+      <PropertyRef Name="commentId" />
+    </Key>
+    <Property Name="commentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="commentContent" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pictureId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="picture" Relationship="Self.comments_picture_FK" FromRole="comments" ToRole="picture" />
+    <NavigationProperty Name="users" Relationship="Self.post" FromRole="comments" ToRole="users" />
+  </EntityType>
+  <EntityType Name="picture">
+    <Key>
+      <PropertyRef Name="pictureId" />
+    </Key>
+    <Property Name="pictureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pictureTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pictureAlternateTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pictureDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pictureStandardUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pictureRatingValue" Type="Int16" />
+    <Property Name="pictureViewsNumber" Type="Int16" />
+    <Property Name="categoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="category" Relationship="Self.picture_category_FK" FromRole="picture" ToRole="category" />
+    <NavigationProperty Name="comments" Relationship="Self.comments_picture_FK" FromRole="picture" ToRole="comments" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userPictureUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="comments" Relationship="Self.post" FromRole="users" ToRole="comments" />
+  </EntityType>
+  <Association Name="picture_category_FK">
+    <End Role="category" Type="Self.category" Multiplicity="1" />
+    <End Role="picture" Type="Self.picture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="picture">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="comments_picture_FK">
+    <End Role="picture" Type="Self.picture" Multiplicity="1" />
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="picture">
+        <PropertyRef Name="pictureId" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="pictureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="post">
+    <End Role="comments" Type="Self.comments" Multiplicity="*" />
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="modellsEntitiesT" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admin" EntityType="Self.admin" />
+    <EntitySet Name="category" EntityType="Self.category" />
+    <EntitySet Name="comments" EntityType="Self.comments" />
+    <EntitySet Name="picture" EntityType="Self.picture" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <AssociationSet Name="picture_category_FK" Association="Self.picture_category_FK">
+      <End Role="category" EntitySet="category" />
+      <End Role="picture" EntitySet="picture" />
+    </AssociationSet>
+    <AssociationSet Name="comments_picture_FK" Association="Self.comments_picture_FK">
+      <End Role="picture" EntitySet="picture" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="post" Association="Self.post">
+      <End Role="comments" EntitySet="comments" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

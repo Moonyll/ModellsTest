@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="modellsModelStoreContainer" CdmEntityContainer="modellsEntities">
+    <EntitySetMapping Name="admin">
+      <EntityTypeMapping TypeName="modellsModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="adminId" ColumnName="adminId" />
+          <ScalarProperty Name="adminLogin" ColumnName="adminLogin" />
+          <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="category">
+      <EntityTypeMapping TypeName="modellsModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="picture">
+      <EntityTypeMapping TypeName="modellsModel.picture">
+        <MappingFragment StoreEntitySet="picture">
+          <ScalarProperty Name="pictureId" ColumnName="pictureId" />
+          <ScalarProperty Name="pictureTitle" ColumnName="pictureTitle" />
+          <ScalarProperty Name="pictureDescription" ColumnName="pictureDescription" />
+          <ScalarProperty Name="pictureUrl" ColumnName="pictureUrl" />
+          <ScalarProperty Name="pictureRatingValue" ColumnName="pictureRatingValue" />
+          <ScalarProperty Name="pictureViewNumber" ColumnName="pictureViewNumber" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

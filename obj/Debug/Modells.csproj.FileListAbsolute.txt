@@ -53,6 +53,7 @@ C:\Users\spouw\source\repos\Modells\Modells\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\spouw\source\repos\Modells\Modells\bin\Antlr3.Runtime.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\EntityFramework.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\EntityFramework.SqlServer.dll
+C:\Users\spouw\source\repos\Modells\Modells\bin\MetadataExtractor.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\Newtonsoft.Json.dll
@@ -64,8 +65,10 @@ C:\Users\spouw\source\repos\Modells\Modells\bin\System.Web.WebPages.Deployment.d
 C:\Users\spouw\source\repos\Modells\Modells\bin\System.Web.WebPages.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\System.Web.WebPages.Razor.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\WebGrease.dll
+C:\Users\spouw\source\repos\Modells\Modells\bin\XmpCore.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\EntityFramework.xml
 C:\Users\spouw\source\repos\Modells\Modells\bin\EntityFramework.SqlServer.xml
+C:\Users\spouw\source\repos\Modells\Modells\bin\MetadataExtractor.xml
 C:\Users\spouw\source\repos\Modells\Modells\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\spouw\source\repos\Modells\Modells\bin\Newtonsoft.Json.xml
 C:\Users\spouw\source\repos\Modells\Modells\bin\System.Web.Helpers.xml
@@ -76,6 +79,9 @@ C:\Users\spouw\source\repos\Modells\Modells\bin\System.Web.WebPages.xml
 C:\Users\spouw\source\repos\Modells\Modells\bin\System.Web.WebPages.Deployment.xml
 C:\Users\spouw\source\repos\Modells\Modells\bin\System.Web.WebPages.Razor.xml
 C:\Users\spouw\source\repos\Modells\Modells\bin\Antlr3.Runtime.pdb
+C:\Users\spouw\source\repos\Modells\Modells\bin\XmpCore.xml
+C:\Users\spouw\source\repos\Modells\Modells\bin\fr\EntityFramework.resources.dll
+C:\Users\spouw\source\repos\Modells\Modells\bin\fr\EntityFramework.SqlServer.resources.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\fr\System.Web.Helpers.resources.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\fr\System.Web.Mvc.resources.dll
 C:\Users\spouw\source\repos\Modells\Modells\bin\fr\System.Web.Optimization.resources.dll

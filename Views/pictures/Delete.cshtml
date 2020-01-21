@@ -1,0 +1,81 @@
+﻿@model Modells.picture
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>picture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pictureTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pictureTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pictureAlternateTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pictureAlternateTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pictureDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pictureDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pictureStandardUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pictureStandardUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pictureRatingValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pictureRatingValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pictureViewsNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pictureViewsNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.category.categoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category.categoryName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

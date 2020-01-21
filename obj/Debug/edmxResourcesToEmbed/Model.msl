@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="modellsModelTStoreContainer" CdmEntityContainer="modellsEntitiesT">
+    <EntitySetMapping Name="admin">
+      <EntityTypeMapping TypeName="modellsModelT.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="adminId" ColumnName="adminId" />
+          <ScalarProperty Name="adminLogin" ColumnName="adminLogin" />
+          <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
+          <ScalarProperty Name="adminEmail" ColumnName="adminEmail" />
+          <ScalarProperty Name="adminPictureUrl" ColumnName="adminPictureUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="category">
+      <EntityTypeMapping TypeName="modellsModelT.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="modellsModelT.comments">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="commentContent" ColumnName="commentContent" />
+          <ScalarProperty Name="pictureId" ColumnName="pictureId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="picture">
+      <EntityTypeMapping TypeName="modellsModelT.picture">
+        <MappingFragment StoreEntitySet="picture">
+          <ScalarProperty Name="pictureId" ColumnName="pictureId" />
+          <ScalarProperty Name="pictureTitle" ColumnName="pictureTitle" />
+          <ScalarProperty Name="pictureAlternateTitle" ColumnName="pictureAlternateTitle" />
+          <ScalarProperty Name="pictureDescription" ColumnName="pictureDescription" />
+          <ScalarProperty Name="pictureStandardUrl" ColumnName="pictureStandardUrl" />
+          <ScalarProperty Name="pictureRatingValue" ColumnName="pictureRatingValue" />
+          <ScalarProperty Name="pictureViewsNumber" ColumnName="pictureViewsNumber" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="modellsModelT.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userLogin" ColumnName="userLogin" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="userPictureUrl" ColumnName="userPictureUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="post" TypeName="modellsModelT.post" StoreEntitySet="post">
+      <EndProperty Name="comments">
+        <ScalarProperty Name="commentId" ColumnName="commentId" />
+      </EndProperty>
+      <EndProperty Name="users">
+        <ScalarProperty Name="userId" ColumnName="userId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
