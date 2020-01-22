@@ -17,27 +17,30 @@ namespace Modells.Controllers
         // GET: pictures
         public ActionResult Index2(int? pageToDisplay)
                                 {
-            // Liste des images - Picture list :
+            // Picture list :
             var picture = db.picture.Include(p => p.category);
             
-            // Nombre total d'images - Total number of pictures :
+            // Total number of pictures :
             var numberOfTotalPics = picture.Count();
             
-            // Affiche 8 images par pages - Display 8 pictures per page :
+            // Display 8 pictures per page :
             int numberOfPicsToDisplayPerPage = 8;
             
-            // Nombre de pages - Number of pages :
+            // Number of pages :
             var n = (decimal)numberOfTotalPics / numberOfPicsToDisplayPerPage;
             
             // Nombre de pages arrondi au plafond supérieur :
             var numberOfPages = Math.Ceiling(n);
 
-            // Eléments a afficher - Element to display :
+            // Element to display according to the page number :
             var elementToDisplay = (pageToDisplay == null) ? 0 : (int)pageToDisplay;
             
-            // Eléments :
+            // Total element :
             var pictures= picture.ToList().Skip((elementToDisplay - 1)*8).Take(8);
-            
+
+            var numberOfPicturesCurrentPage = pictures.Count();
+
+            ViewBag.totalPictures = numberOfPicturesCurrentPage;
             ViewBag.totalPages = numberOfPages;
 
             return View(pictures);

@@ -1,31 +1,50 @@
 ﻿@model IEnumerable<Modells.picture>
 @{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-    @*class template for the column*@
+    // Class template for the column :
     var colcss = "col-md-3 p-2 bg-info border border-dark d-flex align-items-center justify-content-center";
 
-    @*class template for the picture*@
-var imgCss = "card-img img-fluid img-thumbnail d-block mx-auto";
+    // Class template for the picture :
+    var imgCss = "card-img img-fluid img-thumbnail d-block mx-auto";
 
-//var url = String.Concat("/Content/Images/Pictures/", "auto.jpg");
+    // Total pictures to display :
+    var totalPictures = ViewBag.totalPictures;
 
-var url = new string[8];
+    var indexLimit = totalPictures - 1;
 
-for (int index = 0; index <= 7; index++)
-{
+    // Table of pictures to display  :
+    var pictureElements = new string[8,3];
 
-    if (Model.ElementAt(index).pictureStandardUrl != null)
+    for (int index = 0; index <= 7; index++)
     {
-        url[index] = "/Content/Images/Pictures/" + @Html.DisplayFor(model => model.ElementAt(index).pictureStandardUrl);
-    }
 
-    else
-    {
-        url[index] = "/Content/Images/Pictures/smile.jpg";
-    }
+        var pictureUrlToLoad = (index <= indexLimit) ? Model.ElementAt(index).pictureStandardUrl : null;
 
-}
+        if (pictureUrlToLoad != null)
+        {
+            // Load the picture of database :
+            
+            // Url :
+            pictureElements[index,0] = "/Content/Images/Pictures/" + @Html.DisplayFor(model => model.ElementAt(index).pictureStandardUrl);
+            
+            // Title :
+            pictureElements[index,1] = @Html.DisplayFor(model => model.ElementAt(index).pictureTitle).ToString();
+            
+            // Alternative title :
+            pictureElements[index,2] = @Html.DisplayFor(model => model.ElementAt(index).pictureAlternateTitle).ToString();
+        }
+
+        else
+        {
+            // Load the default picture if database ones not exists :
+            pictureElements[index,0] = "/Content/Images/Pictures/smile.jpg";
+            pictureElements[index,1] = "Default picture";
+            pictureElements[index,2]  = "Default picture";
+        }
+
+    }
 
 }
 @Html.ActionLink("To The Test Page", "Test")
@@ -57,8 +76,9 @@ for (int index = 0; index <= 7; index++)
         @*1st column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[0]" class="@imgCss" />
+                <img src="@pictureElements[0,0]" alt="@pictureElements[0,1]" class="@imgCss" />
                 <div class="card-img-overlay">
+                    <h5 class="card-title">@pictureElements[0, 1]</h5>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -68,8 +88,9 @@ for (int index = 0; index <= 7; index++)
         @*2nd column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[1]" class="@imgCss" />
+                <img src="@pictureElements[1,0]"  alt ="@pictureElements[1,1]" class="@imgCss" />
                 <div class="card-img-overlay">
+                    <h5 class="card-title">@pictureElements[1, 1]</h5>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -79,8 +100,9 @@ for (int index = 0; index <= 7; index++)
         @*3rd column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[2]" class="@imgCss" />
+                <img src="@pictureElements[2,0]"  alt ="@pictureElements[2,1]" class="@imgCss" />
                 <div class="card-img-overlay">
+                    <h5 class="card-title">@pictureElements[2, 1]</h5>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -90,8 +112,9 @@ for (int index = 0; index <= 7; index++)
         @*4th column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[3]" class="@imgCss" />
+                <img src="@pictureElements[3,0]"  alt ="@pictureElements[3,1]" class="@imgCss" />
                 <div class="card-img-overlay">
+                    <h5 class="card-title">@pictureElements[3, 1]</h5>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -104,8 +127,9 @@ for (int index = 0; index <= 7; index++)
         @*1st column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[4]" class="@imgCss" />
+                <img src="@pictureElements[4,0]" alt="@pictureElements[4,1]" class="@imgCss" />
                 <div class="card-img-overlay">
+                    <h5 class="card-title">@pictureElements[4, 1]</h5>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -115,8 +139,9 @@ for (int index = 0; index <= 7; index++)
         @*2nd column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[5]" class="@imgCss" />
+                <img src="@pictureElements[5,0]"  alt ="@pictureElements[5,1]" class="@imgCss" />
                 <div class="card-img-overlay">
+                    <h5 class="card-title">@pictureElements[5, 1]</h5>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -126,8 +151,9 @@ for (int index = 0; index <= 7; index++)
         @*3rd column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[6]" class="@imgCss" />
+                <img src="@pictureElements[6,0]"  alt ="@pictureElements[6,1]" class="@imgCss" />
                 <div class="card-img-overlay">
+                    <h5 class="card-title">@pictureElements[6, 1]</h5>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -137,13 +163,14 @@ for (int index = 0; index <= 7; index++)
         @*4th column*@
         <div class="@colcss">
             <div class="card">
-                <img src="@url[7]" class="@imgCss" />
+                <img src="@pictureElements[7,0]"  alt ="@pictureElements[7,1]" class="@imgCss" />
                 @*<img src="~/Content/Images/Pictures/@Html.DisplayFor(model => model.ElementAt(7).pictureStandardUrl)" class="@imgCss" />*@
-                <div class="card-img-overlay">
-                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
+            <div class="card-img-overlay">
+                <h5 class="card-title">@pictureElements[7, 1]</h5>
+                <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
             </div>
         </div>
     </div>

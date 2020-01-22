@@ -32,6 +32,14 @@ footer {
     height: 10vh;
     color: white;
 }
+/* Make title picture appears on hover */
+.card-img-overlay:hover .card-title {
+    display: block !important;
+    color: white;
+}
+.card-title {
+    color: transparent;
+}
 /* Make eye icon appears on hover */
 .card-img-overlay:hover .details {
     display: block !important;
