@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Modells.picture>
+﻿@model IEnumerable<Modells.Models.picture>
 
 @{
     ViewBag.Title = "Index";
@@ -9,11 +9,12 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-
-    @Html.DisplayFor(modelItem => modelItem.ElementAt(0).pictureTitle)
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.category.categoryName)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.pictureTitle)
         </th>
@@ -32,47 +33,38 @@
         <th>
             @Html.DisplayNameFor(model => model.pictureViewsNumber)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.category.categoryName)
-        </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.pictureTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pictureAlternateTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pictureDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pictureStandardUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pictureRatingValue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pictureViewsNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.category.categoryName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.pictureId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.pictureId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.pictureId })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.category.categoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pictureTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pictureAlternateTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pictureDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pictureStandardUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pictureRatingValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pictureViewsNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pictureId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pictureId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pictureId })
+        </td>
+    </tr>
+}
 
 </table>
-@for (int page = 1; page <= ViewBag.totalPages; page++)
-{
-
-    @Html.ActionLink("Page n° " + page, "Index", new { pageToDisplay = page })
-}

@@ -1,16 +1,15 @@
-﻿@model Modells.Models.picturesModells
-{
-    ViewBag.Title = "pictureDetails";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model IEnumerable<Modells.Models.picture>
 
+@{
+    ViewBag.Title = "pictureDetails";
 
 }
 <!-- Modal -->
-<div class="modal fade bg-transparent" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bg-transparent" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content bg-transparent">
             <div class="modal-header bg-transparent">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title text-light" id="pictureModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,8 +17,9 @@
             <div class="modal-body bg-transparent">
                 <img src="" class="img-fluid d-block mx-auto displayPicture" />
             </div>
+            <p class="text-light text-center">toto est arrivé</p>
             <div class="modal-footer">
-                <p></p>
+                <p class="text-light float-left">toto est arrivé</p>
                 <button type="button" class="btn text-light" data-dismiss="modal">Close</button>
                 <button type="button" class="btn text-light">Save changes</button>
             </div>

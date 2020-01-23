@@ -1,4 +1,4 @@
-﻿@model Modells.picture
+﻿@model Modells.Models.picture
 
 @{
     ViewBag.Title = "Details";
@@ -11,6 +11,14 @@
     <h4>picture</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.category.categoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.category.categoryName)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.pictureTitle)
         </dt>
@@ -57,14 +65,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.pictureViewsNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.category.categoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.category.categoryName)
         </dd>
 
     </dl>

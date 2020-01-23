@@ -6,40 +6,51 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Modells;
+using Modells.Models;
 
 namespace Modells.Controllers
 {
-    public class picturesController : Controller
+    public class PicturesController : Controller
     {
-        private modellsEntitiesT db = new modellsEntitiesT();
+        private picturesModells db = new picturesModells();
+
+
+        public ActionResult Index()
+        { 
+            // Picture list :
+            var picture = db.picture.Include(p => p.category);
+      
+            return View(picture.ToList());
+        }
 
         // GET: pictures
         public ActionResult Index2(int? pageToDisplay)
-                                {
+        {
             // Picture list :
             var picture = db.picture.Include(p => p.category);
-            
+
             // Total number of pictures :
             var numberOfTotalPics = picture.Count();
-            
+
             // Display 8 pictures per page :
             int numberOfPicsToDisplayPerPage = 8;
-            
+
             // Number of pages :
             var n = (decimal)numberOfTotalPics / numberOfPicsToDisplayPerPage;
-            
+
             // Nombre de pages arrondi au plafond supérieur :
             var numberOfPages = Math.Ceiling(n);
 
             // Element to display according to the page number :
             var elementToDisplay = (pageToDisplay == null) ? 0 : (int)pageToDisplay;
-            
-            // Total element :
-            var pictures= picture.ToList().Skip((elementToDisplay - 1)*8).Take(8);
 
+            // Total element :
+            var pictures = picture.ToList().Skip((elementToDisplay - 1) * 8).Take(8);
+
+            // Total element per page :
             var numberOfPicturesCurrentPage = pictures.Count();
 
+            // Viewbags to pass data in the view :
             ViewBag.totalPictures = numberOfPicturesCurrentPage;
             ViewBag.totalPages = numberOfPages;
 

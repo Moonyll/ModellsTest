@@ -10,13 +10,13 @@ namespace Modells.Controllers
     {
         public ActionResult Index()
         {
-            Picture pic = new Picture();
+            //Picture pic = new Picture();
 
-            pic.pictureId = 1;
-            pic.pictureTitle = "Route";
-            pic.pictureDescription = "Une jolie route en automne";
-            pic.pictureStandardSizeUrl = "../images/route.jpg";
-            return View(pic);
+            //pic.pictureId = 1;
+            //pic.pictureTitle = "Route";
+            //pic.pictureDescription = "Une jolie route en automne";
+            //pic.pictureStandardSizeUrl = "../images/route.jpg";
+            return View();
         }
 
         public ActionResult About()
@@ -36,7 +36,7 @@ namespace Modells.Controllers
         {
             // Nombre total d'image :
             int numberOfTotalPics = 100;
-            
+
             int numberOfPicsToDisplayPerPage = 8;
             decimal n = numberOfTotalPics / numberOfPicsToDisplayPerPage;
             decimal numberOfPages = Math.Ceiling(n);
@@ -50,4 +50,4 @@ namespace Modells.Controllers
         }
 
     }
-} 
+}
