@@ -16,9 +16,11 @@ namespace Modells.Models
         }
 
         public int categoryId { get; set; }
-
+        
+        // Picture category :
         [Required]
         [StringLength(50)]
+        [Display(Name = "Catégorie")]
         public string categoryName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

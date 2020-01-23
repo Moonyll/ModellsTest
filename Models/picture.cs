@@ -17,24 +17,36 @@ namespace Modells.Models
 
         public int pictureId { get; set; }
 
+        // Picture title :
         [Required]
         [StringLength(50)]
+        [Display(Name = "Titre")]
         public string pictureTitle { get; set; }
 
+        // Picture alternative title :
         [Required]
         [StringLength(50)]
+        [Display(Name = "Titre alternatif")]
         public string pictureAlternateTitle { get; set; }
 
+        // Picture description :
         [Column(TypeName = "text")]
         [Required]
+        [Display(Name = "Description")]
         public string pictureDescription { get; set; }
 
+        // Picture url :
         [Column(TypeName = "text")]
         [Required]
+        [Display(Name = "Image")]
         public string pictureStandardUrl { get; set; }
 
+        // Picture rating :
+        [Display(Name = "Rating")]
         public short? pictureRatingValue { get; set; }
 
+        // Picture views :
+        [Display(Name = "Vues")]
         public short? pictureViewsNumber { get; set; }
 
         public int categoryId { get; set; }

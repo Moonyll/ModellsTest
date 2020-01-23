@@ -9,29 +9,35 @@
 html {
     height: 100vh;
 }
+
 /* Set the body */
 body {
     font-family: Brie_Light;
     height: 100vh;
     background-color: aquamarine;
 }
+
 /* Set the header */
 header {
     height:10vh;
 }
+
 /* Set the navigation bar */
 nav {
     height: 10vh;
 }
+
 /* Set the main content */
 main {
     height: auto;
 }
+
 /* Set the footer */
 footer {
     height: 10vh;
     color: white;
 }
+
 /* Make title picture appears on hover */
 .card-img-overlay:hover .card-title {
     display: block !important;
@@ -40,13 +46,22 @@ footer {
 .card-title {
     color: transparent;
 }
+
 /* Make eye icon appears on hover */
 .card-img-overlay:hover .details {
     display: block !important;
 }
-i{
+
+/* Make ratings icon appears on hover */
+.card-img-overlay:hover .ratings {
+    display: block !important;
+}
+
+/*Set icons color white*/
+i {
     color:white;
 }
+
 /* Set eyey icon */
 .details {
     position: absolute;
@@ -55,65 +70,25 @@ i{
     bottom: 0;
     border: none;
 }
+
+/* Set ratings icons */
+.ratings {
+    position: absolute;
+    display: none;
+    left: 0;
+    bottom: 0;
+    border: none;
+}
+
 /* Remove focus on eye button icon */
-.details:focus {
+.details, .ratings, .removeFocus:focus {
     box-shadow: none !important;
 }
-.brands {
-  
-}
-/*.cadre {
-    position: relative;
-    background-color: black;
-    color: white;
-    width: 500px;
-    height: 500px;
-}
-.picture {
-    position: absolute;
-    margin-left: 5%;
-    margin-top: 5%;
+
+/* Set modal content (picture) */
+.modal-body {
+    margin: auto;
+    display: block;
     width: 90%;
-    height: 90%;
-    color: white;
-    /*background-size: contain;
-    background-repeat: no-repeat;
-}*/
-/*.tagExifs {
-    position: absolute;
-    background-color: yellow;
-    width: 20%;
-    height: 20%;
-}
-.tagZoom {
-    position: absolute;
-    background-color: yellow;
-    top: 0;
-    right: 0;
-    width: 20%;
-    height: 20%;
-}
-.tagGet {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: yellow;
-    width: 20%;
-    height: 20%;
-}
-.tagStats {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: yellow;
-    width: 20%;
-    height: 20%;
 }
 
-.tagExifs .btn {
-    visibility: hidden;
-}
-
-.tagExifs:hover .btn {
-    visibility: visible;
-}*/

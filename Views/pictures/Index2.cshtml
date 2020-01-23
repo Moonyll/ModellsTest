@@ -16,7 +16,7 @@
     var indexLimit = totalPictures - 1;
 
     // Table of pictures to display  :
-    var pictureElements = new string[8, 4];
+    var pictureElements = new string[8, 5];
 
     for (int index = 0; index <= 7; index++)
     {
@@ -38,6 +38,9 @@
 
             // Picture Description :
             pictureElements[index, 3] = Model.ElementAt(index).pictureDescription.ToString();
+
+            // Picture Category :
+            pictureElements[index, 4] = Model.ElementAt(index).category.categoryName.ToString();
         }
 
         else
@@ -53,7 +56,7 @@
 }
 @Html.ActionLink("To The Test Page", "Test")
 @Html.ActionLink("Details", "pictureDetails")
-@Html.ActionLink("Liste des photos", "Index","Pictures")
+@Html.ActionLink("Liste des photos", "Index", "Pictures")
 @Html.ActionLink("List", "Index2", "Pictures")
 
 
@@ -65,13 +68,25 @@
             var url = $(this).parent().prev().attr("src");
 
             // Display the selected image in the modal :
-            var dis = $(".displayPicture").attr("src", url);
+            $(".displayPicture").attr("src", url);
 
             // Get the selected title image in the modal :
-            var title = $(this).prev("h5").text();
+            var title = $(this).prev().prev().children(".pictureTitle").text();
 
-            // Display the selected image in the modal :
-            var tt = $("#pictureModalLabel").text(title);
+            // Get the selected category image in the modal :
+            var category = $(this).prev().prev().children(".pictureCategory").text();
+
+            // Get the selected category image in the modal :
+            var description = $(this).prev().prev().children(".pictureDescription").text();
+
+            // Display the selected image title in the modal :
+            $("#pictureTitle").text(title);
+
+            // Display the selected image category in the modal :
+            $("#pictureCategory").text(category);
+
+            // Display the selected image description in the modal :
+            $("#pictureDescription").text(description);
 
             // Check if src is correct :
             console.log(title);
@@ -88,7 +103,15 @@
             <div class="card">
                 <img src="@pictureElements[0,0]" alt="@pictureElements[0,1]" title="@pictureElements[0,1]" class="@imgCss" />
                 <div class="card-img-overlay">
-                    <h5 class="card-title">@pictureElements[0, 1]</h5>
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">@pictureElements[0, 1]</div>
+                        <div class="card-title text-right pictureCategory">@pictureElements[0, 4]</div>
+                        <div class="pictureDescription" hidden>@pictureElements[0, 3]</div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
