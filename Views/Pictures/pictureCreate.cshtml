@@ -1,0 +1,105 @@
+﻿@model Modells.Models.picture
+
+@{
+    ViewBag.Title = "pictureCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <script>
+
+        function test() {
+
+            // Get picture source to display in the modal :
+            var imgf = $('input[type=file]').val();
+
+            var clean=imgf.split('\\').pop(); // clean from C:\fakepath OR C:\fake_path 
+
+            $(".oki").val(clean);
+
+            // Check if src is correct :
+            console.log(clean);
+            alert('clean file name : '+ clean);
+
+
+
+        }
+    </script>
+
+@*<h2>Ajouter Image</h2>
+
+@using (Html.BeginForm("PictureSourceUpload", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="pictureToUpload" >Ajouter Image</label>
+            <input type="file" name="pictureToUpload" id="file" class="titi" style="width: 100%;" />
+        </div>
+        <input type="submit" value="Ajouter image" id="addNewPicture" class="submit" />
+    </div>
+}*@
+
+@using (Html.BeginForm("PictureCreate", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label for="pictureToUpload">Ajouter Image</label>
+        <input type="file" name="pictureToUpload" id="file" class="titi" onchange=test(event) />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pictureStandardUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = "form-control oki" } })
+            @Html.ValidationMessageFor(model => model.pictureStandardUrl, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pictureTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.pictureTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pictureAlternateTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.pictureAlternateTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pictureDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.pictureDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.pictureDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.categoryId, "Catégorie", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="pictureCreate" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -16,7 +16,7 @@
     var indexLimit = totalPictures - 1;
 
     // Table of pictures to display  :
-    var pictureElements = new string[8, 5];
+    var pictureElements = new string[8, 6];
 
     for (int index = 0; index <= 7; index++)
     {
@@ -41,7 +41,11 @@
 
             // Picture Category :
             pictureElements[index, 4] = Model.ElementAt(index).category.categoryName.ToString();
+
+            // Picture Id :
+            pictureElements[index, 5] = Model.ElementAt(index).pictureId.ToString();
         }
+
 
         else
         {
@@ -58,6 +62,7 @@
 @Html.ActionLink("Details", "pictureDetails")
 @Html.ActionLink("Liste des photos", "Index", "Pictures")
 @Html.ActionLink("List", "Index2", "Pictures")
+@Html.ActionLink("Ajouter une nouvelle photo", "pictureCreate", "Pictures")
 
 
 <script>
@@ -66,9 +71,7 @@
 
             // Get picture source to display in the modal :
             var url = $(this).parent().prev().attr("src");
-
-            // Display the selected image in the modal :
-            $(".displayPicture").attr("src", url);
+            //var objurl =
 
             // Get the selected title image in the modal :
             var title = $(this).prev().prev().children(".pictureTitle").text();
@@ -78,6 +81,9 @@
 
             // Get the selected category image in the modal :
             var description = $(this).prev().prev().children(".pictureDescription").text();
+
+            // Display the selected image in the modal :
+            $(".displayPicture").attr("src", url);
 
             // Display the selected image title in the modal :
             $("#pictureTitle").text(title);
@@ -89,7 +95,7 @@
             $("#pictureDescription").text(description);
 
             // Check if src is correct :
-            console.log(title);
+            console.log(url);
         });
     });
 </script>
@@ -101,12 +107,25 @@
         @*1st column*@
         <div class="@colcss">
             <div class="card">
+                @*Picture source, title & alternative title*@
                 <img src="@pictureElements[0,0]" alt="@pictureElements[0,1]" title="@pictureElements[0,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
-                        <div class="card-title text-left pictureTitle">@pictureElements[0, 1]</div>
-                        <div class="card-title text-right pictureCategory">@pictureElements[0, 4]</div>
-                        <div class="pictureDescription" hidden>@pictureElements[0, 3]</div>
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[0, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[0, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[0, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[0, 5]
+                        </div>
                     </div>
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5

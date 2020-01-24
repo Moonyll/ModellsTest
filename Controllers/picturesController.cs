@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -79,6 +80,46 @@ namespace Modells.Controllers
             return View();
         }
 
+        // GET: picturesCreate
+        public ActionResult pictureCreate()
+        {
+            ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName");
+            return View();
+        }
+
+
+        // POST: pictures/Create
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult pictureCreate([Bind(Include = "pictureId,pictureTitle,pictureAlternateTitle,pictureDescription,pictureStandardUrl,categoryId")] picture picture, HttpPostedFileBase pictureToUpload)
+        {
+
+            if (pictureToUpload != null)
+            {
+                // Picture name :
+                string pictureSourceName = Path.GetFileName(pictureToUpload.FileName);
+
+                // Combine directory path & picture name to make the source picture :
+                string pictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), pictureSourceName);
+
+                // Picture Source is uploaded and saved in the directory :
+                pictureToUpload.SaveAs(pictureSourcePath);
+
+            }
+
+                if (ModelState.IsValid)
+            {
+                db.picture.Add(picture);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName", picture.categoryId);
+            return View(picture);
+        }
+
         // POST: pictures/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -95,6 +136,25 @@ namespace Modells.Controllers
 
             ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName", picture.categoryId);
             return View(picture);
+        }
+
+        // Enable to upload the picture source to the appropriate directory :
+        public ActionResult PictureSourceUpload(HttpPostedFileBase pictureToUpload)
+        {
+            if (pictureToUpload != null)
+            {
+                // Picture name :
+                string pictureSourceName = Path.GetFileName(pictureToUpload.FileName);
+
+                // Combine directory path & picture name to make the source picture :
+                string pictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), pictureSourceName);
+                
+                // Picture Source is uploaded :
+                pictureToUpload.SaveAs(pictureSourcePath);
+            }
+            
+            // After a successful upload - redirect the u
+            return RedirectToAction("pictureCreate", "Pictures");
         }
 
         // GET: pictures/Edit/5
