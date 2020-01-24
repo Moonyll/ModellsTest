@@ -92,3 +92,8 @@ i {
     width: 90%;
 }
 
+/* Set the upload picture button */
+#newPictureToUpload{
+    opacity:0;
+    color:transparent;
+}
