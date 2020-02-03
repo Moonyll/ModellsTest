@@ -19,7 +19,7 @@ body {
 
 /* Set the header */
 header {
-    height:10vh;
+    height: 10vh;
 }
 
 /* Set the navigation bar */
@@ -43,6 +43,7 @@ footer {
     display: block !important;
     color: white;
 }
+
 .card-title {
     color: transparent;
 }
@@ -59,13 +60,13 @@ footer {
 
 /*Set icons color white*/
 i {
-    color:white;
+    color: white;
 }
 
 /* Set eyey icon */
 .details {
     position: absolute;
-    display:none;
+    display: none;
     right: 0;
     bottom: 0;
     border: none;
@@ -93,7 +94,8 @@ i {
 }
 
 /* Set the upload picture button */
-#newPictureToUpload{
-    opacity:0;
-    color:transparent;
+#newPictureToUpload {
+    /*opacity: 0*/
+    color: blue;
+    display:none;
 }
