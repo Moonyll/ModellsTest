@@ -6,6 +6,7 @@ namespace Modells.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Runtime.Serialization;
+    using System.Web;
 
     [Table("picture")]
     public partial class picture
@@ -77,5 +78,16 @@ namespace Modells.Models
         // Regex & error message for the description :
         public const string PatternForpictureStandardUrl = @"^\d*,?\d+$";
         public const string ErrorForpictureStandardUrl = "erreur";
+
+        // Upload file picture attributes limitations :
+        
+        // Size
+        public const int pictureFileToUploadMaxSize = 7000000;
+        public const string errorMessageForPictureOutOfSize = "La taille maximale de l'image doit être de 7 Mo.";
+        // Extension :
+        public static string[] pictureFileToUploadExtension = { "image/jpg", "image/jpeg" };
+        public const string errorMessageForPictureOutOfExt = "L'image doit être au format jpg / jpeg";
+
     }
+
 }

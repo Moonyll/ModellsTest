@@ -1,102 +1,115 @@
 ﻿@model Modells.Models.picture
-
 @{
     ViewBag.Title = "pictureCreate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    // Class templates for the picture form :
+    var formGroupCss = "form-group d-flex mx-auto justify-content-center";
+    var labelCss = "control-label btn btn-dark col-4 text-center text-wrap";
+    var controlLabelCss = "control-label btn btn-dark col-1 d-flex justify-content-center";
+    var editCss = "form-control col-6 was-validated";
+    var btnCss = "btn btn-dark col-1 d-flex justify-content-center";
+
 }
+
+@*Load scripts file*@
+@Scripts.Render("~/Scripts/script.js");
 
 <script>
     $(document).ready(function () {
 
-        // Hide uploaded picture box :
-        $("#pictureChoice").removeClass();
+        $('.resetForm').click(function (e) {
 
+            e.preventDefault();
+            $("form")[0].reset();
+        });
     });
 
-    var integratePicture = function (event) {
-
-        // Capture event of input :
-        var input = event.target;
-
-        // Declare new file reader object :
-        var pictureReader = new FileReader();
-
-        // Get complete path name of the uploaded picture :
-        var pictureFileEntireName = $('input[type=file]').val();
-
-        // Get the short name of the uploaded picture by removing prefixes "C:\fakepath" or "C:\fake_path" :
-        var pictureFileShortName = pictureFileEntireName.split('\\').pop();
-
-        // Set Image label with picture short name value :
-        $(".pictureStandardUrl").val(pictureFileShortName);
-
-        // On load function :
-        pictureReader.onload = function () {
-
-            // Read url of choosen picture :
-            var pictureChoiceURL = pictureReader.result;
-
-            // Set pictureChoice source with previous url :
-            $("#pictureChoice").attr('src', pictureChoiceURL);
-            $("#pictureChoice").addClass('img-fluid img-thumbnail d-block');
-        };
-
-        // Display choosen picture :
-        pictureReader.readAsDataURL(input.files[0]);
-    };
 </script>
+
 <div class="container-fluid d-flex">
     <div class="col-8 border border-warning">
         @using (Html.BeginForm("PictureCreate", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-            <form class="form-horizontal form-control" novalidate>
+
+            // Diplay the picture creation form :
+            <form class="form-horizontal form-control">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <fieldset class="border border-info">
 
-                    <div class="form-group d-flex mx-auto justify-content-center">
-                        @Html.LabelFor(model => model.pictureStandardUrl, new { @class = "control-label btn btn-dark col-4" })
+                    @*Input of picture standard url :*@
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
                         <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
-                        @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = "form-control col-6 pictureStandardUrl", @placeholder = "image.jpg" } })
-                        <label for="newPictureToUpload" class="control-label btn btn-dark col-1"><i class="far fa-image"></i></label>
+                        @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @placeholder = "image.jpg" } })
+                        <label for="newPictureToUpload" class="@controlLabelCss">
+                            <i class="far fa-image"></i>
+                        </label>
                         @Html.ValidationMessageFor(model => model.pictureStandardUrl, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("newPictureToUpload")
                     </div>
 
-                    <div class="form-group d-flex mx-auto justify-content-center">
-                        @Html.LabelFor(model => model.pictureTitle, new { @class = "control-label btn btn-dark col-4" })
-                        @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = "form-control col-6", @placeholder = "titre" } })
-                        <label class="control-label btn btn-dark col-1"><i class="fas fa-bookmark"></i></label>
+                    @*Input of picture title :*@
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
+                        @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre" } })
+                        <label class="@controlLabelCss">
+                            <i class="fas fa-bookmark"></i>
+                        </label>
                         @Html.ValidationMessageFor(model => model.pictureTitle, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-group d-flex mx-auto justify-content-center">
-                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = "control-label btn btn-dark col-4" })
-                        @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = "form-control col-6", @placeholder = "titre alternatif" } })
-                        <label class="control-label btn btn-dark col-1 text-light"><i class="far fa-bookmark"></i></label>
+                    @*Input of picture alternative title :*@
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
+                        @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre alternatif" } })
+                        <label class="@controlLabelCss">
+                            <i class="far fa-bookmark"></i>
+                        </label>
                         @Html.ValidationMessageFor(model => model.pictureAlternateTitle, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-group d-flex mx-auto justify-content-center">
-                        @Html.LabelFor(model => model.pictureDescription, new { @class = "control-label btn btn-dark col-4" })
-                        @Html.TextAreaFor(model => model.pictureDescription, new { @class = "form-control col-6", @placeholder = "descriptif" })
-                        <label class="control-label btn btn-dark col-1 text-light"><i class="fas fa-pen"></i></label>
+                    @*Input of picture description :*@
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
+                        @Html.TextAreaFor(model => model.pictureDescription, new { @class = @editCss, @placeholder = "descriptif", @style = "resize:none" })
+                        <label class="@controlLabelCss">
+                            <i class="fas fa-pen"></i>
+                        </label>
                         @Html.ValidationMessageFor(model => model.pictureDescription, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-group d-flex mx-auto justify-content-center">
-                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = "control-label btn btn-dark col-4" })
-                        @Html.DropDownList("categoryId", null, new { @class = "form-control col-6" })
-                        <label class="control-label btn btn-dark col-1 text-light"><i class="fas fa-book-open"></i></label>
+                    @*Input of picture category :*@
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
+                        @Html.DropDownList("categoryId", null, new { @class = @editCss })
+                        <label class="@controlLabelCss">
+                            <i class="fas fa-book-open"></i>
+                        </label>
                         @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group d-flex mx-auto justify-content-center">
-                        <button class="btn btn-dark col-3 text-light">@Html.ActionLink("Retour", "Index2")</button>
-                        <button type="submit" value="pictureCreate" class="btn btn-dark col-3"><i class="fas fa-plus"></i></button>
+
+                    @*Back - Clear Submit buttons :*@
+                    <div class="@formGroupCss">
+                        <button class="@btnCss offset-3">
+                            <i class="fas fa-share"></i>
+                            @*@Html.ActionLink("Retour", "Index2")*@
+                        </button>
+                        <button value="Reset" class="@btnCss offset-2 resetForm">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <button type="submit" value="pictureCreate" class="@btnCss offset-2">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </fieldset>
             </form>
         }
     </div>
-    <div class="col-4 border border-danger align-self-center d-flex"><img id="pictureChoice" src="" alt="" title="" class=" " /></div>
-</div> 
+
+    @* Display choosen picture to create :*@
+    <div class="col-4 border border-danger align-self-center d-flex">
+        <img id="pictureChoice" src="" alt="" title="" class=" " />
+    </div>
+</div>

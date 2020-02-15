@@ -115,7 +115,33 @@ namespace Modells.Controllers
 
             #region Directory Save
             // Add & save picture file to directory :
-            if (newPictureToUpload != null)
+
+            // Get size in octets of uploaded picture :
+            var uploadedPictureLength = newPictureToUpload.ContentLength;
+            
+            // Check if the size is correct with the limit:
+            var isTooHigh = (uploadedPictureLength >= pictureControls.pictureFileToUploadMaxSize) ? true : false;
+            
+            // Add error message if size is over limitations :
+            if (isTooHigh)
+            {
+                ModelState.AddModelError("newPictureToUpload", pictureControls.errorMessageForPictureOutOfSize);
+            }
+
+            // Get extension of uploaded picture :
+            var uploadedPictureExtension = newPictureToUpload.ContentType;
+
+            // Check if the extension is authorized
+            var isOutExt = (!pictureControls.pictureFileToUploadExtension.Contains(uploadedPictureExtension)) ? true : false;
+
+            // Add error message if extension is not enable :
+            if (isOutExt)
+            {
+                ModelState.AddModelError("newPictureToUpload", pictureControls.errorMessageForPictureOutOfExt);
+            }
+
+            // Save uploaded picture if all limitations are ok :
+            if (newPictureToUpload != null && !isTooHigh && !isOutExt)
             {
                 // Picture name :
                 string newPictureSourceName = Path.GetFileName(newPictureToUpload.FileName);
