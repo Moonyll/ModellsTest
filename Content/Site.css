@@ -99,3 +99,8 @@ i {
     color: blue;
     display:none;
 }
+
+/* Set the popover items */
+.popover-body {
+    color: red;
+}

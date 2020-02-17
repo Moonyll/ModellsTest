@@ -117,7 +117,7 @@ namespace Modells.Controllers
             // Add & save picture file to directory :
 
             // Get size in octets of uploaded picture :
-            var uploadedPictureLength = newPictureToUpload.ContentLength;
+            var uploadedPictureLength = newPictureToUpload?.ContentLength;
             
             // Check if the size is correct with the limit:
             var isTooHigh = (uploadedPictureLength >= pictureControls.pictureFileToUploadMaxSize) ? true : false;
@@ -129,7 +129,7 @@ namespace Modells.Controllers
             }
 
             // Get extension of uploaded picture :
-            var uploadedPictureExtension = newPictureToUpload.ContentType;
+            var uploadedPictureExtension = newPictureToUpload?.ContentType;
 
             // Check if the extension is authorized
             var isOutExt = (!pictureControls.pictureFileToUploadExtension.Contains(uploadedPictureExtension)) ? true : false;

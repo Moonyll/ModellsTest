@@ -10,12 +10,30 @@
     var editCss = "form-control col-6 was-validated";
     var btnCss = "btn btn-dark col-1 d-flex justify-content-center";
 
+@functions
+{
+        string displayErrorMessage(string pictureItem)
+        {
+            var modelStateErrors =  string.Join(",",ViewData.ModelState
+                .Where(mdlState=>mdlState.Key ==pictureItem)
+                .Where(errorsNb => errorsNb.Value.Errors.Count > 0)
+                .SelectMany(errorItems=>errorItems.Value.Errors)
+                .Select(errorValue=>errorValue.ErrorMessage)
+                .ToList());
+
+        return modelStateErrors;
+        }
+
+}
+    var toto = true;
 }
 
 @*Load scripts file*@
 @Scripts.Render("~/Scripts/script.js");
 
 <script>
+
+    // Reset the form :
     $(document).ready(function () {
 
         $('.resetForm').click(function (e) {
@@ -24,6 +42,39 @@
             $("form")[0].reset();
         });
     });
+
+    // Client-side validations :
+    function isValid(input) {
+        var inputValue = input.value;
+        console.log(input.class);
+
+        if (inputValue == 'toto') {
+            $(input).addClass('is-valid');
+        }
+        else {
+            $(input).addClass('is-invalid');
+        }
+    }
+
+    // Clear form from validations tips :
+    function clearCss(input) {
+
+        $(input).removeClass('is-valid');
+        $(input).removeClass('is-invalid');
+        $(input).next('[data-toggle="popover"]').popover('hide');
+
+    }
+
+    // Enable the popover elements in the view :
+    $(function () {
+        $('[data-toggle="popover"]').popover();
+    })
+
+   $(function ValidateForm() {
+
+        $('[data-toggle="popover"]').popover('toggle');
+
+    })
 
 </script>
 
@@ -37,47 +88,41 @@
             <form class="form-horizontal form-control">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <fieldset class="border border-info">
-
                     @*Input of picture standard url :*@
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
                         <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
-                        @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @placeholder = "image.jpg" } })
-                        <label for="newPictureToUpload" class="@controlLabelCss">
+                        @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @placeholder = "image.jpg", @onfocus = "clearCss(this)", @onchange = "isValid(this)" } })
+                        <label for="newPictureToUpload" class="@controlLabelCss" data-container="body" data-toggle="popover" data-placement="right" data-content="@displayErrorMessage("newPictureToUpload")">
                             <i class="far fa-image"></i>
                         </label>
-                        @Html.ValidationMessageFor(model => model.pictureStandardUrl, "", new { @class = "text-danger" })
-                        @Html.ValidationMessage("newPictureToUpload")
                     </div>
 
                     @*Input of picture title :*@
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre" } })
-                        <label class="@controlLabelCss">
+                        @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre", @onfocus = "clearCss(this)", @onblur = "isValid(this)" } })
+                        <label class="@controlLabelCss" data-container="body" data-toggle="popover" data-placement="right" data-content="@displayErrorMessage("pictureTitle")">
                             <i class="fas fa-bookmark"></i>
                         </label>
-                        @Html.ValidationMessageFor(model => model.pictureTitle, "", new { @class = "text-danger" })
                     </div>
 
                     @*Input of picture alternative title :*@
-                    <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre alternatif" } })
-                        <label class="@controlLabelCss">
-                            <i class="far fa-bookmark"></i>
-                        </label>
-                        @Html.ValidationMessageFor(model => model.pictureAlternateTitle, "", new { @class = "text-danger" })
-                    </div>
+                <div class="@formGroupCss">
+                    @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
+                    @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre alternatif", @onfocus = "clearCss(this)", @onblur = "isValid(this)" } })
+                    <label class="@controlLabelCss" data-container="body" data-toggle="popover" data-placement="right" data-content="@displayErrorMessage("pictureAlternateTitle")">
+                        <i class="far fa-bookmark"></i>
+                    </label>
+                </div>
 
                     @*Input of picture description :*@
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
-                        @Html.TextAreaFor(model => model.pictureDescription, new { @class = @editCss, @placeholder = "descriptif", @style = "resize:none" })
-                        <label class="@controlLabelCss">
+                        @Html.TextAreaFor(model => model.pictureDescription, new { @class = @editCss, @placeholder = "descriptif", @style = "resize:none", @onfocus = "clearCss(this)", @onblur = "isValid(this)" })
+                        <label class="@controlLabelCss" data-container="body" data-toggle="popover" data-placement="right" data-content="@displayErrorMessage("pictureDescription")">
                             <i class="fas fa-pen"></i>
                         </label>
-                        @Html.ValidationMessageFor(model => model.pictureDescription, "", new { @class = "text-danger" })
                     </div>
 
                     @*Input of picture category :*@
@@ -87,7 +132,6 @@
                         <label class="@controlLabelCss">
                             <i class="fas fa-book-open"></i>
                         </label>
-                        @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
                     </div>
 
                     @*Back - Clear Submit buttons :*@
@@ -99,7 +143,7 @@
                         <button value="Reset" class="@btnCss offset-2 resetForm">
                             <i class="fas fa-eraser"></i>
                         </button>
-                        <button type="submit" value="pictureCreate" class="@btnCss offset-2">
+                        <button type="submit" value="pictureCreate" class="@btnCss offset-2" onclick="ValidateForm()">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
@@ -109,7 +153,7 @@
     </div>
 
     @* Display choosen picture to create :*@
-    <div class="col-4 border border-danger align-self-center d-flex">
-        <img id="pictureChoice" src="" alt="" title="" class=" " />
-    </div>
+<div class="col-4 border border-danger align-self-center d-flex">
+    <img id="pictureChoice" src="" alt="" title="" class=" " />
+</div>
 </div>
