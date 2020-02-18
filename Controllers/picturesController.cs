@@ -143,11 +143,13 @@ namespace Modells.Controllers
             // Save uploaded picture if all limitations are ok :
             if (newPictureToUpload != null && !isTooHigh && !isOutExt)
             {
-                // Picture name :
-                string newPictureSourceName = Path.GetFileName(newPictureToUpload.FileName);
+                // Picture name - Get input value by user or default filename :
+                var newPictureSourceName = (!string.IsNullOrEmpty(newPicture?.pictureStandardUrl)) ?
+                                              newPicture.pictureStandardUrl :
+                                              Path.GetFileName(newPictureToUpload.FileName);
 
                 // Combine directory path & picture name to make the source picture :
-                string newPictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), newPictureSourceName);
+                var newPictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), newPictureSourceName);
 
                 // Picture Source is uploaded and saved in the directory :
                 newPictureToUpload.SaveAs(newPictureSourcePath);

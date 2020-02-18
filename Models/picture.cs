@@ -68,16 +68,16 @@ namespace Modells.Models
     public static class pictureControls
     {
         // Regex & error message for the titles :
-        public const string PatternForPictureTitles = @"^[\-/A-Za-z\u00C0-\u017F]+$";
+        public const string PatternForPictureTitles = @"^[0-9\-._/A-Za-z\u00C0-\u017F]+$";
         public const string ErrorForPictureTitles = "Veuillez renseigner un titre valide.";
 
-        // Regex & error message for the description :
-        public const string PatternForPictureDescription = @"^[\-/A-Za-z\u00C0-\u017F]+$";
+        // Regex & error message for the description (blank space authorized) :
+        public const string PatternForPictureDescription = @"^[ 0-9\-._/A-Za-z\u00C0-\u017F]+$";
         public const string ErrorForPictureDescription = "Veuillez renseigner une description valide.";
 
         // Regex & error message for the url :
-        public const string PatternForpictureStandardUrl = @"^[\-/A-Za-z\u00C0-\u017F]+$";
-        public const string ErrorForpictureStandardUrl = "erreur";
+        public const string PatternForpictureStandardUrl = @"^[0-9\-._/A-Za-z\u00C0-\u017F]+$";
+        public const string ErrorForpictureStandardUrl = "Veuillez saisir un nom valide";
 
         // Upload file picture attributes limitations :
         

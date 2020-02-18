@@ -46,14 +46,34 @@ var integratePicture = function (event) {
 
 // Client-side validations :
 function isValid(input) {
-    var inputValue = input.value;
-    console.log(input.class);
 
-    if (inputValue == 'toto') {
+    // Input value :
+    var inputValue = input.value;
+
+    // Input label entity :
+    var inputEntity = input.name;
+
+    // Input pattern to match (regex) :
+    var inputPattern = (inputEntity == 'pictureDescription') ?
+                       new RegExp('^[ 0-9\-._/A-Za-z\u00C0-\u017F]+$') :
+                       new RegExp('^[0-9\-._/A-Za-z\u00C0-\u017F]+$');
+
+    // Result from the test of input value with pattern :
+    var inputControl = inputPattern.test(inputValue);
+
+    if (inputControl) {
         $(input).addClass('is-valid');
+        $(input).prev('label').css('color', 'green');
     }
     else {
         $(input).addClass('is-invalid');
+        $(input).prev('label').css('color', 'red');
+        $(input).prev('label').attr({ 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': 'Caractères spéciaux autorisés . - _ ' });
+        //$('label.tooltip').css(color, 'red');
+        $(input).prev('label').tooltip('show');
+
+        // Tests in console :
+        console.log(test);
     }
 }
 
@@ -62,6 +82,7 @@ function clearCss(input) {
 
     $(input).removeClass('is-valid');
     $(input).removeClass('is-invalid');
+    $(input).prev('label').tooltip('hide');
     $(input).next('[data-toggle="popover"]').popover('hide');
 
 }
