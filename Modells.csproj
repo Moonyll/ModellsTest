@@ -1750,6 +1750,7 @@
     <Content Include="Content\Images\Pictures\redwoodpark.jpg" />
     <Content Include="Content\Images\Pictures\route.jpg" />
     <Content Include="Content\Images\Pictures\sky.jpg" />
+    <Content Include="Content\Images\Pictures\upload.png" />
     <Content Include="Content\Images\Pictures\web.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

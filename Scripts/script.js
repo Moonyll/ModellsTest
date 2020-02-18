@@ -1,8 +1,14 @@
 ﻿$(document).ready(function () {
 
-    // Hide uploaded picture box :
-    $("#pictureChoice").removeClass();
+    // Reset form & refresh page :
+    $('.resetForm').click(function (e) {
 
+        e.preventDefault();
+        // Clear form :
+        $("form")[0].reset();
+        // Refresh page (relocate) :
+        window.location.href = window.location.href;
+    });
 });
 
 var integratePicture = function (event) {
@@ -36,3 +42,37 @@ var integratePicture = function (event) {
     // Display choosen picture :
     pictureReader.readAsDataURL(input.files[0]);
 };
+
+
+// Client-side validations :
+function isValid(input) {
+    var inputValue = input.value;
+    console.log(input.class);
+
+    if (inputValue == 'toto') {
+        $(input).addClass('is-valid');
+    }
+    else {
+        $(input).addClass('is-invalid');
+    }
+}
+
+// Clear form from validations tips :
+function clearCss(input) {
+
+    $(input).removeClass('is-valid');
+    $(input).removeClass('is-invalid');
+    $(input).next('[data-toggle="popover"]').popover('hide');
+
+}
+
+// Enable the popover elements in the view :
+$(function () {
+    $('[data-toggle="popover"]').popover();
+})
+
+$(function ValidateForm() {
+
+    $('[data-toggle="popover"]').popover('toggle');
+
+})
