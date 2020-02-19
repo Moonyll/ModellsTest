@@ -32,7 +32,7 @@ namespace Modells.Controllers
         /// </summary>
         /// <param name="pageToDisplay"></param>
         /// <returns></returns>
-        public ActionResult Index2(int? pageToDisplay)
+        public ActionResult pictureCollection(int? pageToDisplay)
         {
             #region Get Pictures List
             // Picture list :
@@ -108,12 +108,13 @@ namespace Modells.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult pictureCreate([Bind(Include = "pictureId,pictureTitle,pictureAlternateTitle,pictureDescription,pictureStandardUrl,categoryId")] picture newPicture, HttpPostedFileBase newPictureToUpload)
         {
-            #region Dropdownlist
+            #region Generate a dropdownlist
             // Display a dropdownlist for the picture categories in the view :
             ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName", newPicture.categoryId);
             #endregion
 
-            #region Directory Save
+            #region Save picture in the directory
+
             // Add & save picture file to directory :
 
             // Get size in octets of uploaded picture :
@@ -131,7 +132,7 @@ namespace Modells.Controllers
             // Get extension of uploaded picture :
             var uploadedPictureExtension = newPictureToUpload?.ContentType;
 
-            // Check if the extension is authorized
+            // Check if the extension is authorized :
             var isOutExt = (!pictureControls.pictureFileToUploadExtension.Contains(uploadedPictureExtension)) ? true : false;
 
             // Add error message if extension is not enable :
@@ -145,8 +146,8 @@ namespace Modells.Controllers
             {
                 // Picture name - Get input value by user or default filename :
                 var newPictureSourceName = (!string.IsNullOrEmpty(newPicture?.pictureStandardUrl)) ?
-                                              newPicture.pictureStandardUrl :
-                                              Path.GetFileName(newPictureToUpload.FileName);
+                                           newPicture.pictureStandardUrl :
+                                           Path.GetFileName(newPictureToUpload.FileName);
 
                 // Combine directory path & picture name to make the source picture :
                 var newPictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), newPictureSourceName);
@@ -156,13 +157,14 @@ namespace Modells.Controllers
             }
             #endregion
 
-            #region Database Save
+            #region Save picture in the database
+
             // Add & Save picture entity to database :
             if (ModelState.IsValid)
             {
                 db.picture.Add(newPicture);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("pictureSuccess");
             }
             #endregion
 
@@ -188,6 +190,7 @@ namespace Modells.Controllers
         }
 
         // GET: pictures/Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -244,6 +247,18 @@ namespace Modells.Controllers
             db.picture.Remove(picture);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // Display success view :
+        public ActionResult pictureSuccess()
+        {
+            return View();
+        }
+
+        // Display error view :
+        public ActionResult pictureError()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,421 @@
+﻿@model IEnumerable<Modells.Models.picture>
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Class template for the column :
+    var colcss = "col-md-3 p-2 bg-info border border-dark d-flex align-items-center justify-content-center";
+
+    // Class template for the picture :
+    var imgCss = "card-img img-fluid img-thumbnail d-block mx-auto";
+
+    // Total pictures to display :
+    var totalPictures = ViewBag.totalPictures;
+
+    var indexLimit = totalPictures - 1;
+
+    // Table of pictures to display  :
+    var pictureElements = new string[8, 6];
+
+    for (int index = 0; index <= 7; index++)
+    {
+
+        var pictureUrlToLoad = (index <= indexLimit) ? Model.ElementAt(index).pictureStandardUrl : null;
+
+        if (pictureUrlToLoad != null)
+        {
+            // Load the picture of database :
+
+            // Picture Url :
+            pictureElements[index, 0] = "/Content/Images/Pictures/" + Model.ElementAt(index).pictureStandardUrl.ToString();
+
+            // Picture Title :
+            pictureElements[index, 1] = Model.ElementAt(index).pictureTitle.ToString();
+
+            // Picture Alternative title :
+            pictureElements[index, 2] = Model.ElementAt(index).pictureAlternateTitle.ToString();
+
+            // Picture Description :
+            pictureElements[index, 3] = Model.ElementAt(index).pictureDescription.ToString();
+
+            // Picture Category :
+            pictureElements[index, 4] = Model.ElementAt(index).category.categoryName.ToString();
+
+            // Picture Id :
+            pictureElements[index, 5] = Model.ElementAt(index).pictureId.ToString();
+        }
+
+
+        else
+        {
+            // Load the default picture if database ones not exists :
+            pictureElements[index, 0] = "/Content/Images/Pictures/smile.jpg";
+            pictureElements[index, 1] = "Default picture";
+            pictureElements[index, 2] = "Default picture";
+        }
+
+    }
+
+}
+
+@Html.ActionLink("To The Test Page", "Test")
+@Html.ActionLink("Details", "pictureDetails")
+@Html.ActionLink("Liste des photos", "Index", "Pictures")
+@Html.ActionLink("List", "pictureCollection", "Pictures")
+@Html.ActionLink("Ajouter une nouvelle photo", "pictureCreate", "Pictures")
+@Html.ActionLink("Vue Succès", "pictureSuccess", "Pictures")
+
+
+<script>
+    $(document).ready(function () {
+        $(".details").click(function () {
+
+            // Get picture source to display in the modal :
+            var url = $(this).parent().prev().attr("src");
+
+            // Get the selected alt. title image in the modal :
+            var alternate = $(this).parent().prev().attr("title");
+
+            // Get the selected title image in the modal :
+            var selectedPictureId = parseInt($(this).prev().prev().children(".pictureId").text());
+
+            // Get the selected title image in the modal :
+            var title = $(this).prev().prev().children(".pictureTitle").text();
+
+            // Get the selected category image in the modal :
+            var category = $(this).prev().prev().children(".pictureCategory").text();
+
+            // Get the selected description image in the modal :
+            var description = $(this).prev().prev().children(".pictureDescription").text();
+
+            // Display the selected image in the modal :
+            $(".displayPicture").attr("src", url);
+
+            // Display the alt. title in the modal :
+            $(".displayPicture").attr("title", alternate);
+
+            // Display the selected image title in the modal :
+            $("#pictureTitle").text(title);
+
+            // Display the selected image category in the modal :
+            $("#pictureCategory").text(category);
+
+            // Display the selected image category in the modal :
+            $("#pictureId").text(selectedPictureId);
+
+            // Display the selected image description in the modal :
+            $("#pictureDescription").text(description);
+
+            // Check if src is correct :
+            console.log(alternate);
+
+            $(".editPicture").click(function () {
+
+                // Ajax call to edit the picture :
+                $.ajax({
+                    url: '@Url.Action("Edit", "Pictures")',
+                    type: 'GET',
+                    dataType: 'html',
+                    contentType: 'application/json; charset=utf-8',
+                    data: { id: selectedPictureId },
+
+                    // Id is found :
+                    success: function () {
+
+                        // Redirect to edition view page to update picture :
+                        var urlEdit =  '@Url.Action("Edit", "Pictures")'+'/'+selectedPictureId;
+                        console.log(urlEdit);
+                        window.location.href = urlEdit;
+                    },
+
+                    // Id is not found :
+                    error: function () {
+                        window.location.href = '@Url.Action("pictureError", "Pictures")';
+                    }
+                });
+
+            });
+
+        });
+    });
+
+</script>
+
+@*One fluid container of 2 rows & 4 columns*@
+<div class="container-fluid bg-warning p-4 d-table-cell">
+    @*First row of 4 pictures*@
+    <div class="row p-2">
+        @*1st column*@
+        <div class="@colcss">
+            <div class="card">
+                @*Picture source, title & alternative title*@
+                <img src="@pictureElements[0,0]" alt="@pictureElements[0,1]" title="@pictureElements[0,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[0, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[0, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[0, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[0, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @*2nd column*@
+        <div class="@colcss">
+            <div class="card">
+                <img src="@pictureElements[1,0]" alt="@pictureElements[1,1]" title="@pictureElements[1,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[1, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[1, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[1, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[1, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @*3rd column*@
+        <div class="@colcss">
+            <div class="card">
+                <img src="@pictureElements[2,0]" alt="@pictureElements[2,1]" title="@pictureElements[2,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[2, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[2, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[2, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[2, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @*4th column*@
+        <div class="@colcss">
+            <div class="card">
+                <img src="@pictureElements[3,0]" alt="@pictureElements[3,1]" title="@pictureElements[3,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[3, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[3, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[3, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[3, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Second row of 4 pictures*@
+    <div class="row p-2">
+        @*1st column*@
+        <div class="@colcss">
+            <div class="card">
+                <img src="@pictureElements[4,0]" alt="@pictureElements[4,1]" title="@pictureElements[4,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[4, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[4, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[4, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[4, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @*2nd column*@
+        <div class="@colcss">
+            <div class="card">
+                <img src="@pictureElements[5,0]" alt="@pictureElements[5,1]" title="@pictureElements[5,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[5, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[5, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[5, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[5, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @*3rd column*@
+        <div class="@colcss">
+            <div class="card">
+                <img src="@pictureElements[6,0]" alt="@pictureElements[6,1]" title="@pictureElements[6,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[6, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[6, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[6, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[6, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @*4th column*@
+        <div class="@colcss">
+            <div class="card">
+                <img src="@pictureElements[7,0]" alt="@pictureElements[7,1]" title="@pictureElements[7,1]" class="@imgCss" />
+                <div class="card-img-overlay">
+                    <div class="justify-content-between d-flex">
+                        <div class="card-title text-left pictureTitle">
+                            @pictureElements[7, 1]
+                        </div>
+                        @*Picture category*@
+                        <div class="card-title text-right pictureCategory">
+                            @pictureElements[7, 4]
+                        </div>
+                        @*Picture description*@
+                        <div class="pictureDescription" hidden>
+                            @pictureElements[7, 3]
+                        </div>
+                        @*Picture id*@
+                        <div class="pictureId" hidden>
+                            @pictureElements[7, 5]
+                        </div>
+                    </div>
+                    <button type="button" class="btn text-light ratings">
+                        <i class="far fa-heart"></i> 5
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+                    <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Enable Pagination*@
+@for (int page = 1; page <= ViewBag.totalPages; page++)
+{
+    <button type="button" class="btn btn-dark rounded rounded-circle" onclick="location.href='@Url.Action("pictureCollection", new { pageToDisplay = page })'">
+        @page
+    </button>
+}
+
+@*Loading the partial view to display the modal :*@
+@Html.Partial("~/Views/pictures/pictureDetails.cshtml")

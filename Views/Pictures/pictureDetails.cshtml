@@ -2,7 +2,11 @@
 
 @{
     ViewBag.Title = "pictureDetails";
+
 }
+
+
+
 <!-- Modal to display picture details -->
 <div class="modal fade bg-transparent testpic" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -15,13 +19,16 @@
                     <div class="text-light p-1" id="pictureCategory">
                         Picture category
                     </div>
+                    <div class="text-light p-1" id="pictureId" hidden>
+                        Picture id
+                    </div>
                 </div>
                 <button type="button" class="btn text-light mr-0 removeFocus" data-dismiss="modal">
                     <i class="fas fa-times-circle"></i>
                 </button>
             </div>
             <div class="modal-body bg-transparent">
-                <img src="" class="img-fluid d-block mx-auto displayPicture" />
+                <img src="" alt="" title="" class="img-fluid d-block mx-auto displayPicture" />
             </div>
             <p class="text-light text-center" id="pictureDescription">toto est arrivé</p>
             <div class="modal-footer justify-content-between">
@@ -34,6 +41,9 @@
                 </button>
                 <button type="button" class="btn text-light m-auto removeFocus">
                     <i class="fas fa-info-circle"></i>
+                </button>
+                <button type="button" class="btn text-light mr-0 removeFocus editPicture">
+                    <i class="fas fa-edit"></i>
                 </button>
                 <button type="button" class="btn text-light mr-0 removeFocus">
                     <i class="fas fa-download"></i>
