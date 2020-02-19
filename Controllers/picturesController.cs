@@ -190,8 +190,25 @@ namespace Modells.Controllers
         }
 
         // GET: pictures/Edit/5
+        //[HttpGet]
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    picture picture = db.picture.Find(id);
+        //    if (picture == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName", picture.categoryId);
+        //    return View(picture);
+        //}
+
+        // GET: pictures/Edit/5
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult pictureEdit(int? id)
         {
             if (id == null)
             {
@@ -209,19 +226,37 @@ namespace Modells.Controllers
         // POST: pictures/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "pictureId,pictureTitle,pictureAlternateTitle,pictureDescription,pictureStandardUrl,pictureRatingValue,pictureViewsNumber,categoryId")] picture picture)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(picture).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName", picture.categoryId);
+        //    return View(picture);
+        //}
+
+        // POST: pictures/Edit/5
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "pictureId,pictureTitle,pictureAlternateTitle,pictureDescription,pictureStandardUrl,pictureRatingValue,pictureViewsNumber,categoryId")] picture picture)
+        public ActionResult pictureEdit([Bind(Include = "pictureId,pictureTitle,pictureAlternateTitle,pictureDescription,pictureStandardUrl,pictureRatingValue,pictureViewsNumber,categoryId")] picture updatePicture)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(picture).State = EntityState.Modified;
+                db.Entry(updatePicture).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("pictureCollection");
             }
-            ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName", picture.categoryId);
-            return View(picture);
+            ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName", updatePicture.categoryId);
+            return View(updatePicture);
         }
+
 
         // GET: pictures/Delete/5
         public ActionResult Delete(int? id)

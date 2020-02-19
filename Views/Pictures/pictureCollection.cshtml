@@ -114,7 +114,7 @@
 
                 // Ajax call to edit the picture :
                 $.ajax({
-                    url: '@Url.Action("Edit", "Pictures")',
+                    url: '@Url.Action("pictureEdit", "Pictures")',
                     type: 'GET',
                     dataType: 'html',
                     contentType: 'application/json; charset=utf-8',
@@ -124,13 +124,15 @@
                     success: function () {
 
                         // Redirect to edition view page to update picture :
-                        var urlEdit =  '@Url.Action("Edit", "Pictures")'+'/'+selectedPictureId;
+                        var urlEdit =  '@Url.Action("pictureEdit", "Pictures")'+'/'+selectedPictureId;
                         console.log(urlEdit);
                         window.location.href = urlEdit;
                     },
 
                     // Id is not found :
                     error: function () {
+
+                        // Redirect to error view page :
                         window.location.href = '@Url.Action("pictureError", "Pictures")';
                     }
                 });
