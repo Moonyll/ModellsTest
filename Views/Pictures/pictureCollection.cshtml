@@ -107,8 +107,29 @@
             // Display the selected image description in the modal :
             $("#pictureDescription").text(description);
 
+            // Get the previous & next button of the collection list :
+            var nextButton = $(this).closest(".col-md-3").next().find(".details");
+
+            var prevButton = $(this).closest(".col-md-3").prev().find(".details");
+
+            // Other code :
+            var numItems = $(".details").length;
+            var indexItem = $(".details").index(this);
             // Check if src is correct :
-            console.log(alternate);
+            console.log(indexItem);
+            //
+            $(".prev").click(function () {
+
+                prevButton.click();
+                $("#showPictureDetails").modal("show");
+
+            });
+            //
+            $(".next").click(function () {
+
+                nextButton.click();
+                 $("#showPictureDetails").modal("show");
+            });
 
             $(".editPicture").click(function () {
 
@@ -140,6 +161,10 @@
             });
 
         });
+
+        // New Code here :
+        //
+
     });
 
 </script>

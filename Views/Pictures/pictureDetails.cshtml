@@ -5,6 +5,10 @@
 
 }
 
+<script>
+//
+</script>
+
 <!-- Modal to display picture details -->
 <div class="modal fade bg-transparent testpic" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -25,10 +29,22 @@
                     <i class="fas fa-times-circle"></i>
                 </button>
             </div>
-            <div class="modal-body bg-transparent">
+            <div class="modal-body bg-transparent d-inline-flex justify-content-center">
+
+                @*Previous picture button :*@
+                <button type="button" class="btn text-light removeFocus prev">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </button>
+
+                @*Display picture :*@
                 <img src="" alt="" title="" class="img-fluid d-block mx-auto displayPicture" />
+
+                @*Next picture button :*@
+                <button type="button" class="btn text-light removeFocus next">
+                    <i class="fas fa-arrow-circle-right"></i>
+                </button>
             </div>
-            <p class="text-light text-center" id="pictureDescription">toto est arrivé</p>
+            <p class="text-light text-center" id="pictureDescription">Picture description</p>
             <div class="modal-footer justify-content-between">
                 @* Justify-content-between enables to set button position*@
                 <button type="button" class="btn text-light ml-0 removeFocus">
