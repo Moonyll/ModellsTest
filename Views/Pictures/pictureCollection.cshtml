@@ -71,42 +71,7 @@
     $(document).ready(function () {
         $(".details").click(function () {
 
-            // Get picture source to display in the modal :
-            var url = $(this).parent().prev().attr("src");
-
-            // Get the selected alt. title image in the modal :
-            var alternate = $(this).parent().prev().attr("title");
-
-            // Get the selected title image in the modal :
-            var selectedPictureId = parseInt($(this).prev().prev().children(".pictureId").text());
-
-            // Get the selected title image in the modal :
-            var title = $(this).prev().prev().children(".pictureTitle").text();
-
-            // Get the selected category image in the modal :
-            var category = $(this).prev().prev().children(".pictureCategory").text();
-
-            // Get the selected description image in the modal :
-            var description = $(this).prev().prev().children(".pictureDescription").text();
-
-            // Display the selected image in the modal :
-            $(".displayPicture").attr("src", url);
-
-            // Display the alt. title in the modal :
-            $(".displayPicture").attr("title", alternate);
-
-            // Display the selected image title in the modal :
-            $("#pictureTitle").text(title);
-
-            // Display the selected image category in the modal :
-            $("#pictureCategory").text(category);
-
-            // Display the selected image category in the modal :
-            $("#pictureId").text(selectedPictureId);
-
-            // Display the selected image description in the modal :
-            $("#pictureDescription").text(description);
-
+ 
             // Get the previous & next button of the collection list :
             var nextButton = $(this).closest(".col-md-3").next().find(".details");
 
@@ -114,22 +79,86 @@
 
             // Other code :
             var numItems = $(".details").length;
+
+            // Get index of selected picture :
             var indexItem = $(".details").index(this);
+
             // Check if src is correct :
-            console.log(indexItem);
-            //
+
+            var mainPictureElements = getPictureElements($(this));
+
+            var selectedPictureId = mainPictureElements[1];
+
+            displayPictureElements(mainPictureElements);
+
+            console.log(selectedPictureId);
+
             $(".prev").click(function () {
 
-                prevButton.click();
-                $("#showPictureDetails").modal("show");
-
+                var prevIndex = ((indexItem - 1) <= 0) ? 0 : (indexItem - 1);
+                var prevElementButton = $(".details").eq(prevIndex);
+                var prevPictureElements = getPictureElements(prevElementButton);
+                displayPictureElements(prevPictureElements);
+                indexItem--;
             });
-            //
+
             $(".next").click(function () {
 
-                nextButton.click();
-                 $("#showPictureDetails").modal("show");
+                var nextIndex = ((indexItem + 1) >= 7) ? 7 : (indexItem + 1);
+                var nextElementButton = $(".details").eq(nextIndex);
+                var nextPictureElements = getPictureElements(nextElementButton);
+                displayPictureElements(nextPictureElements);
+                indexItem++;
             });
+
+            //
+            function getPictureElements(button){
+
+            // Get picture source to display in the modal :
+            var source = button.parent().prev().attr("src");
+            
+            // Get the selected title image in the modal :
+            var id = parseInt(button.prev().prev().children(".pictureId").text());
+            
+            // Get the selected title image in the modal :
+            var title = button.prev().prev().children(".pictureTitle").text();
+            
+            
+            // Get the selected alt. title image in the modal :
+            var alternate = button.parent().prev().attr("title");
+            
+             // Get the selected description image in the modal :
+            var description = button.prev().prev().children(".pictureDescription").text();
+            
+            // Get the selected category image in the modal :
+            var category = button.prev().prev().children(".pictureCategory").text();
+            
+            return pictureElements = new Array(source, id, title, alternate, description, category);
+            
+            }
+            
+            //
+            function displayPictureElements(pictureElements){
+            
+             // Display the selected image in the modal :
+            $(".displayPicture").attr("src", pictureElements[0]);
+            
+            // Display the selected id in the modal :
+            $("#pictureId").text(pictureElements[1]);
+            
+            // Display the selected image title in the modal :
+            $("#pictureTitle").text(pictureElements[2]);
+            
+            // Display the alt. title in the modal :
+            $(".displayPicture").attr("title", pictureElements[3]);
+            
+              // Display the selected image description in the modal :
+            $("#pictureDescription").text(pictureElements[4]);
+            
+            // Display the selected image category in the modal :
+            $("#pictureCategory").text(pictureElements[5]);
+            
+            }
 
             $(".editPicture").click(function () {
 

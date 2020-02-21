@@ -2,33 +2,50 @@
 
 @{
     ViewBag.Title = "pictureDetails";
-
 }
 
 <script>
-//
+
+// Test code here.
+
 </script>
 
 <!-- Modal to display picture details -->
 <div class="modal fade bg-transparent testpic" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+
+        @*Modal content : *@
         <div class="modal-content bg-transparent">
+
+            @*Modal header : *@
             <div class="modal-header bg-transparent justify-content-between d-flex">
+
+                @*Modal title : *@
                 <div class="modal-title text-light ml-0 d-inline-flex" id="pictureModalLabel">
+
+                    @*Picture title :*@
                     <div class="text-light p-1" id="pictureTitle">
                         Picture title
                     </div>
+
+                    @*Picture category :*@
                     <div class="text-light p-1" id="pictureCategory">
                         Picture category
                     </div>
+
+                    @*Picture id :*@
                     <div class="text-light p-1" id="pictureId" hidden>
                         Picture id
                     </div>
                 </div>
+
+                @*Close button*@
                 <button type="button" class="btn text-light mr-0 removeFocus" data-dismiss="modal">
                     <i class="fas fa-times-circle"></i>
                 </button>
             </div>
+
+            @*Modal body : *@
             <div class="modal-body bg-transparent d-inline-flex justify-content-center">
 
                 @*Previous picture button :*@
@@ -44,21 +61,34 @@
                     <i class="fas fa-arrow-circle-right"></i>
                 </button>
             </div>
+
+            @*Picture description :*@
             <p class="text-light text-center" id="pictureDescription">Picture description</p>
+
+            @*Modal footer :*@
             <div class="modal-footer justify-content-between">
-                @* Justify-content-between enables to set button position*@
+
+                @*Justify-content-between enables to set button position :*@
                 <button type="button" class="btn text-light ml-0 removeFocus">
-                    @*Rating value*@
+
+                    @*Picture rating value :*@
                     <i class="far fa-heart"></i> 5
-                    @*View number*@
+
+                    @*Picture views number :*@
                     <i class="fas fa-bullseye"></i> 10
                 </button>
+
+                @*Button infos : *@
                 <button type="button" class="btn text-light m-auto removeFocus">
                     <i class="fas fa-info-circle"></i>
                 </button>
+
+                @*Button edit : *@
                 <button type="button" class="btn text-light mr-0 removeFocus editPicture">
                     <i class="fas fa-edit"></i>
                 </button>
+
+                @*Button download : *@
                 <button type="button" class="btn text-light mr-0 removeFocus">
                     <i class="fas fa-download"></i>
                 </button>
