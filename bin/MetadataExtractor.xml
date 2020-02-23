@@ -430,6 +430,135 @@
         <member name="T:MetadataExtractor.Formats.Bmp.BmpReader">
             <author>Drew Noakes https://drewnoakes.com</author>
         </member>
+        <member name="T:MetadataExtractor.Formats.Eps.EpsDescriptor">
+            <summary>Provides human-readable string versions of the tags stored in a <see cref="T:MetadataExtractor.Formats.Eps.EpsDirectory"/>.</summary>
+            <author>Payton Garland</author>
+            <author>Kevin Mott https://github.com/kwhopper</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Eps.EpsDirectory">
+            <author>Payton Garland</author>
+            <author>Kevin Mott https://github.com/kwhopper</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Eps.EpsMetadataReader">
+            <summary>Obtains metadata from EPS files.</summary>
+            <author>Payton Garland</author>
+            <author>Kevin Mott https://github.com/kwhopper</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Eps.EpsReader">
+            <summary>Reads file passed in through SequentialReader and parses encountered data:</summary>
+            <remarks>
+            <list type="bullet">
+              <item>Basic EPS Comments</item>
+              <item>EXIF</item>
+              <item>Photoshop</item>
+              <item>IPTC</item>
+              <item>ICC Profile</item>
+              <item>XMP</item>
+            </list>
+            EPS comments are retrieved from EPS directory.  Photoshop, ICC Profile, and XMP processing
+            is passed to their respective reader.
+            <para />
+            EPS Constraints (Source: https://www-cdf.fnal.gov/offline/PostScript/5001.PDF pg.18):
+            <list type = "bullet" >
+              <item>Max line length is 255 characters</item>
+              <item>Lines end with a CR(0xD) or LF(0xA) character (or both, in practice)</item>
+              <item>':' separates keywords (considered part of the keyword)</item>
+              <item>Whitespace is either a space(0x20) or tab(0x9)</item>
+              <item>If there is more than one header, the 1st is truth</item>
+            </list>
+            </remarks>
+            <author>Payton Garland</author>
+            <author>Kevin Mott https://github.com/kwhopper</author>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.Extract(MetadataExtractor.Formats.Eps.EpsDirectory,System.Collections.Generic.List{MetadataExtractor.Directory},MetadataExtractor.IO.SequentialReader)">
+            <summary>
+            Main method that parses all comments and then distributes data extraction among other methods that parse the
+            rest of file and store encountered data in metadata(if there exists an entry in EpsDirectory
+            for the found data).  Reads until a begin data/binary comment is found or reader's estimated
+            available data has run out (or AI09 End Private Data).  Will extract data from normal EPS comments, Photoshop, ICC, and XMP.
+            </summary>
+            <param name="directory"></param>
+            <param name="directories">list to add directory to and extracted data</param>
+            <param name="reader"></param>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.AddToDirectory(MetadataExtractor.Formats.Eps.EpsDirectory,System.String,System.String)">
+            <summary>
+            Default case that adds comment with keyword to directory
+            </summary>
+            <param name="directory">EpsDirectory to add extracted data to</param>
+            <param name="name">String that holds name of current comment</param>
+            <param name="value">String that holds value of current comment</param>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.ExtractImageData(MetadataExtractor.Formats.Eps.EpsDirectory,System.String)">
+            <summary>
+            Parses '%ImageData' comment which holds several values including width in px,
+            height in px and color type.
+            </summary>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.ExtractPhotoshopData(System.Collections.Generic.List{MetadataExtractor.Directory},MetadataExtractor.IO.SequentialReader)">
+            <summary>
+            Decodes a commented hex section, and uses <see cref="T:MetadataExtractor.Formats.Photoshop.PhotoshopReader"/> to decode the resulting data.
+            </summary>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.ExtractIccData(System.Collections.Generic.List{MetadataExtractor.Directory},MetadataExtractor.IO.SequentialReader)">
+            <summary>
+            Decodes a commented hex section, and uses <see cref="T:MetadataExtractor.Formats.Icc.IccReader"/> to decode the resulting data.
+            </summary>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.ExtractXmpData(System.Collections.Generic.List{MetadataExtractor.Directory},MetadataExtractor.IO.SequentialReader)">
+            <summary>
+            Extracts an XMP xpacket, and uses <see cref="T:MetadataExtractor.Formats.Xmp.XmpReader"/> to decode the resulting data.
+            </summary>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.ReadUntil(MetadataExtractor.IO.SequentialReader,System.Byte[])">
+            <summary>
+            Reads all bytes until the given sentinel is observed.
+            The sentinel will be included in the returned bytes.
+            </summary>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.DecodeHexCommentBlock(MetadataExtractor.IO.SequentialReader)">
+             EPS files can contain hexadecimal-encoded ASCII blocks, each prefixed with <c>"% "</c>.
+             This method reads such a block and returns a byte[] of the decoded contents.
+             Reading stops at the first invalid line, which is discarded (it's a terminator anyway).
+             <p/>
+             For example:
+             <pre><code>
+             %BeginPhotoshop: 9564
+             % 3842494D040400000000005D1C015A00031B25471C0200000200041C02780004
+             % 6E756C6C1C027A00046E756C6C1C025000046E756C6C1C023700083230313630
+             % 3331311C023C000B3131343335362B303030301C023E00083230313630333131
+             % 48000000010000003842494D03FD0000000000080101000000000000
+             %EndPhotoshop
+             </code></pre>
+             When calling this method, the reader must be positioned at the start of the first line containing
+             hex data, not at the introductory line.
+            
+             @return The decoded bytes, or <code>null</code> if decoding failed.
+            <remarks>
+            EPS files can contain hexadecimal-encoded ASCII blocks, each prefixed with "% ".
+            This method reads such a block and returns a byte[] of the decoded contents.
+            Reading stops at the first invalid line, which is discarded(it's a terminator anyway).
+            <para />
+            For example:
+            <para />
+            %BeginPhotoshop: 9564
+            % 3842494D040400000000005D1C015A00031B25471C0200000200041C02780004
+            % 6E756C6C1C027A00046E756C6C1C025000046E756C6C1C023700083230313630
+            % 3331311C023C000B3131343335362B303030301C023E00083230313630333131
+            % 48000000010000003842494D03FD0000000000080101000000000000
+            %EndPhotoshop
+            <para />
+            When calling this method, the reader must be positioned at the start of the first line containing
+            hex data, not at the introductory line.
+            </remarks>
+            <returns>The decoded bytes, or null if decoding failed.</returns>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Eps.EpsReader.TryHexToInt(System.Byte)">
+            <summary>
+            Treats a byte as an ASCII character, and returns its numerical value in hexadecimal.
+            If conversion is not possible, returns -1.
+            </summary>
+        </member>
         <member name="T:MetadataExtractor.Formats.Exif.ExifDescriptorBase`1">
             <summary>Base class for several Exif format descriptor classes.</summary>
             <author>Drew Noakes https://drewnoakes.com</author>
@@ -3364,6 +3493,15 @@
         <member name="F:MetadataExtractor.Formats.Exif.Makernotes.PentaxMakernoteDirectory.TagDaylightSavings">
             <summary>(String).</summary>
         </member>
+        <member name="T:MetadataExtractor.Formats.Exif.Makernotes.ReconyxHyperFire2MakernoteDescriptor">
+            <summary>
+            Provides human-readable string representations of tag values stored in a <see cref="T:MetadataExtractor.Formats.Exif.Makernotes.ReconyxHyperFire2MakernoteDirectory"/>.
+            </summary>
+            <remarks>Reconyx uses a fixed makernote block. Tag values are the byte index of the tag within the makernote.</remarks>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Exif.Makernotes.ReconyxHyperFire2MakernoteDirectory">
+            <summary>Describes tags specific to Reconyx HyperFire 2 cameras.</summary>
+        </member>
         <member name="T:MetadataExtractor.Formats.Exif.Makernotes.ReconyxHyperFireMakernoteDescriptor">
             <summary>
             Provides human-readable string representations of tag values stored in a <see cref="T:MetadataExtractor.Formats.Exif.Makernotes.ReconyxHyperFireMakernoteDirectory"/>.
@@ -4417,6 +4555,31 @@
             <summary>Reads Photoshop "ducky" segments, created during Save-for-Web.</summary>
             <author>Drew Noakes https://drewnoakes.com</author>
         </member>
+        <member name="T:MetadataExtractor.Formats.Photoshop.Knot">
+            <summary>
+            Represents a knot created by Photoshop:
+            <list type="bullet">
+            <item>Linked knot</item>
+            <item>Unlinked knot</item>
+            </list>
+            </summary>
+            <author>Payton Garland</author>
+            <author>Kevin Mott https://github.com/kwhopper</author>
+        </member>
+        <member name="P:MetadataExtractor.Formats.Photoshop.Knot.Item(System.Int32)">
+            <summary>
+            Add/Get an individual coordinate value (x or y) to/from
+            points array (6 points per knot)
+            </summary>
+            <param name="index"></param>
+            <returns>an individual coordinate value</returns>
+            <remarks>Define the indexer to allow client code to use [] notation</remarks>
+        </member>
+        <member name="P:MetadataExtractor.Formats.Photoshop.Knot.Type">
+            <summary>
+            Get the type of knot (linked or unlinked)
+            </summary>
+        </member>
         <member name="T:MetadataExtractor.Formats.Photoshop.PhotoshopDescriptor">
             <author>Yuri Binev</author>
             <author>Drew Noakes https://drewnoakes.com</author>
@@ -4435,6 +4598,10 @@
             </remarks>
             <author>Yuri Binev</author>
             <author>Drew Noakes https://drewnoakes.com</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Photoshop.PhotoshopTiffHandler">
+            <author>Payton Garland</author>
+            <author>Kevin Mott https://github.com/kwhopper</author>
         </member>
         <member name="T:MetadataExtractor.Formats.Photoshop.PsdHeaderDescriptor">
             <author>Drew Noakes https://drewnoakes.com</author>
@@ -4474,6 +4641,36 @@
         <member name="T:MetadataExtractor.Formats.Photoshop.PsdReader">
             <summary>Reads metadata stored within PSD file format data.</summary>
             <author>Drew Noakes https://drewnoakes.com</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Photoshop.Subpath">
+            <summary>
+            Represents a subpath created by Photoshop:
+            <list type="bullet">
+            <item>Closed Bezier knot, linked</item>
+            <item>Closed Bezier knot, unlinked</item>
+            <item>Open Bezier knot, linked</item>
+            <item>Open Bezier knot, unlinked</item>
+            </list>
+            </summary>
+            <author>Payton Garland</author>
+            <author>Kevin Mott https://github.com/kwhopper</author>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Photoshop.Subpath.Add(MetadataExtractor.Formats.Photoshop.Knot)">
+            <summary>
+            Appends a knot (set of 3 points) into the list
+            </summary>
+            <param name="knot"></param>
+        </member>
+        <member name="P:MetadataExtractor.Formats.Photoshop.Subpath.KnotCount">
+            <summary>
+            Gets size of knots list
+            </summary>
+            <returns>size of knots List</returns>
+        </member>
+        <member name="P:MetadataExtractor.Formats.Photoshop.Subpath.Knots">
+            <summary>
+            Return a read-only list of Knots
+            </summary>
         </member>
         <member name="T:MetadataExtractor.Formats.Png.PngChromaticities">
             <author>Drew Noakes https://drewnoakes.com</author>
@@ -4690,6 +4887,9 @@
             <param name="reader">The reader.</param>
             <returns>System.Single[].</returns>
         </member>
+        <member name="T:MetadataExtractor.Formats.QuickTime.QuickTimeTypeChecker">
+            <author>Dmitry Shechtman</author>
+        </member>
         <member name="T:MetadataExtractor.Formats.Raf.RafMetadataReader">
             <summary>Obtains metadata from RAF (Fujifilm camera raw) image files.</summary>
             <author>TSGames https://github.com/TSGames</author>
@@ -4778,6 +4978,55 @@
             <param name="handler">The <see cref="T:MetadataExtractor.Formats.Riff.IRiffHandler"/> that will coordinate processing and accept read values.</param>
             <exception cref="T:MetadataExtractor.Formats.Riff.RiffProcessingException">An error occurred during the processing of RIFF data that could not be ignored or recovered from.</exception>
             <exception cref="T:System.IO.IOException">an error occurred while accessing the required data</exception>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Riff.RiffTypeChecker">
+            <author>Drew Noakes https://drewnoakes.com</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaDeveloperDirectory">
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaDeveloperReader">
+            <summary>Reads TGA image file developer area.</summary>
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaExtensionDescriptor">
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaExtensionDirectory">
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaExtensionReader">
+            <summary>Reads TGA image file extension area.</summary>
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaFooterReader">
+            <summary>Reads TGA image file footer.</summary>
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaHeaderDescriptor">
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaHeaderDirectory">
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaHeaderReader">
+            <summary>Reads TGA image file header.</summary>
+            <author>Dmitry Shechtman</author>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaMetadataReader">
+            <summary>Obtains metadata from TGA (Truevision) files.</summary>
+            <author>Drew Noakes https://drewnoakes.com</author>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Tga.TgaMetadataReader.ReadMetadata(System.String)">
+            <exception cref="T:System.IO.IOException"/>
+            <exception cref="T:System.ArgumentException"/>
+        </member>
+        <member name="M:MetadataExtractor.Formats.Tga.TgaMetadataReader.ReadMetadata(System.IO.Stream)">
+            <exception cref="T:System.IO.IOException"/>
+            <exception cref="T:System.ArgumentException"/>
+        </member>
+        <member name="T:MetadataExtractor.Formats.Tga.TgaTypeChecker">
+            <author>Dmitry Shechtman</author>
         </member>
         <member name="T:MetadataExtractor.Formats.Tiff.DirectoryTiffHandler">
             <summary>
@@ -5697,6 +5946,17 @@
             A simplified instance if one exists, otherwise a copy of the original value.
             </returns>
         </member>
+        <member name="T:MetadataExtractor.StringBuilderExtensions">
+            <author>Kevin Mott https://github.com/kwhopper</author>
+        </member>
+        <member name="M:MetadataExtractor.StringBuilderExtensions.IndexOf(System.Text.StringBuilder,System.Char)">
+            <summary>
+            Returns the first index of character <paramref name="c"/> in <paramref name="sb"/>,
+            or <c>-1</c> if it is not found.
+            </summary>
+            <param name="sb">The <see cref="T:System.Text.StringBuilder"/> to search within.</param>
+            <param name="c">The character to find.</param>
+        </member>
         <member name="T:MetadataExtractor.StringValue">
             <summary>
             Wraps a byte array with an <see cref="P:MetadataExtractor.StringValue.Encoding"/>. Allows consumers to override the encoding if required.
@@ -5900,11 +6160,20 @@
             <summary>Canon camera raw (version 3).</summary>
             <remarks>Shared by CR3 (image) and CRM (video).</remarks>
         </member>
+        <member name="F:MetadataExtractor.Util.FileType.Eps">
+            <summary>Encapsulated PostScript</summary>
+        </member>
+        <member name="F:MetadataExtractor.Util.FileType.Tga">
+            <summary>Truevision graphics.</summary>
+        </member>
+        <member name="F:MetadataExtractor.Util.FileType.Mp3">
+            <summary>MPEG-1 / MPEG-2 Audio Layer III.</summary>
+        </member>
         <member name="T:MetadataExtractor.Util.FileTypeDetector">
             <summary>Examines the a file's first bytes and estimates the file's type.</summary>
         </member>
         <member name="M:MetadataExtractor.Util.FileTypeDetector.DetectFileType(System.IO.Stream)">
-            <summary>Examines the a file's first bytes and estimates the file's type.</summary>
+            <summary>Examines the file's first bytes and estimates the file's type.</summary>
             <exception cref="T:System.ArgumentException">Stream does not support seeking.</exception>
             <exception cref="T:System.IO.IOException">An IO error occurred, or the input stream ended unexpectedly.</exception>
         </member>

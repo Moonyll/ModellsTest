@@ -6,7 +6,7 @@
 
 <script>
 
-// Test code here.
+//
 
 </script>
 
@@ -46,22 +46,39 @@
             </div>
 
             @*Modal body : *@
-            <div class="modal-body bg-transparent d-inline-flex justify-content-center">
-
+        <div class="modal-body bg-transparent d-inline-flex justify-content-center">
+           
                 @*Previous picture button :*@
                 <button type="button" class="btn text-light removeFocus prev">
                     <i class="fas fa-arrow-circle-left"></i>
                 </button>
-
-                @*Display picture :*@
-                <img src="" alt="" title="" class="img-fluid d-block mx-auto displayPicture" />
+                
+                @*Display Picture & Exifs*@
+                <div class="container border border-danger picExifs">
+                    
+                    @*Display picture :*@
+                    <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto modalPic displayPicture" />
+                    
+                    @*Display picture exifs :*@
+                    <div class="border border-primary mx-auto text-left exifsData" id="exifsInfos">
+                        <ul>
+                            <li><i class="fas fa-industry"></i> : marque appareil</li>
+                            <li><i class="fas fa-camera"></i> : appareil photo</li>
+                            <li><i class="far fa-clock"></i> : vitesse d'oburation (s).<i class="fab fa-chrome"></i></li>
+                            <li><i class="far fa-lightbulb"></i> : sensibilité iso (ISO).</li>
+                            <li><i class="fas fa-ruler-horizontal"></i> : longueur focale (mm).</li>
+                            <li><i class="far fa-calendar-alt"></i> : date et heure.</li>
+                            <li><i class="fas fa-bolt"></i> : flash utilisé oui / non.</li>
+                            <li><i class="fas fa-ruler-combined"></i> : dimensions width x height.</li>
+                        </ul>
+                    </div>
+                </div>
 
                 @*Next picture button :*@
                 <button type="button" class="btn text-light removeFocus next">
                     <i class="fas fa-arrow-circle-right"></i>
                 </button>
-            </div>
-
+        </div>
             @*Picture description :*@
             <p class="text-light text-center" id="pictureDescription">Picture description</p>
 
@@ -79,7 +96,7 @@
                 </button>
 
                 @*Button infos :*@
-                <button type="button" class="btn text-light m-auto removeFocus">
+                <button type="button" class="btn text-light m-auto removeFocus getExifs" data-toggle="collapse" data-target="#exifsInfos">
                     <i class="fas fa-info-circle"></i>
                 </button>
 

@@ -63,7 +63,7 @@ i {
     color: white;
 }
 
-/* Set eyey icon */
+/* Set eye icon */
 .details {
     position: absolute;
     display: none;
@@ -95,7 +95,6 @@ i {
 
 /* Set the upload picture button */
 #newPictureToUpload {
-    /*opacity: 0*/
     color: blue;
     display:none;
 }
@@ -103,4 +102,20 @@ i {
 /* Set the popover items */
 .popover-body {
     color: red;
+}
+
+/** Set the exifs infos*/ 
+.picExifs {
+    position:relative;
+}
+
+/* Set the exifs data infos */
+.exifsData {
+    position: absolute;
+    color: white;
+    top: 0;
+    left:0;
+}
+.modalPic {
+    /*to do*/
 }

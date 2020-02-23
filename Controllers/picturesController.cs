@@ -7,6 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
+using MetadataExtractor.Formats.FileSystem;
 using Modells.Models;
 
 namespace Modells.Controllers
@@ -151,6 +154,9 @@ namespace Modells.Controllers
 
                 // Combine directory path & picture name to make the source picture :
                 var newPictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), newPictureSourceName);
+
+                // Test Exifs :
+                GetExifs(newPictureSourcePath);
 
                 // Picture Source is uploaded and saved in the directory :
                 newPictureToUpload.SaveAs(newPictureSourcePath);
@@ -303,6 +309,74 @@ namespace Modells.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Get Exifs Informations :
+        public List <MetadataExtractor.Directory> GetExifs(string pictureFile) 
+        {
+            var directories = ImageMetadataReader.ReadMetadata(pictureFile).ToList();
+
+            // Get directories metadata files :
+            
+            // "Exif IFD0" directory file :
+            var subIfd0Directory = directories.OfType<ExifIfd0Directory>().FirstOrDefault();
+
+            // "Exif SubIFD" directory file :
+            var subIfdDirectory= directories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
+
+            // "MetadataDirectory" directory file :
+            var subMetadataDirectory = directories.OfType<FileMetadataDirectory>().FirstOrDefault();
+
+            // Get the camera make :
+            var pictureCameraMake = subIfd0Directory?.GetDescription(ExifDirectoryBase.TagMake);
+            
+            // Get the camera model :
+            var pictureCameraModel = subIfd0Directory?.GetDescription(ExifDirectoryBase.TagModel);
+
+            // Get original date time :
+            var pictureOriginalDateTime = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagDateTimeOriginal);
+
+            // Get aperture value :
+            var pictureApertureValue = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagAperture);
+
+            // Get exposure time :
+            var pictureExposureTime = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagExposureTime);
+
+            // Get iso speed ratings :
+            var pictureIsoSpeedRatings = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagIsoEquivalent);
+
+            // Get focal length :
+            var pictureFocalLength = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagFocalLength);
+
+            // Get picture file size :
+            var pictureFileSize = subMetadataDirectory?.GetDescription(FileMetadataDirectory.TagFileSize);
+
+            // Get picture width :
+            var pictureWidth = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagExifImageWidth);
+
+            // Get picture height :
+            var pictureHeight = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagExifImageHeight);
+
+            // Get picture flash :
+            var pictureFlash = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagFlash);
+
+            foreach (var directory in directories)
+            {
+                foreach (var tag in directory.Tags)
+                    string.Format($"[{directory.Name}] {tag.Name} = {tag.Description}");
+
+                if (directory.HasError)
+                {
+                    foreach (var error in directory.Errors)
+                        string.Format($"ERROR: {error}");
+                }
+            }
+
+           
+
+            return directories;
+
+
         }
     }
 }
