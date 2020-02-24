@@ -77,6 +77,9 @@
             // Get selected picture elements :
             var mainPictureElements = getPictureElements($(this));
 
+            // Catch the picture src :
+            var selectedPictureFile = mainPictureElements[0];
+
             // Catch the picture id :
             var selectedPictureId = mainPictureElements[1];
 
@@ -104,6 +107,9 @@
                 // Previous picture elements :
                 var prevPictureElements = getPictureElements(prevElementButton);
 
+                // Previous src :
+                selectedPictureFile = prevPictureElements[0];
+
                 // Previous id :
                 selectedPictureId = prevPictureElements[1];
 
@@ -128,6 +134,9 @@
 
                 // Next picture elements :
                 var nextPictureElements = getPictureElements(nextElementButton);
+
+                // Next src :
+                selectedPictureFile = nextPictureElements[0];
 
                 // Next id :
                 selectedPictureId = nextPictureElements[1];
@@ -215,6 +224,34 @@
                     },
 
                     // Id is not found :
+                    error: function () {
+
+                        // Redirect to error view page :
+                        window.location.href = '@Url.Action("pictureError", "Pictures")';
+                    }
+                });
+
+            });
+
+                 $(".getExifs").click(function () {
+
+                // Ajax call to edit the picture :
+                $.ajax({
+                    url: '@Url.Action("GetExifs", "Pictures")',
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: { pictureFile: selectedPictureFile },
+
+                    // src is found :
+                    success: function (result) {
+
+                        // Redirect to edition view page to update picture :
+                        $("#titi").text(result.pictureFileSize);
+                        console.log(result);
+                    },
+
+                    // src is not found :
                     error: function () {
 
                         // Redirect to error view page :
