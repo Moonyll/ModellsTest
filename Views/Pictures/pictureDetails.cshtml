@@ -54,26 +54,47 @@
                 </button>
                 
                 @*Display Picture & Exifs*@
-                <div class="container border border-danger picExifs">
-                    
-                    @*Display picture :*@
-                    <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto modalPic displayPicture" />
-                    
-                    @*Display picture exifs :*@
-                    <div class="border border-primary mx-auto text-left exifsData" id="exifsInfos">
-                        <ul>
-                            <li><i class="fas fa-industry"></i> : marque appareil</li>
-                            <li><i class="fas fa-camera"></i> : appareil photo</li>
-                            <li><i class="far fa-clock"></i> : vitesse d'oburation (s).<i class="fab fa-chrome"></i></li>
-                            <li><i class="far fa-lightbulb"></i> : sensibilité iso (ISO).</li>
-                            <li><i class="fas fa-ruler-horizontal"></i> : longueur focale (mm).</li>
-                            <li><i class="far fa-calendar-alt"></i> : date et heure.</li>
-                            <li><i class="fas fa-bolt"></i> : flash utilisé oui / non.</li>
-                            <li><i class="fas fa-ruler-combined"></i> : dimensions width x height.</li>
-                            <li><i class="fas fa-ruler-combined" id="titi"></i> : dimensions width x height.</li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="container border border-danger picExifs">
+
+            @*Display picture :*@
+            <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto modalPic displayPicture" />
+
+            @*Display picture exifs :*@
+            <div class="border border-primary mx-auto text-left exifsData" id="exifsInfos">
+                <ul>
+                    @*Display camera make :*@
+                    <li><i class="fas fa-industry"> &emsp; </i><span id="pictureCameraMake"> marque appareil </span></li>
+
+                    @*Display camera model :*@
+                    <li><i class="fas fa-camera"> &emsp; </i><span id="pictureCameraModel"> appareil photo </span></li>
+
+                    @*Display picture date time :*@
+                    <li><i class="far fa-calendar-alt"> &emsp; </i><span id="pictureOriginalDateTime"> Date & heure prise de vue </span></li>
+
+                    @*Display picture exposure time :*@
+                    <li><i class="fab fa-chrome"> &emsp; </i><span id="pictureApertureValue"> ouverture </span></li>
+
+                    @*Display picture exposure time :*@
+                    <li><i class="far fa-clock"> &emsp; </i><span id="pictureExposureTime"> vitesse d'oburation (s) </span></li>
+
+                    @*Display picture speed ratings :*@
+                    <li><i class="far fa-lightbulb"> &emsp; </i><span id="pictureIsoSpeedRatings"> sensibilité iso (ISO) </span></li>
+
+                    @*Display picture focal length :*@
+                    <li><i class="fas fa-ruler-horizontal"> &emsp; </i><span id="pictureFocalLength"> longueur focale (mm) </span></li>
+
+                    @*Display picture flash :*@
+                    <li><i class="fas fa-bolt"> &emsp; </i><span id="pictureFlash"> flash utilisé oui / non </span></li>
+
+                    @*Display picture width x height :*@
+                    <li><i class="far fa-image"> &emsp; </i><span id="pictureDimensions"> largeur x hauteur (pixels) </span></li>
+
+                    @*Display picture file size :*@
+                    <li><i class="fas fa-weight-hanging"></i> &emsp; <span id="pictureFileSize"> taille </span></li>
+
+                </ul>
+            </div>
+        </div>
 
                 @*Next picture button :*@
                 <button type="button" class="btn text-light removeFocus next">

@@ -102,6 +102,9 @@ namespace Modells.Models
 
         // Original date time :
         public string pictureOriginalDateTime { get; set; }
+        
+        // F-Number value :
+        public string pictureFnumberValue { get; set; }
 
         // Aperture value :
         public string pictureApertureValue { get; set; }

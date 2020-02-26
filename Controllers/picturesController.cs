@@ -156,7 +156,7 @@ namespace Modells.Controllers
                 var newPictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), newPictureSourceName);
 
                 // Test Exifs :
-                GetExifs(newPictureSourcePath);
+                //GetExifs(newPictureSourcePath);
 
                 // Picture Source is uploaded and saved in the directory :
                 newPictureToUpload.SaveAs(newPictureSourcePath);
@@ -345,7 +345,10 @@ namespace Modells.Controllers
     
                 // Get original date time :
                 pictureExifs.pictureOriginalDateTime = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagDateTimeOriginal);
-    
+
+                // Get f-number value :
+                pictureExifs.pictureFnumberValue = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagFNumber);
+
                 // Get aperture value :
                 pictureExifs.pictureApertureValue = subIfdDirectory?.GetDescription(ExifDirectoryBase.TagAperture);
     
