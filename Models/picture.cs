@@ -94,6 +94,11 @@ namespace Modells.Models
     public class pictureExifMetaData
     {
 
+        //
+        public const string EmptyValue = "---";
+
+        public const string SpaceTabulation = "\u2003";
+
         // Camera make :
         public string pictureCameraMake { get; set; }
 

@@ -112,10 +112,11 @@ i {
 /* Set the exifs data infos */
 .exifsData {
     position: absolute;
-    background-color:cornflowerblue;
+    background-color: cornflowerblue;
     color: white;
     top: 0;
-    left:0;
+    left: 0;
+    display: table;
 }
 .modalPic {
     /*to do*/
@@ -123,8 +124,10 @@ i {
 /*to do*/
 span {
 color :yellow;
-align-self:center;
+
 }
 ul {
+    
     list-style-type: none;
+    text-align: left;
 }

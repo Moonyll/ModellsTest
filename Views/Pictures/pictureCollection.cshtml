@@ -246,17 +246,19 @@
                     // src is found :
                     success: function (result) {
 
+                        //
+
                         // Redirect to edition view page to update picture :
-                        $("#pictureCameraMake").text("\u2003" + result.pictureCameraMake);
-                        $("#pictureCameraModel").text("\u2003" + result.pictureCameraModel);
-                        $("#pictureOriginalDateTime").text("\u2003" + result.pictureOriginalDateTime);
-                        $("#pictureApertureValue").text("\u2003" + result.pictureApertureValue);
-                        $("#pictureExposureTime").text("\u2003" + result.pictureExposureTime);
-                        $("#pictureIsoSpeedRatings").text("\u2003" + "ISO " + result.pictureIsoSpeedRatings);
-                        $("#pictureFocalLength").text("\u2003"+ result.pictureFocalLength);
-                        $("#pictureFlash").text("\u2003" + result.pictureFlash);
-                        $("#pictureDimensions").text("\u2003" + result.pictureWidth + " X " + result.pictureHeight);
-                        $("#pictureFileSize").text("\u2003" + result.pictureFileSize);
+                        $("#pictureCameraMake").text(result.pictureCameraMake);
+                        $("#pictureCameraModel").text(result.pictureCameraModel);
+                        $("#pictureOriginalDateTime").text(result.pictureOriginalDateTime);
+                        $("#pictureApertureValue").text(result.pictureApertureValue);
+                        $("#pictureExposureTime").text(result.pictureExposureTime);
+                        $("#pictureIsoSpeedRatings").text(result.pictureIsoSpeedRatings);
+                        $("#pictureFocalLength").text(result.pictureFocalLength);
+                        $("#pictureFlash").text(result.pictureFlash);
+                        $("#pictureDimensions").text(result.pictureWidth + " X " + result.pictureHeight);
+                        $("#pictureFileSize").text(result.pictureFileSize);
 
                         console.log(result);
                     },
