@@ -58,7 +58,7 @@ footer {
     display: block !important;
 }
 
-/*Set icons color white*/
+/*Set icons color white */
 i {
     color: white;
 }
@@ -104,7 +104,7 @@ i {
     color: red;
 }
 
-/** Set the exifs infos*/ 
+/* Set the exifs infos */
 .picExifs {
     position:relative;
 }
@@ -112,22 +112,19 @@ i {
 /* Set the exifs data infos */
 .exifsData {
     position: absolute;
-    background-color: cornflowerblue;
-    color: white;
-    top: 0;
+    bottom: 0;
     left: 0;
-    display: table;
+    background-color: transparent;
+    color: white;
+    display: none;
 }
-.modalPic {
-    /*to do*/
-}
-/*to do*/
-span {
-color :yellow;
 
+/* Set exifs span */
+span {
+    color :wheat;
 }
-ul {
-    
-    list-style-type: none;
-    text-align: left;
+
+/* Set ul li elements of exifs list */
+ul li {
+    display:inline;
 }

@@ -84,6 +84,7 @@
 
             // Display selected picture elements :
             displayPictureElements(mainPictureElements);
+            displayPictureExifs();
 
             // Display button :
             displayButton(indexItem);
@@ -111,6 +112,7 @@
 
                 // Display previous picture elements :
                 displayPictureElements(prevPictureElements);
+                displayPictureExifs();
 
                 // Decrement index :
                 indexItem--;
@@ -139,6 +141,7 @@
 
                 // Display next picture elements :
                 displayPictureElements(nextPictureElements);
+                displayPictureExifs();
 
                 // Increment index :
                 indexItem++;
@@ -228,8 +231,8 @@
                 });
             });
 
-            // Ajax call to edit the picture :
-            $(".getExifs").click(function () {
+            // Display picture exifs with an ajax call :
+            function displayPictureExifs() {
 
                 $.ajax({
                     url: '@Url.Action("GetExifs", "Pictures")',
@@ -262,10 +265,11 @@
                         window.location.href = '@Url.Action("pictureError", "Pictures")';
                     }
                 });
-            });
+
+            }
         });
         //
-        //      New Code here:
+            // New Code here:
         //
     });
 </script>

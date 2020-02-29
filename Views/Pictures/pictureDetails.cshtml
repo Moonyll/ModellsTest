@@ -4,6 +4,22 @@
     ViewBag.Title = "pictureDetails";
 }
 
+    <script>
+
+        $(document).ready(function () {
+
+            $(".toto").mouseover(function () {
+
+                $(".exifsData").css("display", "block");
+            });
+
+            $(".toto").mouseleave(function () {
+
+                $(".exifsData").css("display", "none");
+            });
+        });
+    </script>
+
 @*Modal to display picture details*@
 <div class="modal fade bg-transparent testpic" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
 
@@ -52,40 +68,48 @@
                 <div class="container border border-danger picExifs">
 
                     @*Display picture :*@
-                    <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto modalPic displayPicture" />
+                    <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto displayPicture" />
 
                     @*Display picture exifs :*@
-                    <div class="collapse border border-primary exifsData" id="exifsInfos">
+                    <div class="exifsData">
+
+                        @*A. Display main infos :*@
                         <ul>
                             @*Display camera make :*@
-                            <li><i class="fas fa-industry"></i><span id="pictureCameraMake"> marque appareil </span></li>
+                            <li><i class="fas fa-industry"></i><span id="pictureCameraMake"></span></li>
 
                             @*Display camera model :*@
-                            <li><i class="fas fa-camera"></i><span id="pictureCameraModel"> appareil photo </span></li>
+                            <li><i class="fas fa-camera"></i><span id="pictureCameraModel"></span></li>
 
                             @*Display picture date time :*@
-                            <li><i class="far fa-calendar-alt"></i><span id="pictureOriginalDateTime"> date & heure prise de vue </span></li>
+                            <li><i class="far fa-calendar-alt"></i><span id="pictureOriginalDateTime"></span></li>
+                        </ul>
+
+                        @*B. Display picture taking infos :*@
+                        <ul>
+                            @*Display picture aperture value :*@
+                            <li><i class="fab fa-chrome"></i><span id="pictureApertureValue"></span></li>
 
                             @*Display picture exposure time :*@
-                            <li><i class="fab fa-chrome"></i><span id="pictureApertureValue"> ouverture </span></li>
-
-                            @*Display picture exposure time :*@
-                            <li><i class="far fa-clock"></i><span id="pictureExposureTime"> vitesse d'oburation </span></li>
+                            <li><i class="far fa-clock"></i><span id="pictureExposureTime"></span></li>
 
                             @*Display picture speed ratings :*@
-                            <li><i class="far fa-sun"></i><span id="pictureIsoSpeedRatings"> sensibilité iso </span></li>
+                            <li><i class="far fa-sun"></i><span id="pictureIsoSpeedRatings"></span></li>
 
                             @*Display picture focal length :*@
-                            <li><i class="fab fa-periscope"></i><span id="pictureFocalLength"> longueur focale </span></li>
+                            <li><i class="fab fa-periscope"></i><span id="pictureFocalLength"></span></li>
 
                             @*Display picture flash :*@
-                            <li><i class="fas fa-bolt"></i><span id="pictureFlash"> flash utilisé oui / non </span></li>
+                            <li><span></span><i class="fas fa-bolt"></i><span id="pictureFlash"></span></li>
+                        </ul>
 
+                        @*C. Display picture file infos :*@
+                        <ul>
                             @*Display picture width x height :*@
-                            <li><i class="far fa-image"></i><span id="pictureDimensions"> largeur x hauteur </span></li>
+                            <li><i class="far fa-image"></i><span id="pictureDimensions"></span></li>
 
                             @*Display picture file size :*@
-                            <li><i class="fas fa-weight-hanging"></i><span id="pictureFileSize"> taille </span></li>
+                            <li><i class="fas fa-weight-hanging"></i><span id="pictureFileSize"></span></li>
                         </ul>
                     </div>
                 </div>
@@ -113,7 +137,7 @@
                 </button>
 
                 @*Button infos :*@
-                <button type="button" class="btn text-light m-auto removeFocus getExifs" data-toggle="collapse" data-target="#exifsInfos">
+                <button class="btn text-light mx-auto removeFocus toto">
                     <i class="fas fa-info-circle"></i>
                 </button>
 
