@@ -153,10 +153,7 @@ namespace Modells.Controllers
                                            Path.GetFileName(newPictureToUpload.FileName);
 
                 // Combine directory path & picture name to make the source picture :
-                var newPictureSourcePath = Path.Combine(Server.MapPath("~/Content/Images/Pictures/"), newPictureSourceName);
-
-                // Test Exifs :
-                //GetExifs(newPictureSourcePath);
+                var newPictureSourcePath = Path.Combine(Server.MapPath(pictureControls.pictureFileDirectory), newPictureSourceName);
 
                 // Picture Source is uploaded and saved in the directory :
                 newPictureToUpload.SaveAs(newPictureSourcePath);
@@ -263,7 +260,6 @@ namespace Modells.Controllers
             return View(updatePicture);
         }
 
-
         // GET: pictures/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -311,9 +307,15 @@ namespace Modells.Controllers
             base.Dispose(disposing);
         }
 
-        // Get Exifs Informations :
+        #region EXIFS Management
+        
+        /// <summary>
+        /// Get Exifs Informations.
+        /// </summary>
+        /// <param name="pictureFile"></param>
+        /// <returns></returns>
         [HttpGet]
-        public JsonResult GetExifs(string pictureFile) 
+        public JsonResult GetExifs(string pictureFile)
         {
             pictureExifMetaData pictureExifs = new pictureExifMetaData();
 
@@ -325,63 +327,129 @@ namespace Modells.Controllers
 
             // 1° Read directories metadata files :
 
-            // Read "Exif IFD0" directory file :
-            var subIfd0Directory = pictureDirectories.OfType<ExifIfd0Directory>().FirstOrDefault();
-
-            // Read "Exif SubIFD" directory file :
-            var subIfdDirectory = pictureDirectories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
-
-            // Read "MetadataDirectory" directory file :
-            var subMetadataDirectory = pictureDirectories.OfType<FileMetadataDirectory>().FirstOrDefault();
+                    // Read "Exif IFD0" directory file :
+                    var subIfd0Directory = pictureDirectories.OfType<ExifIfd0Directory>().FirstOrDefault();
+        
+                    // Read "Exif SubIFD" directory file :
+                    var subIfdDirectory = pictureDirectories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
+        
+                    // Read "MetadataDirectory" directory file :
+                    var subMetadataDirectory = pictureDirectories.OfType<FileMetadataDirectory>().FirstOrDefault();
 
             // 2° Get Exifs data from read file :
 
-            // Get the camera make :
-            pictureExifs.pictureCameraMake = GetExifData(subIfd0Directory, ExifDirectoryBase.TagMake);
+                    // Get the camera make :
+                    pictureExifs.pictureCameraMake = GetExifData(subIfd0Directory, ExifDirectoryBase.TagMake);
+        
+                    // Get the camera model :
+                    pictureExifs.pictureCameraModel = GetExifData(subIfd0Directory, ExifDirectoryBase.TagModel);
+        
+                    // Get original date time :
+                    pictureExifs.pictureOriginalDateTime = GetExifData(subIfdDirectory, ExifDirectoryBase.TagDateTimeOriginal);
+        
+                    // Get aperture value :
+                    pictureExifs.pictureApertureValue = GetExifData(subIfdDirectory,ExifDirectoryBase.TagAperture);
+        
+                    // Get exposure time :
+                    pictureExifs.pictureExposureTime = GetExifData(subIfdDirectory, ExifDirectoryBase.TagExposureTime);
 
-            // Get the camera model :
-            pictureExifs.pictureCameraModel = GetExifData(subIfd0Directory, ExifDirectoryBase.TagModel);
+                    // Get iso speed ratings :
+                    pictureExifs.pictureIsoSpeedRatings =
+                        (GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent) != pictureExifMetaData.TabEmpty) ?
+                                    GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent) + pictureExifMetaData.ISO
+                                    : GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent);
+        
+                    // Get picture flash :
+                    pictureExifs.pictureFlash = GetExifData(subIfdDirectory,ExifDirectoryBase.TagFlash);
+        
+                    // Get focal length :
+                    pictureExifs.pictureFocalLength = GetExifData(subIfdDirectory,ExifDirectoryBase.TagFocalLength);
+        
+                    // Get picture width :
+                    pictureExifs.pictureWidth = DisplayPictureDimension(GetExifData(subIfdDirectory,ExifDirectoryBase.TagExifImageWidth));
+        
+                    // Get picture height :
+                    pictureExifs.pictureHeight = DisplayPictureDimension(GetExifData(subIfdDirectory,ExifDirectoryBase.TagExifImageHeight));
 
-            // Get original date time :
-            pictureExifs.pictureOriginalDateTime = GetExifData(subIfdDirectory, ExifDirectoryBase.TagDateTimeOriginal);
+                    // Get picture dimensions :
+                    pictureExifs.pictureDimensions =
+                                (pictureExifs.pictureWidth != pictureExifMetaData.TabEmpty
+                                    && pictureExifs.pictureHeight != pictureExifMetaData.TabEmpty) ?
+                                    (
+                                        pictureExifMetaData.SpaceTabulation +
+                                        pictureExifs.pictureWidth + "   x   " +
+                                        pictureExifs.pictureHeight +
+                                        pictureExifMetaData.Pixels
+                                    )
+                                 : pictureExifMetaData.TabEmpty;
 
-            // Get aperture value :
-            pictureExifs.pictureApertureValue = GetExifData(subIfdDirectory,ExifDirectoryBase.TagAperture);
+                    // Get picture file size :
+                    pictureExifs.pictureFileSize = DisplayPictureSize((GetExifData(subMetadataDirectory,FileMetadataDirectory.TagFileSize)));
 
-            // Get exposure time :
-            pictureExifs.pictureExposureTime = GetExifData(subIfdDirectory, ExifDirectoryBase.TagExposureTime);
-
-            // Get iso speed ratings :
-            pictureExifs.pictureIsoSpeedRatings = GetExifData(subIfdDirectory,ExifDirectoryBase.TagIsoEquivalent);
-
-            // Get picture flash :
-            pictureExifs.pictureFlash = GetExifData(subIfdDirectory,ExifDirectoryBase.TagFlash);
-
-            // Get focal length :
-            pictureExifs.pictureFocalLength = GetExifData(subIfdDirectory,ExifDirectoryBase.TagFocalLength);
-
-            // Get picture width :
-            pictureExifs.pictureWidth = GetExifData(subIfdDirectory,ExifDirectoryBase.TagExifImageWidth);
-
-            // Get picture height :
-            pictureExifs.pictureHeight = GetExifData(subIfdDirectory,ExifDirectoryBase.TagExifImageHeight);
-
-            // Get picture file size :
-            pictureExifs.pictureFileSize = GetExifData(subMetadataDirectory,FileMetadataDirectory.TagFileSize);
-
-                return Json(pictureExifs, JsonRequestBehavior.AllowGet);
-
+                        return Json(pictureExifs, JsonRequestBehavior.AllowGet);
         }
 
-        // Extract exif data from picture directories :
+        /// <summary>
+        /// Extract exif data from picture directories.
+        /// </summary>
+        /// <param name="pictureDirectory"></param>
+        /// <param name="pictureExiftag"></param>
+        /// <returns></returns>
         public string GetExifData(MetadataExtractor.Directory pictureDirectory, int pictureExiftag)
         {
             var exifData = pictureDirectory?.GetDescription(pictureExiftag);
 
-            var pictureExifData = (!string.IsNullOrEmpty(exifData)) ? (pictureExifMetaData.SpaceTabulation + exifData) : (pictureExifMetaData.SpaceTabulation + pictureExifMetaData.EmptyValue);
+            var pictureExifData = (!string.IsNullOrEmpty(exifData)) ? (pictureExifMetaData.SpaceTabulation + exifData)
+                                                                    : (pictureExifMetaData.TabEmpty);
 
                 return pictureExifData;
         }
 
+        /// <summary>
+        /// Convert bytes to octets for a friendly picture file size display.
+        /// </summary>
+        /// <param name="exifDataTagFileSize"></param>
+        /// <returns></returns>
+        public string DisplayPictureSize(string exifDataTagFileSize)
+        {
+            // Extract bytes numbers of picture file size :
+            var extractBytesNumbers = string.Join("", exifDataTagFileSize.ToCharArray().Where(Char.IsDigit));
+            
+            // Convert bytes to Ko :
+            var convertNumbersToKo = Math.Round(Convert.ToDecimal(extractBytesNumbers) / 1000);
+            
+            // Display picture file size in Ko :
+            var displayPictureFileSize = pictureExifMetaData.SpaceTabulation + convertNumbersToKo + pictureExifMetaData.KiloOctets;
+            
+            // Diplay picture file size in Mo : 
+            if (convertNumbersToKo >= 1000)
+            {
+                var convertNumbersToMo = Math.Round(convertNumbersToKo / 1000);
+                return displayPictureFileSize = pictureExifMetaData.SpaceTabulation + convertNumbersToMo + pictureExifMetaData.MegaOctets;
+            }
+
+            return displayPictureFileSize;
+        }
+
+        /// <summary>
+        /// Display dimension value of picture width & height.
+        /// </summary>
+        /// <param name="exifDataTagDimension"></param>
+        /// <returns></returns>
+        public string DisplayPictureDimension(string exifDataTagDimension)
+        {
+
+            if (exifDataTagDimension != pictureExifMetaData.TabEmpty)
+            {
+                // Extract pixels dimension numbers of picture width or height :
+                var displayDimensionNumbers = string.Join("", exifDataTagDimension.ToCharArray().Where(Char.IsDigit));
+
+                return displayDimensionNumbers;
+            }
+
+            return exifDataTagDimension;
+        }
+
+        #endregion
     }
 }

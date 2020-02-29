@@ -89,15 +89,30 @@ namespace Modells.Models
         public static string[] pictureFileToUploadExtension = { "image/jpg", "image/jpeg" };
         public const string errorMessageForPictureOutOfExt = "L'image doit être au format jpg / jpeg";
 
+        // Diretory :
+        public const string pictureFileDirectory = "~/Content/Images/Pictures/";
+
     }
 
     public class pictureExifMetaData
     {
 
-        //
+        // Constant string values to display :
+
         public const string EmptyValue = "---";
 
         public const string SpaceTabulation = "\u2003";
+
+        public const string TabEmpty = "\u2003---";
+
+        public const string KiloOctets = " Ko";
+
+        public const string MegaOctets = " Mo";
+
+        public const string Pixels = " px";
+
+        public const string ISO = " iso";
+
 
         // Camera make :
         public string pictureCameraMake { get; set; }
@@ -131,6 +146,9 @@ namespace Modells.Models
 
         // Picture height :
         public string pictureHeight { get; set; }
+
+        // Picture dimensions:
+        public string pictureDimensions { get; set; }
 
         // Picture file size :
         public string pictureFileSize { get; set; }

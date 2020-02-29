@@ -4,14 +4,9 @@
     ViewBag.Title = "pictureDetails";
 }
 
-<script>
-
-//
-
-</script>
-
-<!-- Modal to display picture details -->
+@*Modal to display picture details*@
 <div class="modal fade bg-transparent testpic" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 
         @*Modal content :*@
@@ -45,62 +40,62 @@
                 </button>
             </div>
 
-            @*Modal body : *@
-        <div class="modal-body bg-transparent d-inline-flex justify-content-center">
-           
+            @*Modal body :*@
+            <div class="modal-body bg-transparent d-inline-flex justify-content-center">
+
                 @*Previous picture button :*@
                 <button type="button" class="btn text-light removeFocus prev">
                     <i class="fas fa-arrow-circle-left"></i>
                 </button>
-                
+
                 @*Display Picture & Exifs*@
-        <div class="container border border-danger picExifs">
+                <div class="container border border-danger picExifs">
 
-            @*Display picture :*@
-            <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto modalPic displayPicture" />
+                    @*Display picture :*@
+                    <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto modalPic displayPicture" />
 
-            @*Display picture exifs :*@
-            <div class="border border-primary exifsData" id="exifsInfos">
-                <ul>
-                    @*Display camera make :*@
-                    <li><i class="fas fa-industry"> &emsp; </i><span id="pictureCameraMake"> marque appareil </span></li>
+                    @*Display picture exifs :*@
+                    <div class="collapse border border-primary exifsData" id="exifsInfos">
+                        <ul>
+                            @*Display camera make :*@
+                            <li><i class="fas fa-industry"></i><span id="pictureCameraMake"> marque appareil </span></li>
 
-                    @*Display camera model :*@
-                    <li><i class="fas fa-camera"> &emsp; </i><span id="pictureCameraModel"> appareil photo </span></li>
+                            @*Display camera model :*@
+                            <li><i class="fas fa-camera"></i><span id="pictureCameraModel"> appareil photo </span></li>
 
-                    @*Display picture date time :*@
-                    <li><i class="far fa-calendar-alt"> &emsp; </i><span id="pictureOriginalDateTime"> date & heure prise de vue </span></li>
+                            @*Display picture date time :*@
+                            <li><i class="far fa-calendar-alt"></i><span id="pictureOriginalDateTime"> date & heure prise de vue </span></li>
 
-                    @*Display picture exposure time :*@
-                    <li><i class="fab fa-chrome"> &emsp; </i><span id="pictureApertureValue"> ouverture </span></li>
+                            @*Display picture exposure time :*@
+                            <li><i class="fab fa-chrome"></i><span id="pictureApertureValue"> ouverture </span></li>
 
-                    @*Display picture exposure time :*@
-                    <li><i class="far fa-clock"> &emsp; </i><span id="pictureExposureTime"> vitesse d'oburation </span></li>
+                            @*Display picture exposure time :*@
+                            <li><i class="far fa-clock"></i><span id="pictureExposureTime"> vitesse d'oburation </span></li>
 
-                    @*Display picture speed ratings :*@
-                    <li><i class="far fa-sun"> &emsp; </i><span id="pictureIsoSpeedRatings"> sensibilité iso </span></li>
+                            @*Display picture speed ratings :*@
+                            <li><i class="far fa-sun"></i><span id="pictureIsoSpeedRatings"> sensibilité iso </span></li>
 
-                    @*Display picture focal length :*@
-                    <li><i class="fab fa-periscope"> &emsp; </i><span id="pictureFocalLength"> longueur focale </span></li>
+                            @*Display picture focal length :*@
+                            <li><i class="fab fa-periscope"></i><span id="pictureFocalLength"> longueur focale </span></li>
 
-                    @*Display picture flash :*@
-                    <li><i class="fas fa-bolt"> &emsp; </i><span id="pictureFlash"> flash utilisé oui / non </span></li>
+                            @*Display picture flash :*@
+                            <li><i class="fas fa-bolt"></i><span id="pictureFlash"> flash utilisé oui / non </span></li>
 
-                    @*Display picture width x height :*@
-                    <li><i class="far fa-image"> &emsp; </i><span id="pictureDimensions"> largeur x hauteur </span></li>
+                            @*Display picture width x height :*@
+                            <li><i class="far fa-image"></i><span id="pictureDimensions"> largeur x hauteur </span></li>
 
-                    @*Display picture file size :*@
-                    <li><i class="fas fa-weight-hanging"></i> &emsp; <span id="pictureFileSize"> taille </span></li>
-
-                </ul>
-            </div>
-        </div>
+                            @*Display picture file size :*@
+                            <li><i class="fas fa-weight-hanging"></i><span id="pictureFileSize"> taille </span></li>
+                        </ul>
+                    </div>
+                </div>
 
                 @*Next picture button :*@
                 <button type="button" class="btn text-light removeFocus next">
                     <i class="fas fa-arrow-circle-right"></i>
                 </button>
-        </div>
+            </div>
+
             @*Picture description :*@
             <p class="text-light text-center" id="pictureDescription">Picture description</p>
 

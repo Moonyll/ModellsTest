@@ -33,16 +33,10 @@
 @*Load scripts file*@
 @Scripts.Render("~/Scripts/script.js");
 
-<script>
-
-    // test jquery
-
-</script>
-
 <div class="container-fluid d-flex">
     <div class="row mx-auto">
 
-        @* Display choosen picture to create :*@
+        @*Display choosen picture to create :*@
         <div class="col-sm-12 col-md-4 col-lg-4 border border-danger">
             <p class="btn btn-dark d-flex justify-content-center">Aperçu de votre image</p>
             <img id="pictureChoice" src="~/Content/Images/Pictures/upload.png" alt="ici votre image" title="Aperçu image" class="card-img img-thumbnail mx-auto" />
@@ -57,8 +51,11 @@
 
                 // Diplay the picture creation form :
                 <form class="form-horizontal form-control">
+                    
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    
                     <fieldset class="border border-info">
+
                         @*Input of picture standard url :*@
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
