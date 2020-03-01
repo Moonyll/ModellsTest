@@ -114,22 +114,8 @@ i {
     border: 1px solid white;
 }
 
-/* Set the exifs infos */
-.picExifs {
-    position:relative;
-}
-
-/* Set the exifs data infos */
-.exifsData {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: blue;
-    color: white;
-    display: none;
-}
-
 /* Set ul li elements of exifs list */
 ul li {
-    display:inline;
+    list-style-type: none;
+    /*display:inline;*/
 }
