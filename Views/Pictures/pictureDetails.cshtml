@@ -5,19 +5,26 @@
 }
 
     <script>
+        $(function() {
+  $('[data-toggle="popover"]').popover({
+        html: true,
+        content: function() {
+            return $('#popover-content').html();
+        }
+  });
+});
+        //$(document).ready(function () {
 
-        $(document).ready(function () {
+        //    $(".toto").mouseover(function () {
 
-            $(".toto").mouseover(function () {
+        //        $(".exifsData").css("display", "block");
+        //    });
 
-                $(".exifsData").css("display", "block");
-            });
+        //    $(".toto").mouseleave(function () {
 
-            $(".toto").mouseleave(function () {
-
-                $(".exifsData").css("display", "none");
-            });
-        });
+        //        $(".exifsData").css("display", "none");
+        //    });
+        //});
     </script>
 
 @*Modal to display picture details*@
@@ -71,7 +78,7 @@
                     <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto displayPicture" />
 
                     @*Display picture exifs :*@
-                    <div class="exifsData">
+                    <div class="exifsData" id="popover-content">
 
                         @*A. Display main infos :*@
                         <ul>
@@ -137,7 +144,7 @@
                 </button>
 
                 @*Button infos :*@
-                <button class="btn text-light mx-auto removeFocus toto">
+                <button class="btn text-light mx-auto removeFocus toto" data-toggle="popover" data-trigger="hover" data-placement="top" title="Données EXIFS">
                     <i class="fas fa-info-circle"></i>
                 </button>
 

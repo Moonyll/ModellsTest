@@ -99,9 +99,19 @@ i {
     display:none;
 }
 
-/* Set the popover items */
+/* Set the popover header */
+.popover-header {
+    background-color: black !important;
+    color: white;
+    text-align:center;
+    border:1px solid white;
+}
+
+/* Set the popover body */
 .popover-body {
-    color: red;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
 }
 
 /* Set the exifs infos */
@@ -114,14 +124,9 @@ i {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: transparent;
+    background-color: blue;
     color: white;
     display: none;
-}
-
-/* Set exifs span */
-span {
-    color :wheat;
 }
 
 /* Set ul li elements of exifs list */
