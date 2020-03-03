@@ -1960,6 +1960,7 @@
     <Content Include="Views\Pictures\pictureCreate.cshtml" />
     <Content Include="Views\Shared\pictureSuccess.cshtml" />
     <Content Include="Views\Pictures\pictureEdit.cshtml" />
+    <Content Include="Views\Pictures\pictureHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

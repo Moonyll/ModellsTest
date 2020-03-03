@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using MetadataExtractor;
@@ -286,6 +288,13 @@ namespace Modells.Controllers
             return RedirectToAction("Index");
         }
 
+        // Display home view :
+        public ActionResult pictureHome()
+        {
+            return View();
+        }
+
+
         // Display success view :
         public ActionResult pictureSuccess()
         {
@@ -345,8 +354,41 @@ namespace Modells.Controllers
                     pictureExifs.pictureCameraModel = GetExifData(subIfd0Directory, ExifDirectoryBase.TagModel);
         
                     // Get original date time :
+                    var datetimeString = GetExifData(subIfdDirectory, ExifDirectoryBase.TagDateTimeOriginal);
+
+                    // Date :
+                    Dictionary<string, string> datetimeDico = new Dictionary<string, string>()
+                    {
+                        {"testDateFormatA", TestDateTimeString(pictureControls.PatternOrigDtFA, datetimeString)},
+                        {"testDateFormatB", TestDateTimeString(pictureControls.PatternOrigDtFB, datetimeString)},
+                        {"testDateFormatC", TestDateTimeString(pictureControls.PatternOrigDtFC, datetimeString)},
+                        {"testDateFormatD", TestDateTimeString(pictureControls.PatternOrigDtFD, datetimeString)},
+                        {"testTimeFormatA", TestDateTimeString(pictureControls.PatternOrigTmFA, datetimeString)}
+                    };
+
+                    var datetimeValues = datetimeDico.Values.Where(value => value.Length > 0).ToList();
+
+                    var dateValue = datetimeValues.ElementAt(0);
+                    if (dateValue.Contains(":"))
+                    {
+                        dateValue = dateValue.Replace(":", "/");
+                    }
+                    if (dateValue.Contains("-"))
+                    {
+                        dateValue = dateValue.Replace("-", "/");
+                    }
+
+                    var timeValue = datetimeValues.ElementAt(1);
+
+                    // DateTime res ;
+                    DateTime date = DateTime.Parse(dateValue);
+                    var toto = date.ToString("dd/MM/yyyy");
+
+                    DateTime time = DateTime.Parse(timeValue);
+                    var totoa = time.ToString("hh:mm:ss");
+
                     pictureExifs.pictureOriginalDateTime = GetExifData(subIfdDirectory, ExifDirectoryBase.TagDateTimeOriginal);
-        
+
                     // Get aperture value :
                     pictureExifs.pictureApertureValue = GetExifData(subIfdDirectory,ExifDirectoryBase.TagAperture);
         
@@ -448,6 +490,14 @@ namespace Modells.Controllers
             }
 
             return exifDataTagDimension;
+        }
+
+        public string TestDateTimeString(Regex patternFormat, string dtimeString)
+
+        {
+            var result = patternFormat.Match(dtimeString).ToString();
+
+            return result;
         }
 
         #endregion

@@ -38,6 +38,12 @@ footer {
     color: white;
 }
 
+/* Set the logo brand image */
+.logobrand {
+   height : 10vh;
+}
+
+
 /* Make title picture appears on hover */
 .card-img-overlay:hover .card-title {
     display: block !important;

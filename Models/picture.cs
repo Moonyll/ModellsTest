@@ -6,6 +6,7 @@ namespace Modells.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Runtime.Serialization;
+    using System.Text.RegularExpressions;
     using System.Web;
 
     [Table("picture")]
@@ -92,6 +93,19 @@ namespace Modells.Models
         // Diretory :
         public const string pictureFileDirectory = "~/Content/Images/Pictures/";
 
+        // Patterns for original date & time regex :
+        public const string OriginalDateFormatA = @"\d{2}-\d{2}-\d{4}";
+        public const string OriginalDateFormatB = @"\d{2}:\d{2}:\d{4}";
+        public const string OriginalDateFormatC = @"\d{4}-\d{2}-\d{2}";
+        public const string OriginalDateFormatD = @"\d{4}:\d{2}:\d{2}";
+        public const string OriginalTimeFormatA = @" \d{2}:\d{2}:\d{2}";
+
+        // Regex for original date & time :
+        public static Regex PatternOrigDtFA = new Regex(OriginalDateFormatA);
+        public static Regex PatternOrigDtFB = new Regex(OriginalDateFormatB);
+        public static Regex PatternOrigDtFC = new Regex(OriginalDateFormatC);
+        public static Regex PatternOrigDtFD = new Regex(OriginalDateFormatD);
+        public static Regex PatternOrigTmFA = new Regex(OriginalTimeFormatA);
     }
 
     public class pictureExifMetaData
