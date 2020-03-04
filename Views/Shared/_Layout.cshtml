@@ -1,35 +1,40 @@
-﻿@*<!DOCTYPE html> = Instruction to the web browser about what version of HTML: current version is HTML5.*@
+﻿<!--<!DOCTYPE html> = Instruction to the web browser about what version of HTML: current version is HTML5.-->
 <!DOCTYPE html>
 <html>
-    <head>
-        @*Encoding type for HTML page as "Universal Character Set Transformation Format - 8 bits"*@
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta charset="utf-8" />
+<head>
 
-        @*Settings for adaptative design & zoom level*@
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-        @*Load CSS for FontAwesome Icons*@
-        <link href="~/Content/Icons/css/all.css" rel="stylesheet">
-        <title>@ViewBag.Title - Modells</title>
-    
-        @*Load the CSS bundles styles.*@
-        @Styles.Render("~/Content/css")
-        
-        @*Load the modernizr / jquery / popper bundles scripts.*@
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/popper")
-    </head>
-    <body>
-        @*Start Of Header*@
-        <header class="bg-transparent border border-dark">Header For Modells</header>
-        @*End Of Header*@
-        
-        @*Start Of Navigation Bar*@
+    <!--Encoding type for HTML page as "Universal Character Set Transformation Format - 8 bits" :-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+
+    <!--Settings for adaptative design & zoom level :-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Load CSS for FontAwesome Icons :-->
+    <link href="~/Content/Icons/css/all.css" rel="stylesheet">
+    <title>@ViewBag.Title - Modells</title>
+
+    <!--Load the CSS bundles styles :-->
+    @Styles.Render("~/Content/css")
+
+    <!--Load the modernizr / jquery / popper bundles scripts.-->
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</head>
+<body>
+    <!--Header :-->
+    <header class="bg-transparent border border-dark">
+        Header For Modells
+    </header>
+
+    <!--Navigation Bar :-->
     <nav class="bg-transparent border border-dark">
-        @*Display the logo*@
 
+        <!--Application Logo :-->
         <img src="~/Content/Images/Logos/modells.jpg" class="btn img-fluid p-1 logobrand" alt="modells" />
 
         <div class="btn-group p-1 logobrand float-right" role="group">
@@ -45,24 +50,17 @@
                 <i class="far fa-image"></i>
             </button>
         </div>
-
     </nav>
-        @*End Of Navigation Bar*@
 
-        @*Start Of Main Content*@
-        <main class="bg-success">
-            @RenderBody()
-        </main>
-        @*End Of Main Content*@
+    <!--Main Content :-->
+    <main class="bg-success">
+        @RenderBody()
+    </main>
 
-        @*Start Of Footer*@
-        <footer class="bg-transparent border border-dark">
-            &copy; @DateTime.Now.Year - Modells
-        </footer>
-        @*End Of Footer*@
+    <!--Footer :-->
+    <footer class="bg-transparent border border-dark">
+        &copy; @DateTime.Now.Year - Modells
+    </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+</body>
 </html>

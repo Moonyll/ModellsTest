@@ -56,6 +56,19 @@
     }
 }
 
+@section Scripts
+{
+    <!--Add actions url for ajax calls :-->
+    <script type="text/javascript">
+    var urlPictureEdit = '@Url.Action("pictureEdit", "Pictures")';
+    var urlPictureExifs = '@Url.Action("GetExifs", "Pictures")';
+    var urlPictureError = '@Url.Action("pictureError", "Pictures")';
+    </script>
+
+    <!--Load pictureCollection script :-->
+    <script src="~/Scripts/pictureCollection.js"></script>
+}
+
 @Html.ActionLink("To The Test Page", "Test")
 @Html.ActionLink("Details", "pictureDetails")
 @Html.ActionLink("Liste des photos", "Index", "Pictures")
@@ -63,57 +76,46 @@
 @Html.ActionLink("Ajouter une nouvelle photo", "pictureCreate", "Pictures")
 @Html.ActionLink("Vue Succès", "pictureSuccess", "Pictures")
 
-@section Scripts
-{
-    @*Add actions url for ajax calls :*@
-    <script type="text/javascript">
-    var urlPictureEdit = '@Url.Action("pictureEdit", "Pictures")';
-    var urlPictureExifs = '@Url.Action("GetExifs", "Pictures")';
-    var urlPictureError = '@Url.Action("pictureError", "Pictures")';
-    </script>
-
-    @*Load pictureCollection script :*@
-    <script src="~/Scripts/pictureCollection.js"></script>
-}
-
-@*One fluid container of 2 rows & 4 columns*@
+<!--One fluid container of 2 rows & 4 columns :-->
 <div class="container-fluid bg-warning p-4 d-table-cell">
-    @*First row of 4 pictures*@
+    <!--First row of 4 pictures :-->
     <div class="row p-2">
-        @*1st column*@
+        <!--1st column :-->
         <div class="@colcss">
             <div class="card">
-                @*Picture source, title & alternative title*@
+                <!--Picture source, title & alternative title :-->
                 <img src="@pictureElements[0,0]" alt="@pictureElements[0,1]" title="@pictureElements[0,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[0, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[0, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[0, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id :-->
                         <div class="pictureId" hidden>
                             @pictureElements[0, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
         </div>
-        @*2nd column*@
+        <!--2nd column :-->
         <div class="@colcss">
             <div class="card">
                 <img src="@pictureElements[1,0]" alt="@pictureElements[1,1]" title="@pictureElements[1,1]" class="@imgCss" />
@@ -122,30 +124,32 @@
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[1, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[1, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[1, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id :-->
                         <div class="pictureId" hidden>
                             @pictureElements[1, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
         </div>
-        @*3rd column*@
+        <!--3rd column :-->
         <div class="@colcss">
             <div class="card">
                 <img src="@pictureElements[2,0]" alt="@pictureElements[2,1]" title="@pictureElements[2,1]" class="@imgCss" />
@@ -154,30 +158,32 @@
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[2, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[2, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[2, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id :-->
                         <div class="pictureId" hidden>
                             @pictureElements[2, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
         </div>
-        @*4th column*@
+        <!--4th column :-->
         <div class="@colcss">
             <div class="card">
                 <img src="@pictureElements[3,0]" alt="@pictureElements[3,1]" title="@pictureElements[3,1]" class="@imgCss" />
@@ -186,23 +192,25 @@
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[3, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[3, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[3, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id :-->
                         <div class="pictureId" hidden>
                             @pictureElements[3, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -210,9 +218,9 @@
             </div>
         </div>
     </div>
-    @*Second row of 4 pictures*@
+    <!--Second row of 4 pictures :-->
     <div class="row p-2">
-        @*1st column*@
+        <!--1st column :-->
         <div class="@colcss">
             <div class="card">
                 <img src="@pictureElements[4,0]" alt="@pictureElements[4,1]" title="@pictureElements[4,1]" class="@imgCss" />
@@ -221,30 +229,32 @@
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[4, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[4, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[4, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id :-->
                         <div class="pictureId" hidden>
                             @pictureElements[4, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
         </div>
-        @*2nd column*@
+        <!--2nd column :-->
         <div class="@colcss">
             <div class="card">
                 <img src="@pictureElements[5,0]" alt="@pictureElements[5,1]" title="@pictureElements[5,1]" class="@imgCss" />
@@ -253,30 +263,32 @@
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[5, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[5, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[5, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id :-->
                         <div class="pictureId" hidden>
                             @pictureElements[5, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
         </div>
-        @*3rd column*@
+        <!--3rd column :-->
         <div class="@colcss">
             <div class="card">
                 <img src="@pictureElements[6,0]" alt="@pictureElements[6,1]" title="@pictureElements[6,1]" class="@imgCss" />
@@ -285,30 +297,32 @@
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[6, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[6, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[6, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id :-->
                         <div class="pictureId" hidden>
                             @pictureElements[6, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
         </div>
-        @*4th column*@
+        <!--4th column :-->
         <div class="@colcss">
             <div class="card">
                 <img src="@pictureElements[7,0]" alt="@pictureElements[7,1]" title="@pictureElements[7,1]" class="@imgCss" />
@@ -317,23 +331,25 @@
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[7, 1]
                         </div>
-                        @*Picture category*@
+                        <!--Picture category :-->
                         <div class="card-title text-right pictureCategory">
                             @pictureElements[7, 4]
                         </div>
-                        @*Picture description*@
+                        <!--Picture description :-->
                         <div class="pictureDescription" hidden>
                             @pictureElements[7, 3]
                         </div>
-                        @*Picture id*@
+                        <!--Picture id-->
                         <div class="pictureId" hidden>
                             @pictureElements[7, 5]
                         </div>
                     </div>
+                    <!--Picture ratings :-->
                     <button type="button" class="btn text-light ratings">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
+                    <!--Show picture details :-->
                     <button class="btn details" data-toggle="modal" data-target="#showPictureDetails">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -343,13 +359,13 @@
     </div>
 </div>
 
-@*Enable Pagination*@
+<!--Loading the partial view to display the modal :-->
+@Html.Partial("~/Views/pictures/pictureDetails.cshtml")
+
+<!--Enable Pagination :-->
 @for (int page = 1; page <= ViewBag.totalPages; page++)
 {
     <button type="button" class="btn btn-dark rounded rounded-circle" onclick="location.href='@Url.Action("pictureCollection", new { pageToDisplay = page })'">
         @page
     </button>
 }
-
-@*Loading the partial view to display the modal :*@
-@Html.Partial("~/Views/pictures/pictureDetails.cshtml")

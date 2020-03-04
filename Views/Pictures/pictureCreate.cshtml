@@ -30,33 +30,33 @@
     var toto = true;
 }
 
-@*Load scripts file*@
+<!--Load scripts file :-->
 @Scripts.Render("~/Scripts/script.js");
 
 <div class="container-fluid d-flex">
     <div class="row mx-auto">
 
-        @*Display choosen picture to create :*@
+        <!--Display choosen picture to create :-->
         <div class="col-sm-12 col-md-4 col-lg-4 border border-danger">
             <p class="btn btn-dark d-flex justify-content-center">Aperçu de votre image</p>
             <img id="pictureChoice" src="~/Content/Images/Pictures/upload.png" alt="ici votre image" title="Aperçu image" class="card-img img-thumbnail mx-auto" />
             <p class="btn btn-dark d-flex justify-content-center m-2">---------------------</p>
         </div>
 
-        @*Display the form to add a picture :*@
+        <!--Display the form to add a picture :-->
         <div class="col-sm-12 col-md-8 col-lg-8 border border-warning">
             @using (Html.BeginForm("pictureCreate", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
-                // Diplay the picture creation form :
+                <!--Diplay the picture creation form :-->
                 <form class="form-horizontal form-control">
-                    
+
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    
+
                     <fieldset class="border border-info">
 
-                        @*Input of picture standard url :*@
+                        <!--Input of picture standard url :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
                             <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
@@ -66,7 +66,7 @@
                             </label>
                         </div>
 
-                        @*Input of picture title :*@
+                        <!--Input of picture title :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
                             @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre", @onfocus = "clearCss(this)", @onblur = "isValid(this)" } })
@@ -75,7 +75,7 @@
                             </label>
                         </div>
 
-                        @*Input of picture alternative title :*@
+                        <!--Input of picture alternative title :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
                             @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre alternatif", @onfocus = "clearCss(this)", @onblur = "isValid(this)" } })
@@ -84,7 +84,7 @@
                             </label>
                         </div>
 
-                        @*Input of picture description :*@
+                        <!--Input of picture description :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
                             @Html.TextAreaFor(model => model.pictureDescription, new { @class = @editCss, @placeholder = "descriptif", @style = "resize:none", @onfocus = "clearCss(this)", @onblur = "isValid(this)" })
@@ -93,7 +93,7 @@
                             </label>
                         </div>
 
-                        @*Input of picture category :*@
+                        <!--Input of picture category :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
                             @Html.DropDownList("categoryId", null, new { @class = @editCss })
@@ -102,14 +102,20 @@
                             </label>
                         </div>
 
-                        @*Back - Clear Submit buttons :*@
+                        <!--Back - Clear Submit buttons :-->
                         <div class="@formGroupCss">
+
+                            <!--Back button :-->
                             <button type="button" class="@btnCss offset-3" onclick="location.href='@Url.Action("pictureCollection", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Retour collection">
                                 <i class="fas fa-home"></i>
                             </button>
+
+                            <!--Clear button :-->
                             <button value="Reset" class="@btnCss offset-2 resetForm" data-toggle="tooltip" data-placement="bottom" title="Réinitialiser">
                                 <i class="fas fa-eraser"></i>
                             </button>
+
+                            <!--Submit button :-->
                             <button type="submit" value="pictureCreate" class="@btnCss offset-2" onclick="ValidateForm()" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
                                 <i class="fas fa-plus"></i>
                             </button>

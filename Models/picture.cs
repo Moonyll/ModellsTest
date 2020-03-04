@@ -127,6 +127,9 @@ namespace Modells.Models
 
         public const string ISO = " iso";
 
+        public const string DateLabel = "Date : ";
+
+        public const string TimeLabel = "Heure : ";
 
         // Camera make :
         public string pictureCameraMake { get; set; }
@@ -168,5 +171,4 @@ namespace Modells.Models
         public string pictureFileSize { get; set; }
 
     }
-
 }
