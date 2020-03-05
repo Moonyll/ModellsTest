@@ -2,89 +2,96 @@
 
 @{
     ViewBag.Title = "pictureDetails";
+
+    // Class templates for the picture details :
+    var textLight = "text-light";
+    var imgDispCss = "img-fluid img-thumbnail d-block mx-auto displayPicture";
+    var btnDetailsCss = "btn text-light removeFocus";
+    var btnExifsAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Données&nbsp;EXIFS";
+
 }
 
-@*Modal to display picture details*@
+<!--Modal to display picture details-->
 <div class="modal fade bg-transparent testpic" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
-    @*Centered large modal :*@
+    <!--Centered large modal :-->
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
 
-        @*Modal content :*@
+        <!--Modal content :-->
         <div class="modal-content bg-transparent">
 
-            @*Modal header :*@
+            <!--Modal header :-->
             <div class="modal-header bg-transparent justify-content-between d-flex">
 
-                @*Modal title :*@
-                <div class="modal-title text-light ml-0 d-inline-flex" id="pictureModalLabel">
+                <!--Modal title :-->
+                <div class="modal-title ml-0 d-inline-flex @textLight" id="pictureModalLabel">
 
-                    @*Picture title :*@
-                    <div class="text-light p-1" id="pictureTitle">
+                    <!--Picture title :-->
+                    <div class="p-1 @textLight" id="pictureTitle">
                         Picture title
                     </div>
 
-                    @*Picture category :*@
-                    <div class="text-light p-1" id="pictureCategory">
+                    <!--Picture category :-->
+                    <div class="p-1 @textLight" id="pictureCategory">
                         Picture category
                     </div>
 
-                    @*Picture id :*@
-                    <div class="text-light p-1" id="pictureId" hidden>
+                    <!--Picture id :-->
+                    <div class="p-1 @textLight" id="pictureId" hidden>
                         Picture id
                     </div>
                 </div>
 
-                @*Close button*@
-                <button type="button" class="btn text-light mr-0 removeFocus" data-dismiss="modal">
+                <!--Close button-->
+                <button type="button" class="@btnDetailsCss mr-0" data-dismiss="modal">
                     <i class="fas fa-times-circle"></i>
                 </button>
             </div>
 
-            @*Modal body :*@
+            <!--Modal body :-->
             <div class="modal-body bg-transparent d-inline-flex justify-content-center">
 
-                @*Previous picture button :*@
-                <button type="button" class="btn text-light removeFocus prev">
+                <!--Previous picture button :-->
+                <button type="button" class="@btnDetailsCss prev">
                     <i class="fas fa-arrow-circle-left"></i>
                 </button>
 
-                @*Display Picture :*@
-                <img src="" alt="" title="" class="img-fluid img-thumbnail d-block mx-auto displayPicture" />
+                <!--Display Picture :-->
+                <img src="" alt="" title="" class="@imgDispCss" />
 
-                @*Next picture button :*@
-                <button type="button" class="btn text-light removeFocus next">
+                <!--Next picture button :-->
+                <button type="button" class="@btnDetailsCss next">
                     <i class="fas fa-arrow-circle-right"></i>
                 </button>
             </div>
 
-            @*Picture description :*@
-            <p class="text-light text-center" id="pictureDescription">Picture description</p>
+            <!--Picture description :-->
+            <p class="text-center @textLight" id="pictureDescription">Picture description</p>
 
-            @*Modal footer :*@
+            <!--Modal footer :-->
             <div class="modal-footer justify-content-between">
 
-                @*Justify-content-between enables to set button position :*@
-                <button type="button" class="btn text-light ml-0 removeFocus">
+                <!--Justify-content-between enables to set button position :-->
+                <button type="button" class="@btnDetailsCss ml-0">
 
-                    @*Picture rating value :*@
+                    <!--Picture rating value :-->
                     <i class="far fa-heart"></i> 5
 
-                    @*Picture views number :*@
+                    <!--Picture views number :-->
                     <i class="fas fa-bullseye"></i> 10
                 </button>
 
-                @*Button infos :*@
-                <button class="btn text-light mx-auto removeFocus toto" data-toggle="popover" data-trigger="hover" data-placement="top" title="Données EXIFS">
+                <!--Button infos :-->
+                <button class="@btnDetailsCss mx-auto toto" @btnExifsAttr>
                     <i class="fas fa-info-circle"></i>
                 </button>
 
-                @*Button edit :*@
-                <button type="button" class="btn text-light mr-0 removeFocus editPicture">
+                <!--Button edit :-->
+                <button type="button" class="@btnDetailsCss mr-0 editPicture">
                     <i class="fas fa-edit"></i>
                 </button>
 
-                @*Button download :*@
-                <button type="button" class="btn text-light mr-0 removeFocus">
+                <!--Button download :-->
+                <button type="button" class="@btnDetailsCss mr-0">
                     <i class="fas fa-download"></i>
                 </button>
             </div>
@@ -92,46 +99,46 @@
     </div>
 </div>
 
-@*Display picture exifs data :*@
+<!--Display picture exifs data :-->
 <div class="exifsData" id="popover-content" hidden>
 
-    @*A. Display main infos :*@
+    <!--A. Display main infos :-->
     <ul class="justify-content-between">
-        @*Display camera make :*@
+        <!--Display camera make :-->
         <li class="mx-auto"><i class="fas fa-industry"></i><span id="pictureCameraMake"></span></li>
 
-        @*Display camera model :*@
+        <!--Display camera model :-->
         <li class="mx-auto"><i class="fas fa-camera"></i><span id="pictureCameraModel"></span></li>
     </ul>
     <ul>
-        @*Display picture date time :*@
+        <!--Display picture date time :-->
         <li class="mx-auto"><i class="far fa-calendar-alt"></i><span id="pictureOriginalDateTime"></span></li>
     </ul>
 
-    @*B. Display picture taking infos :*@
+    <!--B. Display picture taking infos :-->
     <ul>
-        @*Display picture aperture value :*@
+        <!--Display picture aperture value :-->
         <li class="mx-auto"><i class="fab fa-chrome"></i><span id="pictureApertureValue"></span></li>
 
-        @*Display picture exposure time :*@
+        <!--Display picture exposure time :-->
         <li class="mx-auto"><i class="far fa-clock"></i><span id="pictureExposureTime"></span></li>
 
-        @*Display picture speed ratings :*@
+        <!--Display picture speed ratings :-->
         <li class="mx-auto"><i class="far fa-sun"></i><span id="pictureIsoSpeedRatings"></span></li>
 
-        @*Display picture focal length :*@
+        <!--Display picture focal length :-->
         <li class="mx-auto"><i class="fab fa-periscope"></i><span id="pictureFocalLength"></span></li>
 
-        @*Display picture flash :*@
+        <!--Display picture flash :-->
         <li class="mx-auto"><span></span><i class="fas fa-bolt"></i><span id="pictureFlash"></span></li>
     </ul>
 
-    @*C. Display picture file infos :*@
+    <!--C. Display picture file infos :-->
     <ul>
-        @*Display picture width x height :*@
+        <!--Display picture width x height :-->
         <li class="mx-auto"><i class="far fa-image"></i><span id="pictureDimensions"></span></li>
 
-        @*Display picture file size :*@
+        <!--Display picture file size :-->
         <li class="mx-auto"><i class="fas fa-weight-hanging"></i><span id="pictureFileSize"></span></li>
     </ul>
 </div>

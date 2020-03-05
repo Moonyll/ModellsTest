@@ -31,8 +31,7 @@ namespace Modells.Controllers
         public ActionResult Index()
         {
             // Picture list :
-            var picture = db.picture
-                            .Include(p => p.category);
+            var picture = db.picture.Include(p => p.category);
 
             return View(picture.ToList());
         }
@@ -44,11 +43,10 @@ namespace Modells.Controllers
         /// <returns></returns>
         public ActionResult pictureCollection(int? pageToDisplay)
         {
-            #region Get Pictures List
+            #region Get pictures list
 
             // Picture list :
-            var pictureList = db.picture
-                                .Include(p => p.category);
+            var pictureList = db.picture.Include(p => p.category);
 
             #endregion
 
@@ -61,32 +59,85 @@ namespace Modells.Controllers
             int numberOfPicsToDisplayPerPage = 8;
 
             // Number of pages :
-            var n = (decimal)numberOfTotalPics / numberOfPicsToDisplayPerPage;
+            var decimalNumberOfPages = (decimal)numberOfTotalPics / numberOfPicsToDisplayPerPage;
 
             // Nombre de pages arrondi au plafond supérieur :
-            var numberOfPages = Math.Ceiling(n);
+            var numberOfPages = Math.Ceiling(decimalNumberOfPages);
 
             // Element to display according to the page number :
             var elementToDisplay = (pageToDisplay == null) ? 0 : (int)pageToDisplay;
 
             // Total element :
-            var pictures = pictureList
-                           .ToList()
-                           .Skip((elementToDisplay - 1) * 8)
-                           .Take(8);
+            var pictures = pictureList.ToList()
+                                      .Skip((elementToDisplay - 1) * numberOfPicsToDisplayPerPage)
+                                      .Take(numberOfPicsToDisplayPerPage)
+                                      ;
 
             // Total element per page :
             var numberOfPicturesCurrentPage = pictures.Count();
 
-            // Viewbags to pass data in the view :
-            
-            ViewBag.totalPictures = numberOfPicturesCurrentPage;
-            
+            // Index limit :
+            var indexLimit = numberOfPicturesCurrentPage - 1;
+
+            #endregion
+
+            #region Generate picture table
+
+            // Table of pictures to display :
+            var pictureElements = new string[8, 6];
+
+            for (int index = 0; index <= 7; index++)
+            {
+                var pictureUrlToLoad = (index <= indexLimit) ? pictures.ElementAt(index).pictureStandardUrl : null;
+
+                // Load the picture of database at index :
+
+                if (pictureUrlToLoad != null)
+                {
+                    // Picture Url :
+                    pictureElements[index, 0] = pictureControls.pictureFileDirectory + pictures.ElementAt(index).pictureStandardUrl.ToString();
+
+                    // Picture Title :
+                    pictureElements[index, 1] = pictures.ElementAt(index).pictureTitle.ToString();
+
+                    // Picture Alternative title :
+                    pictureElements[index, 2] = pictures.ElementAt(index).pictureAlternateTitle.ToString();
+
+                    // Picture Description :
+                    pictureElements[index, 3] = pictures.ElementAt(index).pictureDescription.ToString();
+
+                    // Picture Category :
+                    pictureElements[index, 4] = pictures.ElementAt(index).category.categoryName.ToString();
+
+                    // Picture Id :
+                    pictureElements[index, 5] = pictures.ElementAt(index).pictureId.ToString();
+                }
+
+                else
+                {
+                    // Load the default picture if database ones not exists :
+                    pictureElements[index, 0] = "/Content/Images/Pictures/smile.jpg";
+                    pictureElements[index, 1] = "Default picture main title";
+                    pictureElements[index, 2] = "Default picture alt title";
+                    pictureElements[index, 3] = "Default picture description";
+                    pictureElements[index, 4] = "Default picture category";
+                    pictureElements[index, 5] = "Default picture id";
+                }
+            }
+
+            #endregion
+
+            #region Passing data to view
+
+            // Set viewbag & viewdata :
+
+            ViewData["pictureElements"] = pictureElements;
+
             ViewBag.totalPages = numberOfPages;
 
             #endregion
 
-            return View(pictures);
+            return View();
         }
 
         #endregion
@@ -100,7 +151,7 @@ namespace Modells.Controllers
         public ActionResult pictureCreate()
         {
             ViewBag.categoryId = new SelectList(db.category, "categoryId", "categoryName");
-            
+
             return View();
         }
 
@@ -322,76 +373,76 @@ namespace Modells.Controllers
 
             // 1° Read directories metadata files :
 
-                    // Read "Exif IFD0" directory file :
-                    var subIfd0Directory = pictureDirectories.OfType<ExifIfd0Directory>().FirstOrDefault();
-        
-                    // Read "Exif SubIFD" directory file :
-                    var subIfdDirectory = pictureDirectories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
-        
-                    // Read "MetadataDirectory" directory file :
-                    var subMetadataDirectory = pictureDirectories.OfType<FileMetadataDirectory>().FirstOrDefault();
+            // Read "Exif IFD0" directory file :
+            var subIfd0Directory = pictureDirectories.OfType<ExifIfd0Directory>().FirstOrDefault();
+
+            // Read "Exif SubIFD" directory file :
+            var subIfdDirectory = pictureDirectories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
+
+            // Read "MetadataDirectory" directory file :
+            var subMetadataDirectory = pictureDirectories.OfType<FileMetadataDirectory>().FirstOrDefault();
 
             // 2° Get Exifs data from read file :
 
-                    // Get the camera make :
-                    pictureExifs.pictureCameraMake = GetExifData(subIfd0Directory, ExifDirectoryBase.TagMake);
-        
-                    // Get the camera model :
-                    pictureExifs.pictureCameraModel = GetExifData(subIfd0Directory, ExifDirectoryBase.TagModel);
+            // Get the camera make :
+            pictureExifs.pictureCameraMake = GetExifData(subIfd0Directory, ExifDirectoryBase.TagMake);
 
-                    // Get original date time :
-                    var datetimeString = GetExifData(subIfdDirectory, ExifDirectoryBase.TagDateTimeOriginal);
+            // Get the camera model :
+            pictureExifs.pictureCameraModel = GetExifData(subIfd0Directory, ExifDirectoryBase.TagModel);
 
-                    var picutreDateTimeValues = (!string.IsNullOrEmpty(datetimeString)) ?
-                                            GetDateTimeValues(datetimeString) :
-                                            new string[]
-                                            {
+            // Get original date time :
+            var datetimeString = GetExifData(subIfdDirectory, ExifDirectoryBase.TagDateTimeOriginal);
+
+            var picutreDateTimeValues = (!string.IsNullOrEmpty(datetimeString)) ?
+                                    GetDateTimeValues(datetimeString) :
+                                    new string[]
+                                    {
                                                 pictureExifMetaData.EmptyValue,
                                                 pictureExifMetaData.EmptyValue
-                                            };
+                                    };
 
-                    pictureExifs.pictureOriginalDateTime = pictureExifMetaData.DateLabel + picutreDateTimeValues[0] + "   " + pictureExifMetaData.TimeLabel + picutreDateTimeValues[1];
+            pictureExifs.pictureOriginalDateTime = pictureExifMetaData.DateLabel + picutreDateTimeValues[0] + "   " + pictureExifMetaData.TimeLabel + picutreDateTimeValues[1];
 
-                    // Get aperture value :
-                    pictureExifs.pictureApertureValue = GetExifData(subIfdDirectory,ExifDirectoryBase.TagAperture);
-        
-                    // Get exposure time :
-                    pictureExifs.pictureExposureTime = GetExifData(subIfdDirectory, ExifDirectoryBase.TagExposureTime);
+            // Get aperture value :
+            pictureExifs.pictureApertureValue = GetExifData(subIfdDirectory, ExifDirectoryBase.TagAperture);
 
-                    // Get iso speed ratings :
-                    pictureExifs.pictureIsoSpeedRatings =
-                        (GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent) != pictureExifMetaData.TabEmpty) ?
-                                    GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent) + pictureExifMetaData.ISO
-                                    : GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent);
-        
-                    // Get picture flash :
-                    pictureExifs.pictureFlash = GetExifData(subIfdDirectory,ExifDirectoryBase.TagFlash);
-        
-                    // Get focal length :
-                    pictureExifs.pictureFocalLength = GetExifData(subIfdDirectory,ExifDirectoryBase.TagFocalLength);
-        
-                    // Get picture width :
-                    pictureExifs.pictureWidth = DisplayPictureDimension(GetExifData(subIfdDirectory,ExifDirectoryBase.TagExifImageWidth));
-        
-                    // Get picture height :
-                    pictureExifs.pictureHeight = DisplayPictureDimension(GetExifData(subIfdDirectory,ExifDirectoryBase.TagExifImageHeight));
+            // Get exposure time :
+            pictureExifs.pictureExposureTime = GetExifData(subIfdDirectory, ExifDirectoryBase.TagExposureTime);
 
-                    // Get picture dimensions :
-                    pictureExifs.pictureDimensions =
-                                (pictureExifs.pictureWidth != pictureExifMetaData.TabEmpty
-                                    && pictureExifs.pictureHeight != pictureExifMetaData.TabEmpty) ?
-                                    (
-                                        pictureExifMetaData.SpaceTabulation +
-                                        pictureExifs.pictureWidth + "   x   " +
-                                        pictureExifs.pictureHeight +
-                                        pictureExifMetaData.Pixels
-                                    )
-                                 : pictureExifMetaData.TabEmpty;
+            // Get iso speed ratings :
+            pictureExifs.pictureIsoSpeedRatings =
+                (GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent) != pictureExifMetaData.TabEmpty) ?
+                            GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent) + pictureExifMetaData.ISO
+                            : GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent);
 
-                    // Get picture file size :
-                    pictureExifs.pictureFileSize = DisplayPictureSize((GetExifData(subMetadataDirectory,FileMetadataDirectory.TagFileSize)));
+            // Get picture flash :
+            pictureExifs.pictureFlash = GetExifData(subIfdDirectory, ExifDirectoryBase.TagFlash);
 
-                        return Json(pictureExifs, JsonRequestBehavior.AllowGet);
+            // Get focal length :
+            pictureExifs.pictureFocalLength = GetExifData(subIfdDirectory, ExifDirectoryBase.TagFocalLength);
+
+            // Get picture width :
+            pictureExifs.pictureWidth = DisplayPictureDimension(GetExifData(subIfdDirectory, ExifDirectoryBase.TagExifImageWidth));
+
+            // Get picture height :
+            pictureExifs.pictureHeight = DisplayPictureDimension(GetExifData(subIfdDirectory, ExifDirectoryBase.TagExifImageHeight));
+
+            // Get picture dimensions :
+            pictureExifs.pictureDimensions =
+                        (pictureExifs.pictureWidth != pictureExifMetaData.TabEmpty
+                            && pictureExifs.pictureHeight != pictureExifMetaData.TabEmpty) ?
+                            (
+                                pictureExifMetaData.SpaceTabulation +
+                                pictureExifs.pictureWidth + "   x   " +
+                                pictureExifs.pictureHeight +
+                                pictureExifMetaData.Pixels
+                            )
+                         : pictureExifMetaData.TabEmpty;
+
+            // Get picture file size :
+            pictureExifs.pictureFileSize = DisplayPictureSize((GetExifData(subMetadataDirectory, FileMetadataDirectory.TagFileSize)));
+
+            return Json(pictureExifs, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -407,7 +458,7 @@ namespace Modells.Controllers
             var pictureExifData = (!string.IsNullOrEmpty(exifData)) ? (pictureExifMetaData.SpaceTabulation + exifData)
                                                                     : (pictureExifMetaData.TabEmpty);
 
-                return pictureExifData;
+            return pictureExifData;
         }
 
         /// <summary>
@@ -419,13 +470,13 @@ namespace Modells.Controllers
         {
             // Extract bytes numbers of picture file size :
             var extractBytesNumbers = string.Join("", exifDataTagFileSize.ToCharArray().Where(Char.IsDigit));
-            
+
             // Convert bytes to Ko :
             var convertNumbersToKo = Math.Round(Convert.ToDecimal(extractBytesNumbers) / 1000);
-            
+
             // Display picture file size in Ko :
             var displayPictureFileSize = pictureExifMetaData.SpaceTabulation + convertNumbersToKo + pictureExifMetaData.KiloOctets;
-            
+
             // Diplay picture file size in Mo : 
             if (convertNumbersToKo >= 1000)
             {
@@ -519,8 +570,8 @@ namespace Modells.Controllers
                 datetimeArrayValues[0] = finalDateValue;
                 datetimeArrayValues[1] = finalTimeValue;
             }
-            
-                return datetimeArrayValues;
+
+            return datetimeArrayValues;
 
         }
 

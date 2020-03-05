@@ -91,7 +91,7 @@ namespace Modells.Models
         public const string errorMessageForPictureOutOfExt = "L'image doit être au format jpg / jpeg";
 
         // Diretory :
-        public const string pictureFileDirectory = "~/Content/Images/Pictures/";
+        public const string pictureFileDirectory = "/Content/Images/Pictures/";
 
         // Patterns for original date & time regex :
         public const string OriginalDateFormatA = @"\d{2}-\d{2}-\d{4}";
@@ -169,6 +169,28 @@ namespace Modells.Models
 
         // Picture file size :
         public string pictureFileSize { get; set; }
+
+    }
+
+    public class pictureGlobalLabels
+    {
+        public const string PictureMainTitle = "titre";
+
+        public const string PictureAlTitle = "titre alternatif";
+
+        public const string PictureDecription = "description";
+
+        public const string AddPicture = "Ajouter image";
+
+        public const string BackToColl = "Retour collection";
+
+        public const string ResetForm = "Réinitialiser";
+
+        public const string PreviewImgMTitle = "Aperçu image";
+
+        public const string PreviewImgATitle = "Ici votre image";
+
+        public const string DefaultPictureUrl = "/Content/Images/Pictures/upload.png";
 
     }
 }

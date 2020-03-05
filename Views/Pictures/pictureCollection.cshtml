@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Modells.Models.picture>
-
-@{
+﻿@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -13,47 +11,9 @@
     // Total pictures to display :
     var totalPictures = ViewBag.totalPictures;
 
-    var indexLimit = totalPictures - 1;
-
     // Table of pictures to display :
-    var pictureElements = new string[8, 6];
+    var pictureElements = ViewData["pictureElements"] as string[,];
 
-    for (int index = 0; index <= 7; index++)
-    {
-
-        var pictureUrlToLoad = (index <= indexLimit) ? Model.ElementAt(index).pictureStandardUrl : null;
-
-        if (pictureUrlToLoad != null)
-        {
-            // Load the picture of database :
-
-            // Picture Url :
-            pictureElements[index, 0] = "/Content/Images/Pictures/" + Model.ElementAt(index).pictureStandardUrl.ToString();
-
-            // Picture Title :
-            pictureElements[index, 1] = Model.ElementAt(index).pictureTitle.ToString();
-
-            // Picture Alternative title :
-            pictureElements[index, 2] = Model.ElementAt(index).pictureAlternateTitle.ToString();
-
-            // Picture Description :
-            pictureElements[index, 3] = Model.ElementAt(index).pictureDescription.ToString();
-
-            // Picture Category :
-            pictureElements[index, 4] = Model.ElementAt(index).category.categoryName.ToString();
-
-            // Picture Id :
-            pictureElements[index, 5] = Model.ElementAt(index).pictureId.ToString();
-        }
-
-        else
-        {
-            // Load the default picture if database ones not exists :
-            pictureElements[index, 0] = "/Content/Images/Pictures/smile.jpg";
-            pictureElements[index, 1] = "Default picture";
-            pictureElements[index, 2] = "Default picture";
-        }
-    }
 }
 
 @section Scripts
@@ -70,11 +30,6 @@
 }
 
 @Html.ActionLink("To The Test Page", "Test")
-@Html.ActionLink("Details", "pictureDetails")
-@Html.ActionLink("Liste des photos", "Index", "Pictures")
-@Html.ActionLink("List", "pictureCollection", "Pictures")
-@Html.ActionLink("Ajouter une nouvelle photo", "pictureCreate", "Pictures")
-@Html.ActionLink("Vue Succès", "pictureSuccess", "Pictures")
 
 <!--One fluid container of 2 rows & 4 columns :-->
 <div class="container-fluid bg-warning p-4 d-table-cell">
@@ -84,9 +39,10 @@
         <div class="@colcss">
             <div class="card">
                 <!--Picture source, title & alternative title :-->
-                <img src="@pictureElements[0,0]" alt="@pictureElements[0,1]" title="@pictureElements[0,1]" class="@imgCss" />
+                <img src="@pictureElements[0,0]" alt="@pictureElements[0,2]" title="@pictureElements[0,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[0, 1]
                         </div>
@@ -118,9 +74,10 @@
         <!--2nd column :-->
         <div class="@colcss">
             <div class="card">
-                <img src="@pictureElements[1,0]" alt="@pictureElements[1,1]" title="@pictureElements[1,1]" class="@imgCss" />
+                <img src="@pictureElements[1,0]" alt="@pictureElements[1,2]" title="@pictureElements[1,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[1, 1]
                         </div>
@@ -152,9 +109,10 @@
         <!--3rd column :-->
         <div class="@colcss">
             <div class="card">
-                <img src="@pictureElements[2,0]" alt="@pictureElements[2,1]" title="@pictureElements[2,1]" class="@imgCss" />
+                <img src="@pictureElements[2,0]" alt="@pictureElements[2,2]" title="@pictureElements[2,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[2, 1]
                         </div>
@@ -186,9 +144,10 @@
         <!--4th column :-->
         <div class="@colcss">
             <div class="card">
-                <img src="@pictureElements[3,0]" alt="@pictureElements[3,1]" title="@pictureElements[3,1]" class="@imgCss" />
+                <img src="@pictureElements[3,0]" alt="@pictureElements[3,2]" title="@pictureElements[3,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[3, 1]
                         </div>
@@ -223,9 +182,10 @@
         <!--1st column :-->
         <div class="@colcss">
             <div class="card">
-                <img src="@pictureElements[4,0]" alt="@pictureElements[4,1]" title="@pictureElements[4,1]" class="@imgCss" />
+                <img src="@pictureElements[4,0]" alt="@pictureElements[4,2]" title="@pictureElements[4,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[4, 1]
                         </div>
@@ -257,9 +217,10 @@
         <!--2nd column :-->
         <div class="@colcss">
             <div class="card">
-                <img src="@pictureElements[5,0]" alt="@pictureElements[5,1]" title="@pictureElements[5,1]" class="@imgCss" />
+                <img src="@pictureElements[5,0]" alt="@pictureElements[5,2]" title="@pictureElements[5,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[5, 1]
                         </div>
@@ -291,9 +252,10 @@
         <!--3rd column :-->
         <div class="@colcss">
             <div class="card">
-                <img src="@pictureElements[6,0]" alt="@pictureElements[6,1]" title="@pictureElements[6,1]" class="@imgCss" />
+                <img src="@pictureElements[6,0]" alt="@pictureElements[6,2]" title="@pictureElements[6,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[6, 1]
                         </div>
@@ -325,9 +287,10 @@
         <!--4th column :-->
         <div class="@colcss">
             <div class="card">
-                <img src="@pictureElements[7,0]" alt="@pictureElements[7,1]" title="@pictureElements[7,1]" class="@imgCss" />
+                <img src="@pictureElements[7,0]" alt="@pictureElements[7,2]" title="@pictureElements[7,1]" class="@imgCss" />
                 <div class="card-img-overlay">
                     <div class="justify-content-between d-flex">
+                        <!--Picture title :-->
                         <div class="card-title text-left pictureTitle">
                             @pictureElements[7, 1]
                         </div>

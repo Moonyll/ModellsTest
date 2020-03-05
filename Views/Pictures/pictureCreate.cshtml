@@ -3,13 +3,26 @@
     ViewBag.Title = "pictureCreate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    // Class templates for the picture form :
+    // Class templates for the picture create :
     var formGroupCss = "form-group d-flex mx-auto justify-content-center";
     var labelCss = "control-label btn btn-dark col-4 text-center text-wrap";
     var controlLabelCss = "control-label btn btn-dark col-1 d-flex justify-content-center";
     var controlLabelAttr = "data-container=body data-toggle=popover data-placement=right";
+    var buttonToolAttr = "data-toggle = tooltip data-placement = bottom";
     var editCss = "form-control col-6 was-validated";
     var btnCss = "btn btn-dark col-1 d-flex justify-content-center";
+    var previewCss = "col-sm-12 col-md-4 col-lg-4 border border-danger";
+
+    // Global labels & titles :
+    var backCol = Modells.Models.pictureGlobalLabels.BackToColl;
+    var addPic = Modells.Models.pictureGlobalLabels.AddPicture;
+    var resetFm = Modells.Models.pictureGlobalLabels.ResetForm;
+    var previewImgTtl = Modells.Models.pictureGlobalLabels.PreviewImgMTitle;
+    var previewImgAlt = Modells.Models.pictureGlobalLabels.PreviewImgATitle;
+    var previewDefaultSrc = Modells.Models.pictureGlobalLabels.DefaultPictureUrl;
+
+    // Action Links :
+    var urlToColl = Url.Action("pictureCollection", "Pictures");
 
     @functions
     {
@@ -26,8 +39,6 @@
             return modelStateErrors;
         }
     }
-
-    var toto = true;
 }
 
 <!--Load scripts file :-->
@@ -37,9 +48,9 @@
     <div class="row mx-auto">
 
         <!--Display choosen picture to create :-->
-        <div class="col-sm-12 col-md-4 col-lg-4 border border-danger">
+        <div class="@previewCss">
             <p class="btn btn-dark d-flex justify-content-center">Aperçu de votre image</p>
-            <img id="pictureChoice" src="~/Content/Images/Pictures/upload.png" alt="ici votre image" title="Aperçu image" class="card-img img-thumbnail mx-auto" />
+            <img id="pictureChoice" src="@previewDefaultSrc" alt="@previewImgAlt" title="@previewImgTtl" class="card-img img-thumbnail mx-auto" />
             <p class="btn btn-dark d-flex justify-content-center m-2">---------------------</p>
         </div>
 
@@ -60,7 +71,7 @@
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
                             <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
-                            @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @placeholder = "image.jpg", @onfocus = "clearCss(this)", @onchange = "isValid(this)" } })
+                            @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @placeholder = "image.jpg", @onfocus= "clearCss(this)", @onchange = "isValid(this)" } })
                             <label for="newPictureToUpload" class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("newPictureToUpload")">
                                 <i class="far fa-image"></i>
                             </label>
@@ -69,7 +80,7 @@
                         <!--Input of picture title :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
-                            @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre", @onfocus = "clearCss(this)", @onblur = "isValid(this)" } })
+                            @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @onfocus= "clearCss(this)", @onchange = "isValid(this)", @placeholder = "titre" } })
                             <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureTitle")">
                                 <i class="fas fa-bookmark"></i>
                             </label>
@@ -78,7 +89,7 @@
                         <!--Input of picture alternative title :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
-                            @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @placeholder = "titre alternatif", @onfocus = "clearCss(this)", @onblur = "isValid(this)" } })
+                            @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @onfocus= "clearCss(this)", @onchange = "isValid(this)", @placeholder = "titre alternatif" } })
                             <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureAlternateTitle")">
                                 <i class="far fa-bookmark"></i>
                             </label>
@@ -87,7 +98,7 @@
                         <!--Input of picture description :-->
                         <div class="@formGroupCss">
                             @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
-                            @Html.TextAreaFor(model => model.pictureDescription, new { @class = @editCss, @placeholder = "descriptif", @style = "resize:none", @onfocus = "clearCss(this)", @onblur = "isValid(this)" })
+                            @Html.TextAreaFor(model => model.pictureDescription, new { @class = @editCss, @onfocus= "clearCss(this)", @onchange = "isValid(this)", @placeholder = "descriptif", @style = "resize:none" })
                             <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureDescription")">
                                 <i class="fas fa-pen"></i>
                             </label>
@@ -106,17 +117,17 @@
                         <div class="@formGroupCss">
 
                             <!--Back button :-->
-                            <button type="button" class="@btnCss offset-3" onclick="location.href='@Url.Action("pictureCollection", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Retour collection">
+                            <button type="button" class="@btnCss offset-3" onclick="location.href='@urlToColl'" @buttonToolAttr title=@backCol>
                                 <i class="fas fa-home"></i>
                             </button>
 
                             <!--Clear button :-->
-                            <button value="Reset" class="@btnCss offset-2 resetForm" data-toggle="tooltip" data-placement="bottom" title="Réinitialiser">
+                            <button value="Reset" class="@btnCss offset-2 resetForm" @buttonToolAttr title=@resetFm>
                                 <i class="fas fa-eraser"></i>
                             </button>
 
                             <!--Submit button :-->
-                            <button type="submit" value="pictureCreate" class="@btnCss offset-2" onclick="ValidateForm()" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
+                            <button type="submit" value="pictureCreate" class="@btnCss offset-2" onclick="ValidateForm()" @buttonToolAttr title=@addPic>
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
