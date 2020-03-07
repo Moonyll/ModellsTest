@@ -435,7 +435,7 @@ namespace Modells.Controllers
                                                                                             pictureExifMetaData.EmptyValue
                                                                                       };
 
-                pictureExifs.pictureOriginalDateTime = pictureExifMetaData.DateLabel + picutreDateTimeValues[0] + "   " + pictureExifMetaData.TimeLabel + picutreDateTimeValues[1];
+                pictureExifs.pictureOriginalDateTime = pictureExifMetaData.SpaceTabulation + picutreDateTimeValues[0] + pictureExifMetaData.SpaceTabulation + picutreDateTimeValues[1];
 
                 // Get aperture value :
                 pictureExifs.pictureApertureValue = GetExifData(subIfdDirectory, ExifDirectoryBase.TagAperture);
@@ -554,7 +554,7 @@ namespace Modells.Controllers
 
         public string[] GetDateTimeValues(string datetimeString)
         {
-            string[] datetimeArrayValues = new string[2] { "date", "time" };
+            string[] datetimeArrayValues = new string[2] { pictureExifMetaData.EmptyValue, pictureExifMetaData.EmptyValue };
 
             Dictionary<string, string> datetimeDico = new Dictionary<string, string>()
             {
