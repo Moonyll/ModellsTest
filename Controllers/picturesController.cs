@@ -253,6 +253,20 @@ namespace Modells.Controllers
 
                 // Picture Source is uploaded and saved in the directory :
                 newPictureToUpload.SaveAs(newPictureSourcePath);
+
+                // Set relative picture path :
+                var relativePicturePath = newPictureSourcePath
+                                          .Replace
+                                          (
+                                            Server.MapPath("~/"),
+                                            "/"
+                                          )
+                                          .Replace(@"\", "/");
+
+                // Set a viewbag to keep & display preview picture when submit :
+                ViewBag.picturePreviewSrc = (!ModelState.IsValid) ?
+                                            relativePicturePath :
+                                            pictureGlobalLabels.DefaultPictureUrl;
             }
 
             #endregion

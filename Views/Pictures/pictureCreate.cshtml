@@ -22,7 +22,7 @@
     var resetFm = globalLabels.ResetForm;
     var previewImgTtl = globalLabels.PreviewImgMTitle;
     var previewImgAlt = globalLabels.PreviewImgATitle;
-    var previewDefaultSrc = globalLabels.DefaultPictureUrl;
+    var previewDefaultSrc = ViewBag.picturePreviewSrc ?? globalLabels.DefaultPictureUrl;
 
     // Action Links :
     var urlToColl = Url.Action("pictureCollection", "Pictures");

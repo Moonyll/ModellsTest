@@ -50,12 +50,13 @@ function isValid(input) {
     // Input value :
     var inputValue = input.value;
     var inputLength = inputValue.length;
+
+    // Remove spaces :
     var removeBlank = inputValue.trim();
     var removeBlankLength = removeBlank.length;
-    var n = inputLength - removeBlankLength;
 
     // Tests in console :
-    console.log(removeBlank,inputLength,removeBlankLength,n);
+    console.log(removeBlank,removeBlankLength);
 
     // Input label entity :
     var inputEntity = input.name;
@@ -68,19 +69,14 @@ function isValid(input) {
     // Result from the test of input value with pattern :
     var inputControl = inputPattern.test(inputValue);
 
-    if (inputControl && inputLength>2 && n!=0) {
+    if (inputControl && inputLength > 2 && removeBlankLength!=0) {
         $(input).addClass('is-valid');
-        $(input).prev('label').css('color', 'green');
+        $(input).next('.btn').children().css('color', 'silver');
     }
     else if (!inputControl && inputLength > 2){
         $(input).addClass('is-invalid');
-        $(input).prev('label').css('color', 'red');
         $(input).prev('label').attr({ 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': 'Autorisés [ . - _ ] seulement' });
-        //$('label.tooltip').css(color, 'red');
         $(input).prev('label').tooltip('show');
-
-        // Tests in console :
-        console.log(n);
     }
 }
 
