@@ -32,43 +32,43 @@
     </header>
 
     <!--Navigation Bar :-->
-    <nav class="navbar-expand-lg">
+    <nav class="navbar-expand-lg border border-light">
 
         <!--Application Logo :-->
         <img src="~/Content/Images/Logos/modells.jpg" class="btn border border-light logobrand" alt="modells" />
 
         <!--Home button :-->
-        <button type="button" class="btn border border-light nav-item m-2" onclick="location.href='@Url.Action("pictureHome", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Accueil">
+        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureHome", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Accueil">
             <i class="fas fa-home"></i>
         </button>
 
         <!--Collection button :-->
-        <button type="button" class="btn border border-light nav-item m-2" onclick="location.href='@Url.Action("pictureCollection", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Collection">
+        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureCollection", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Collection">
             <i class="far fa-images"></i>
         </button>
 
         <!--Add picture button :-->
-        <button type="button" class="btn border border-light nav-item m-2" onclick="location.href='@Url.Action("pictureCreate", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
+        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureCreate", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
             <i class="far fa-image"></i>
         </button>
 
         <!--Search bar :-->
-        <form class="form-inline btn nav-item m-2 float-right" action="">
+        @*<form class="form-inline btn nav-item m-2 float-right" action="">
             <input class="form-control" type="text" placeholder="Recherche">
             <button class="btn btn-light" type="submit">
                 Recherche
             </button>
-        </form>
+        </form>*@
 
     </nav>
 
     <!--Main Content :-->
-    <main class="bg-success">
+    <main class="border border-light">
         @RenderBody()
     </main>
 
     <!--Footer :-->
-    <footer class="bg-transparent border border-dark">
+    <footer class="border border-light">
         &copy; @DateTime.Now.Year - Modells
     </footer>
 

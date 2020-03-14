@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Class template for the column :
-    var colcss = "col-md-3 p-2 bg-info border border-dark d-flex align-items-center justify-content-center";
+    var colcss = "col-md-3 p-2 bg-transparent d-flex align-items-center justify-content-center";
 
     // Class template for the picture :
     var imgCss = "card-img img-fluid img-thumbnail d-block mx-auto";
@@ -29,10 +29,9 @@
     <script src="~/Scripts/pictureCollection.js"></script>
 }
 
-@Html.ActionLink("To The Test Page", "Test")
 
 <!--One fluid container of 2 rows & 4 columns :-->
-<div class="container-fluid bg-warning p-4 d-table-cell">
+<div class="container-fluid bg-transparent p-4 d-table-cell">
     <!--First row of 4 pictures :-->
     <div class="row p-2">
         <!--1st column :-->
@@ -326,9 +325,41 @@
 @Html.Partial("~/Views/pictures/pictureDetails.cshtml")
 
 <!--Enable Pagination :-->
-@for (int page = 1; page <= ViewBag.totalPages; page++)
-{
-    <button type="button" class="btn btn-dark rounded rounded-circle" onclick="location.href='@Url.Action("pictureCollection", new { pageToDisplay = page })'">
-        @page
-    </button>
-}
+<div class="text-center">
+    @for (int page = 1; page <= ViewBag.totalPages; page++)
+    {
+        <button type="button" class="btn text-light rounded rounded-circle m-2" onclick="location.href='@Url.Action("pictureCollection", new { pageToDisplay = page })'">
+            @page
+        </button>
+    }
+</div>
+
+<button class="btn removeFocus" onclick="topFunction()" id="topButton">
+    <i class="fas fa-arrow-alt-circle-up"></i>
+</button>
+
+<script>
+
+    // Show the button when the user scrolls down 50px :
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50)
+        {
+            $("#topButton").css("display","block");
+        }
+        else
+        {
+            $("#topButton").css("display","none");
+        }
+    }
+
+    // Scrolls to the top of the document :
+    function topFunction() {
+
+        document.body.scrollTop = 0;
+
+        document.documentElement.scrollTop = 0;
+    }
+</script>

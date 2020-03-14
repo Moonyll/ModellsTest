@@ -92,29 +92,41 @@ namespace Modells.Controllers
 
             for (int index = 0; index <= 7; index++)
             {
-                var pictureUrlToLoad = (index <= indexLimit) ? pictures.ElementAt(index).pictureStandardUrl : null;
+                var pictureUrlToLoad = (index <= indexLimit) ?
+                                       pictures.ElementAt(index)
+                                               .pictureStandardUrl :
+                                       null;
 
                 // Load the picture of database at index :
 
                 if (pictureUrlToLoad != null)
                 {
                     // Picture Url :
-                    pictureElements[index, 0] = pictureControls.pictureFileDirectory + pictures.ElementAt(index).pictureStandardUrl.ToString();
-
+                    pictureElements[index, 0] = pictureControls.pictureFileDirectory +
+                                                pictures.ElementAt(index)
+                                                        .pictureStandardUrl
+                                                        .ToString();
                     // Picture Title :
-                    pictureElements[index, 1] = pictures.ElementAt(index).pictureTitle.ToString();
-
+                    pictureElements[index, 1] = pictures.ElementAt(index)
+                                                        .pictureTitle
+                                                        .ToString();
                     // Picture Alternative title :
-                    pictureElements[index, 2] = pictures.ElementAt(index).pictureAlternateTitle.ToString();
-
+                    pictureElements[index, 2] = pictures.ElementAt(index)
+                                                        .pictureAlternateTitle
+                                                        .ToString();
                     // Picture Description :
-                    pictureElements[index, 3] = pictures.ElementAt(index).pictureDescription.ToString();
-
+                    pictureElements[index, 3] = pictures.ElementAt(index)
+                                                        .pictureDescription
+                                                        .ToString();
                     // Picture Category :
-                    pictureElements[index, 4] = pictures.ElementAt(index).category.categoryName.ToString();
-
+                    pictureElements[index, 4] = pictures.ElementAt(index)
+                                                        .category
+                                                        .categoryName
+                                                        .ToString();
                     // Picture Id :
-                    pictureElements[index, 5] = pictures.ElementAt(index).pictureId.ToString();
+                    pictureElements[index, 5] = pictures.ElementAt(index)
+                                                        .pictureId
+                                                        .ToString();
                 }
 
                 else
@@ -211,7 +223,8 @@ namespace Modells.Controllers
             var uploadedPictureExtension = newPictureToUpload?.ContentType;
 
             // Check if the extension is authorized :
-            var isOutExt = (!pictureControls.pictureFileToUploadExtension.Contains(uploadedPictureExtension)) || false;
+            var isOutExt = (!pictureControls.pictureFileToUploadExtension
+                                            .Contains(uploadedPictureExtension)) || false;
 
             // Add error message if extension is not enable :
             if (isOutExt)
@@ -227,10 +240,16 @@ namespace Modells.Controllers
             if (newPictureToUpload != null && !isTooHigh && !isOutExt)
             {
                 // Picture name - Get input value by user or default filename :
-                var newPictureSourceName = (!string.IsNullOrEmpty(newPicture?.pictureStandardUrl)) ? newPicture.pictureStandardUrl
-                                                                                                   : Path.GetFileName(newPictureToUpload.FileName);
+                var newPictureSourceName = (!string.IsNullOrEmpty(newPicture?.pictureStandardUrl)) ?
+                                           newPicture?.pictureStandardUrl :
+                                           Path.GetFileName(newPictureToUpload.FileName);
+
                 // Combine directory path & picture name to make the source picture :
-                var newPictureSourcePath = Path.Combine(Server.MapPath(pictureControls.pictureFileDirectory), newPictureSourceName);
+                var newPictureSourcePath = Path.Combine
+                                           (
+                                                Server.MapPath(pictureControls.pictureFileDirectory),
+                                                newPictureSourceName
+                                           );
 
                 // Picture Source is uploaded and saved in the directory :
                 newPictureToUpload.SaveAs(newPictureSourcePath);
