@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Class templates for the picture create :
-    var formGroupCss = "form-group d-flex mx-auto justify-content-center";
+    var formGroupCss = "form-group d-flex mx-auto m-2 justify-content-center";
     var labelCss = "control-label col-4 btn recButton text-light text-center text-wrap border border-light";
     var controlLabelCss = "control-label d-flex btn recButton border border-light col-1 justify-content-center";
     var controlLabelAttr = "data-container = body data-toggle = popover data-placement = right";
@@ -17,7 +17,6 @@
 
     // Global labels & titles :
 
-    var backCol = globalLabels.BackToColl;
     var addPic = globalLabels.AddPicture;
     var resetFm = globalLabels.ResetForm;
     var previewImgTtl = globalLabels.PreviewImgMTitle;
@@ -43,9 +42,16 @@
         }
     }
 }
+@section Scripts
+{
+    <!--Add actions url for ajax calls :-->
+    <script type="text/javascript">
+    var urlPictureCreate = '@Url.Action("pictureCreate", "Pictures")';
+    </script>
 
-<!--Load scripts file :-->
-@Scripts.Render("~/Scripts/script.js");
+    <!--Load scripts file :-->
+    @Scripts.Render("~/Scripts/script.js");
+}
 
 <div class="container-fluid d-flex">
     <div class="row mx-auto align-items-center">
@@ -64,74 +70,69 @@
                 @Html.AntiForgeryToken()
 
                 <!--Diplay the picture creation form :-->
-                <form class="form-horizontal form-control">
+                <form class="form-horizontal form-control m-2">
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        <!--Input of picture standard url :-->
-                        <div class="@formGroupCss">
-                            @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
-                            <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
-                            @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete="off"} })
-                            <label for="newPictureToUpload" class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("newPictureToUpload")">
-                                <i class="far fa-image"></i>
-                            </label>
-                        </div>
+                    <!--Input of picture standard url :-->
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
+                        <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
+                        @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        <label for="newPictureToUpload" class="@controlLabelCss hovering" @controlLabelAttr data-content="@displayErrorMessage("newPictureToUpload")">
+                            <i class="far fa-image"></i>
+                        </label>
+                    </div>
 
-                        <!--Input of picture title :-->
-                        <div class="@formGroupCss">
-                            @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
-                            @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete="off"} })
-                            <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureTitle")">
-                                <i class="fas fa-bookmark"></i>
-                            </label>
-                        </div>
+                    <!--Input of picture title :-->
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
+                        @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureTitle")">
+                            <i class="fas fa-bookmark"></i>
+                        </label>
+                    </div>
 
-                        <!--Input of picture alternative title :-->
-                        <div class="@formGroupCss">
-                            @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
-                            @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete="off" } })
-                            <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureAlternateTitle")">
-                                <i class="far fa-bookmark"></i>
-                            </label>
-                        </div>
+                    <!--Input of picture alternative title :-->
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
+                        @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureAlternateTitle")">
+                            <i class="far fa-bookmark"></i>
+                        </label>
+                    </div>
 
-                        <!--Input of picture description :-->
-                        <div class="@formGroupCss">
-                            @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
-                            @Html.EditorFor(model => model.pictureDescription, new {htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)" , @autocomplete="off"}})
-                            <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureDescription")" onkeypress="">
-                                <i class="fas fa-pen"></i>
-                            </label>
-                        </div>
+                    <!--Input of picture description :-->
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
+                        @Html.EditorFor(model => model.pictureDescription, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        <label class="@controlLabelCss" @controlLabelAttr data-content="@displayErrorMessage("pictureDescription")">
+                            <i class="fas fa-pen"></i>
+                        </label>
+                    </div>
 
-                        <!--Input of picture category :-->
-                        <div class="@formGroupCss">
-                            @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
-                            @Html.DropDownList("categoryId", null, new { @class = @editCss })
-                            <label class="@controlLabelCss">
-                                <i class="fas fa-book-open"></i>
-                            </label>
-                        </div>
+                    <!--Input of picture category :-->
+                    <div class="@formGroupCss">
+                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
+                        @Html.DropDownList("categoryId", null, new { @class = @editCss })
+                        <label class="@controlLabelCss">
+                            <i class="fas fa-book-open"></i>
+                        </label>
+                    </div>
 
-                        <!--Back - Clear Submit buttons :-->
-                        <div class="@formGroupCss">
+                    <!--Back - Clear Submit buttons :-->
+                    <div class="d-flex justify-content-center m-2">
 
-                            <!--Back button :-->
-                            <button type="button" class="@btnCss offset-3" onclick="location.href='@urlToColl'" @buttonToolAttr title=@backCol>
-                                <i class="fas fa-home"></i>
-                            </button>
+                        <!--Clear button :-->
+                        <button value="Reset" class="@btnCss offset-2 resetForm" @buttonToolAttr title=@resetFm>
+                            <i class="fas fa-eraser"></i>
+                        </button>
 
-                            <!--Clear button :-->
-                            <button value="Reset" class="@btnCss offset-2 resetForm" @buttonToolAttr title=@resetFm>
-                                <i class="fas fa-eraser"></i>
-                            </button>
-
-                            <!--Submit button :-->
-                            <button type="submit" value="pictureCreate" class="@btnCss offset-2" onclick="ValidateForm()" @buttonToolAttr title=@addPic>
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+                        <!--Submit button :-->
+                        <button type="submit" value="pictureCreate" class="@btnCss offset-2" id="submitPicture" onclick="ValidateForm()" @buttonToolAttr title=@addPic>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
                 </form>
             }
         </div>

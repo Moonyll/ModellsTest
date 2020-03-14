@@ -14,7 +14,7 @@ html {
 body {
     font-family: Brie_Light;
     height: 100vh;
-    background-image: url('../Content/Images/Pictures/auto.jpg');
+    background-image: url('../Content/Images/AppPics/NightPort.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -23,7 +23,9 @@ body {
 /* Set the header */
 header {
     height: 10vh;
-    background-image: url('../Content/Images/Pictures/auto.jpg');
+    background-image: url('../Content/Images/AppPics/Shadows.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* Set the navigation bar */
@@ -116,18 +118,33 @@ i {
     width: 90%;
 }
 
+/* Set modal header */
+.modal-header {
+    border-bottom:none;
+}
+
+/* Set modal footer */
+.modal-footer {
+    border-top: none;
+}
+
 /* Set the upload picture button */
 #newPictureToUpload {
     color: blue;
     display:none;
 }
 
+/* Set modal background */
+#showPictureDetails {
+    background-image: url('../Content/Images/AppPics/Town.jpg');
+}
+
 /* Set the popover header */
 .popover-header {
     background-color: black !important;
     color: white;
-    text-align:center;
-    border:1px solid white;
+    text-align: center;
+    border: 1px solid white;
 }
 
 /* Set the popover body */
@@ -185,8 +202,23 @@ ul li {
     background-color: black !important;
 }
 
-/* Set focus effect for input form */
+/* Set input form */
 .currentInput {
     background-color: black !important;
     color: white;
+}
+
+/* Set hover effect for modal close, delete buttons */
+.closing:hover i, .delete:hover i {
+    color: red !important;
+}
+
+/* Set hover effect for modal prev, next, edit buttons */
+.greenify:hover i {
+    color: chartreuse !important;
+}
+
+/* Set hover effect for modal exif button */
+.exifsBlue:hover i {
+    color: deepskyblue !important;
 }

@@ -43,7 +43,6 @@ var integratePicture = function (event) {
     pictureReader.readAsDataURL(input.files[0]);
 };
 
-
 // Client-side validations :
 function isValid(input) {
 

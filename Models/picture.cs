@@ -30,7 +30,7 @@ namespace Modells.Models
         // Picture alternative title :
         [Required]
         [StringLength(50)]
-        [Display(Name = "Titre alternatif")]
+        [Display(Name = "Text alt.")]
         [RegularExpression(pictureControls.PatternForPictureTitles, ErrorMessage = pictureControls.ErrorForPictureTitles)]
         public string pictureAlternateTitle { get; set; }
 
@@ -84,7 +84,7 @@ namespace Modells.Models
         
         // Size
         public const int pictureFileToUploadMaxSize = 7000000;
-        public const string errorMessageForPictureOutOfSize = "La taille maximale de l'image doit être de 7 Mo.";
+        public const string ErrorMessageForPictureOutOfSize = "La taille maximale de l'image doit être de 7 Mo.";
         
         // Extension :
         public static string[] pictureFileToUploadExtension = { "image/jpg", "image/jpeg" };
@@ -92,6 +92,7 @@ namespace Modells.Models
 
         // Diretory :
         public const string pictureFileDirectory = "/Content/Images/Pictures/";
+        public const string ErrorMessageForPictureFileUnicity = "Une image ayant le même nom existe déjà.";
 
         // Patterns for original date & time regex :
         public const string OriginalDateFormatA = @"\d{2}-\d{2}-\d{4}";

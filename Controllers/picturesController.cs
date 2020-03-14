@@ -215,7 +215,7 @@ namespace Modells.Controllers
                 ModelState.AddModelError
                 (
                     "newPictureToUpload",
-                    pictureControls.errorMessageForPictureOutOfSize
+                    pictureControls.ErrorMessageForPictureOutOfSize
                 );
             }
 
@@ -251,23 +251,36 @@ namespace Modells.Controllers
                                                 newPictureSourceName
                                            );
 
-                // Picture Source is uploaded and saved in the directory :
-                newPictureToUpload.SaveAs(newPictureSourcePath);
+                // Check if file path exists :
+                if (!System.IO.File.Exists(newPictureSourcePath))
+                {
+                    // Picture Source is uploaded and saved in the directory :
+                    newPictureToUpload.SaveAs(newPictureSourcePath);
 
-                // Set relative picture path :
-                var relativePicturePath = newPictureSourcePath
-                                          .Replace
-                                          (
-                                            Server.MapPath("~/"),
-                                            "/"
-                                          )
-                                          .Replace(@"\", "/");
+                    // Set relative picture path :
+                    var relativePicturePath = newPictureSourcePath
+                                              .Replace
+                                              (
+                                                Server.MapPath("~/"),
+                                                "/"
+                                              )
+                                              .Replace(@"\", "/");
 
-                // Set a viewbag to keep & display preview picture when submit :
-                ViewBag.picturePreviewSrc = (!ModelState.IsValid) ?
-                                            relativePicturePath :
-                                            pictureGlobalLabels.DefaultPictureUrl;
-            }
+                    // Set a viewbag to keep & display preview picture when submit :
+                    ViewBag.picturePreviewSrc = (!ModelState.IsValid) ?
+                                                relativePicturePath :
+                                                pictureGlobalLabels.DefaultPictureUrl;
+                }
+
+                else
+                {
+                    ModelState.AddModelError
+                    (
+                        "newPictureToUpload",
+                        pictureControls.ErrorMessageForPictureFileUnicity
+                    );
+                }
+             }
 
             #endregion
 
