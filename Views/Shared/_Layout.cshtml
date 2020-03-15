@@ -24,14 +24,62 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
+    @{
+        var headerPictureCss = "img-fluid col-2 d-inline-block p-0 mt-0";
+    }
+
+    @functions{
+        
+        public int RandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
+        
+    }
+
 </head>
 <body>
     <!--Header :-->
-    <header class="bg-transparent border border-light">
-        Header For Modells
+    <header class="bg-transparent border border-light d-flex">
+        <img src="~/Content/Images/AppPics/CaboSanLucas.jpg" class="@headerPictureCss ml-0" alt="modells" id="toto" />
+        <img src="~/Content/Images/AppPics/SunBeams.jpg" class="@headerPictureCss" alt="modells" />
+        <img src="~/Content/Images/AppPics/SeaTempest.jpg" class="@headerPictureCss" alt="modells" />
+        <img src="~/Content/Images/AppPics/ScubaDiver.jpg" class="@headerPictureCss" alt="modells" />
+        <img src="~/Content/Images/AppPics/Recco.jpg" class="@headerPictureCss" alt="modells" />
+        <img src="~/Content/Images/AppPics/Landscape.jpg" class="@headerPictureCss" alt="modells" />
     </header>
 
-    <!--Navigation Bar :-->
+    <script type="text/javascript">
+
+        var pictureToChange = $("#toto");
+
+        var pictureIndex = 0;
+
+        var picturesLibrary =
+        [
+            "/Content/Images/AppPics/ScubaDiver.jpg",
+            "/Content/Images/AppPics/Landscape.jpg",
+            "/Content/Images/AppPics/SunBeams.jpg"
+        ];
+
+        pictureToChange.fadeTo(1000, 0.30, function changePicture () {
+
+            pictureIndex = (++pictureIndex >= picturesLibrary.length) ? 0 : pictureIndex;
+
+            pictureToChange.attr('src', picturesLibrary[pictureIndex]);
+
+            setInterval(changePicture, 10000);
+
+            pictureToChange.on('load', function () {
+
+                pictureToChange.fadeTo(500, 1);
+            });
+        });
+
+    </script>
+
+    <!--Normal Navigation Bar :-->
     <nav class="navbar-expand-lg border border-light" id="normalNavBar">
 
         <!--Application Logo :-->
@@ -53,6 +101,7 @@
         </button>
     </nav>
 
+    <!--Mini responsive navigation Bar :-->
     <nav class="navbar-expand-lg border border-light" id="responsiveNavBar">
 
         <!--Application Logo :-->
