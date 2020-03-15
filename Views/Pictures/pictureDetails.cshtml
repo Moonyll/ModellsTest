@@ -20,27 +20,33 @@
         <div class="modal-content bg-transparent">
 
             <!--Modal header :-->
-            <div class="modal-header bg-transparent justify-content-between d-flex">
+            <div class="modal-header bg-transparent align-items-center d-flex">
 
                 <!--Modal title :-->
-                <div class="modal-title ml-0 d-inline-flex @textLight" id="pictureModalLabel">
+                <div class="modal-title d-inline-flex justify-content-between @textLight" id="pictureModalLabel">
 
                     <!--Picture title :-->
-                    <div class="p-1 @textLight" id="pictureTitle">
-                        Picture title
-                    </div>
-
-                    <!--Picture category :-->
-                    <div class="p-1 @textLight" id="pictureCategory">
-                        Picture category
-                    </div>
+                    <button type="button" class="@btnDetailsCss ml-0">
+                        <i class="fas fa-bookmark"></i>
+                        <text class="p-1 @textLight" id="pictureTitle">
+                            Picture title
+                        </text>
+                    </button>
 
                     <!--Picture id :-->
                     <div class="p-1 @textLight" id="pictureId" hidden>
                         Picture id
                     </div>
-                </div>
 
+                    <!--Picture category :-->
+                    <button type="button" class="@btnDetailsCss">
+                        <i class="fas fa-book-open"></i>
+                        <text class="p-1 @textLight" id="pictureCategory">
+                            Picture category
+                        </text>
+                    </button>
+                </div>
+ 
                 <!--Close button-->
                 <button type="button" class="@btnDetailsCss closing mr-0" data-dismiss="modal">
                     <i class="fas fa-times-circle"></i>

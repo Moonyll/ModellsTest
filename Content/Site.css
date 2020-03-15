@@ -5,6 +5,31 @@
     font-weight: normal;
     src: url('../Content/Fonts/BRI293.woff');
 }
+/* Set nav bar in accordance with responsive features */
+
+/* Display mini nav */
+@media screen and (max-width: 700px) {
+    
+    #normalNavBar {
+        display: none;
+    }
+
+    #responsiveNavBar {
+        display: block;
+    }
+}
+
+/* Display normal nav */
+@media screen and (min-width: 701px) {
+    
+    #normalNavBar {
+        display: block;
+    }
+    #responsiveNavBar {
+        display: none;
+    }
+}
+
 /* Set the html page */
 html {
     height: 100vh;

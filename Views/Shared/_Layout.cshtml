@@ -32,7 +32,7 @@
     </header>
 
     <!--Navigation Bar :-->
-    <nav class="navbar-expand-lg border border-light">
+    <nav class="navbar-expand-lg border border-light" id="normalNavBar">
 
         <!--Application Logo :-->
         <img src="~/Content/Images/Logos/modells.jpg" class="btn border border-light logobrand" alt="modells" />
@@ -51,15 +51,27 @@
         <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureCreate", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
             <i class="far fa-image"></i>
         </button>
+    </nav>
 
-        <!--Search bar :-->
-        @*<form class="form-inline btn nav-item m-2 float-right" action="">
-            <input class="form-control" type="text" placeholder="Recherche">
-            <button class="btn btn-light" type="submit">
-                Recherche
-            </button>
-        </form>*@
+    <nav class="navbar-expand-lg border border-light" id="responsiveNavBar">
 
+        <!--Application Logo :-->
+        <img src="~/Content/Images/Logos/logo.jpg" class="btn border border-light logobrand" alt="modells" />
+
+        <!--Home button :-->
+        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureHome", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Accueil">
+            <i class="fas fa-home"></i>
+        </button>
+
+        <!--Collection button :-->
+        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureCollection", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Collection">
+            <i class="far fa-images"></i>
+        </button>
+
+        <!--Add picture button :-->
+        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureCreate", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
+            <i class="far fa-image"></i>
+        </button>
     </nav>
 
     <!--Main Content :-->
