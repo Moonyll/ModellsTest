@@ -20,7 +20,7 @@
         <div class="modal-content bg-transparent">
 
             <!--Modal header :-->
-            <div class="modal-header bg-transparent align-items-center d-flex">
+            <div class="modal-header bg-transparent align-items-center justify-content-between d-flex">
 
                 <!--Modal title :-->
                 <div class="modal-title d-inline-flex justify-content-between @textLight" id="pictureModalLabel">
@@ -45,74 +45,81 @@
                             Picture category
                         </text>
                     </button>
+
                 </div>
- 
+
                 <!--Close button-->
                 <button type="button" class="@btnDetailsCss closing mr-0" data-dismiss="modal">
                     <i class="fas fa-times-circle"></i>
                 </button>
             </div>
 
-            <!--Modal body :-->
-            <div class="modal-body bg-transparent d-inline-flex justify-content-center">
+                <!--Modal body :-->
+                <div class="modal-body bg-transparent d-inline-flex justify-content-center">
 
-                <!--Previous picture button :-->
-                <button type="button" class="@btnDetailsCss prev greenify">
-                    <i class="fas fa-arrow-circle-left"></i>
-                </button>
+                    <!--Previous picture button :-->
+                    <button type="button" class="@btnDetailsCss prev greenify">
+                        <i class="fas fa-arrow-circle-left"></i>
+                    </button>
 
-                <!--Display Picture :-->
-                <img src="" alt="" title="" class="@imgDispCss" />
+                    <!--Display Picture :-->
+                    <img src="" alt="" title="" class="@imgDispCss" id="pictureDisplayed" />
 
-                <!--Next picture button :-->
-                <button type="button" class="@btnDetailsCss next greenify">
-                    <i class="fas fa-arrow-circle-right"></i>
-                </button>
+                    <!--Next picture button :-->
+                    <button type="button" class="@btnDetailsCss next greenify">
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </button>
+                </div>
+
+                <!--Picture description :-->
+                <p class="text-center @textLight" id="pictureDescription">Picture description</p>
+
+                <!--Modal footer :-->
+                <div class="modal-footer justify-content-between">
+
+                    <!--Justify-content-between enables to set button position :-->
+                    <button type="button" class="@btnDetailsCss ml-0">
+
+                        <!--Picture rating value :-->
+                        <i class="far fa-heart"></i> 5
+
+                        <!--Picture views number :-->
+                        <i class="fas fa-bullseye"></i> 10
+                    </button>
+
+                    <!--Button infos :-->
+                    <button class="@btnDetailsCss mx-auto exifsBlue" @btnExifsAttr>
+                        <i class="fas fa-info-circle"></i>
+                        <text class="p-1 @textLight">
+                            Exifs
+                        </text>
+                    </button>
+
+                    <!--Button edit :-->
+                    <button type="button" class="@btnDetailsCss mr-0 editPicture greenify">
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                    <!--Button delete :-->
+                    <button type="button" class="@btnDetailsCss mr-0 editPicture delete">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+
+                    <!--Button download :-->
+                    <button type="button" class="@btnDetailsCss mr-0">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
             </div>
-
-            <!--Picture description :-->
-            <p class="text-center @textLight" id="pictureDescription">Picture description</p>
-
-            <!--Modal footer :-->
-            <div class="modal-footer justify-content-between">
-
-                <!--Justify-content-between enables to set button position :-->
-                <button type="button" class="@btnDetailsCss ml-0">
-
-                    <!--Picture rating value :-->
-                    <i class="far fa-heart"></i> 5
-
-                    <!--Picture views number :-->
-                    <i class="fas fa-bullseye"></i> 10
-                </button>
-
-                <!--Button infos :-->
-                <button class="@btnDetailsCss mx-auto exifsBlue" @btnExifsAttr>
-                    <i class="fas fa-info-circle"></i>
-                </button>
-
-                <!--Button edit :-->
-                <button type="button" class="@btnDetailsCss mr-0 editPicture greenify">
-                    <i class="fas fa-edit"></i>
-                </button>
-
-                <!--Button delete :-->
-                <button type="button" class="@btnDetailsCss mr-0 editPicture delete">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-
-                <!--Button download :-->
-                <button type="button" class="@btnDetailsCss mr-0">
-                    <i class="fas fa-download"></i>
-                </button>
-            </div>
-        </div>
     </div>
 </div>
 
 <!--Display picture exifs data :-->
 <div class="exifsData" id="popover-content" hidden>
-
+    
+    <!--Display Picture :-->
+    <img src="" alt="" title="" class="mx-auto d-block displayPicture smallPic" />
+    
     <!--A. Display main infos :-->
     <ul class="justify-content-between">
         <!--Display camera make :-->

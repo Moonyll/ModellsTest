@@ -247,3 +247,12 @@ ul li {
 .exifsBlue:hover i {
     color: deepskyblue !important;
 }
+
+/* Set small picture in exifs popover */
+.smallPic {
+    width: 70px;
+    height: 70px;
+    border: 2px solid white;
+    padding: 2px;
+    margin-bottom : 5px;
+}

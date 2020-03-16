@@ -209,6 +209,20 @@
               }
           });
       });
+
+      // Display exifs & hide some elements :
+      $(".exifsBlue").mouseover(function () {
+          $("#pictureDisplayed").css("opacity", "0");
+          $(".prev").hide();
+          $(".next").hide();
+      });
+      $(".exifsBlue").mouseleave(function () {
+          $("#pictureDisplayed").css("opacity", "1");
+          $(".prev").show();
+          $(".next").show();
+      });
+
+
       //
             // New Code here:
       //
