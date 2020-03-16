@@ -54,72 +54,72 @@
                 </button>
             </div>
 
-                <!--Modal body :-->
-                <div class="modal-body bg-transparent d-inline-flex justify-content-center">
+            <!--Modal body :-->
+            <div class="modal-body bg-transparent d-inline-flex justify-content-center">
 
-                    <!--Previous picture button :-->
-                    <button type="button" class="@btnDetailsCss prev greenify">
-                        <i class="fas fa-arrow-circle-left"></i>
-                    </button>
+                <!--Previous picture button :-->
+                <button type="button" class="@btnDetailsCss prev greenify">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </button>
 
-                    <!--Display Picture :-->
-                    <img src="" alt="" title="" class="@imgDispCss" id="pictureDisplayed" />
+                <!--Display Picture :-->
+                <img src="" alt="" title="" class="@imgDispCss" id="pictureDisplayed" />
 
-                    <!--Next picture button :-->
-                    <button type="button" class="@btnDetailsCss next greenify">
-                        <i class="fas fa-arrow-circle-right"></i>
-                    </button>
-                </div>
-
-                <!--Picture description :-->
-                <p class="text-center @textLight" id="pictureDescription">Picture description</p>
-
-                <!--Modal footer :-->
-                <div class="modal-footer justify-content-between">
-
-                    <!--Justify-content-between enables to set button position :-->
-                    <button type="button" class="@btnDetailsCss ml-0">
-
-                        <!--Picture rating value :-->
-                        <i class="far fa-heart"></i> 5
-
-                        <!--Picture views number :-->
-                        <i class="fas fa-bullseye"></i> 10
-                    </button>
-
-                    <!--Button infos :-->
-                    <button class="@btnDetailsCss mx-auto exifsBlue" @btnExifsAttr>
-                        <i class="fas fa-info-circle"></i>
-                        <text class="p-1 @textLight">
-                            Exifs
-                        </text>
-                    </button>
-
-                    <!--Button edit :-->
-                    <button type="button" class="@btnDetailsCss mr-0 editPicture greenify">
-                        <i class="fas fa-edit"></i>
-                    </button>
-
-                    <!--Button delete :-->
-                    <button type="button" class="@btnDetailsCss mr-0 editPicture delete">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-
-                    <!--Button download :-->
-                    <button type="button" class="@btnDetailsCss mr-0">
-                        <i class="fas fa-download"></i>
-                    </button>
-                </div>
+                <!--Next picture button :-->
+                <button type="button" class="@btnDetailsCss next greenify">
+                    <i class="fas fa-arrow-circle-right"></i>
+                </button>
             </div>
+
+            <!--Picture description :-->
+            <p class="text-center @textLight" id="pictureDescription">Picture description</p>
+
+            <!--Modal footer :-->
+            <div class="modal-footer justify-content-between">
+
+                <!--Justify-content-between enables to set button position :-->
+                <button type="button" class="@btnDetailsCss ml-0">
+
+                    <!--Picture rating value :-->
+                    <i class="far fa-heart"></i> 5
+
+                    <!--Picture views number :-->
+                    <i class="fas fa-bullseye"></i> 10
+                </button>
+
+                <!--Button infos :-->
+                <button class="@btnDetailsCss mx-auto exifsBlue" @btnExifsAttr>
+                    <i class="fas fa-info-circle"></i>
+                    <text class="p-1 @textLight">
+                        Exifs
+                    </text>
+                </button>
+
+                <!--Button edit :-->
+                <button type="button" class="@btnDetailsCss mr-0 editPicture greenify">
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <!--Button delete :-->
+                <button type="button" class="@btnDetailsCss mr-0 delete" data-toggle="modal" data-target="#deleteModal">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+
+                <!--Button download :-->
+                <button type="button" class="@btnDetailsCss mr-0">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
 <!--Display picture exifs data :-->
 <div class="exifsData" id="popover-content" hidden>
-    
+
     <!--Display Picture :-->
     <img src="" alt="" title="" class="mx-auto d-block displayPicture smallPic" />
-    
+
     <!--A. Display main infos :-->
     <ul class="justify-content-between">
         <!--Display camera make :-->
@@ -159,4 +159,39 @@
         <!--Display picture file size :-->
         <li class="mx-auto"><i class="fas fa-weight-hanging"></i><span id="pictureFileSize"></span></li>
     </ul>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade bg-transparent" id="deleteModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border border-light delModal">
+            <!-- Modal Header -->
+            <div class="modal-header d-block text-light text-center">
+                <p class="text-center">Supprimer cette image ?</p>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body d-block">
+                @TempData["WarningMessage"]
+                <!--Display Picture :-->
+                <img src="" alt="" title="" class="d-block displayPicture smallDelPic float-left" />
+
+                <!--Delete button-->
+                <button type="button" class="@btnDetailsCss closing deletePicture">
+                    <text class="p-1 @textLight">
+                        Supprimer
+                    </text>
+                    <i class="far fa-trash-alt"></i>
+                </button>
+
+                <!--Back button-->
+                <button type="button" class="@btnDetailsCss greenify" data-dismiss="modal">
+                    <text class="p-1 @textLight">
+                        Retour
+                    </text>
+                    <i class="fas fa-backspace"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

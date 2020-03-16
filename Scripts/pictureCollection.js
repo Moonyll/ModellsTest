@@ -162,6 +162,65 @@
                 });
             });
 
+          //
+          //// Ajax call to delete the picture :
+          $(".deletePicture").click(function () {
+
+              $.ajax({
+                  url: urlPictureDelete,
+                  type: 'GET',
+                  dataType: 'html',
+                  contentType: 'application/json; charset=utf-8',
+                  data: { id: selectedPictureId },
+
+                  // Id is found :
+                  success: function () {
+
+                      // Redirect to edition view page to update picture :
+                      console.log(urlPictureDelete);
+                      window.location.href = urlPictureDeleteOk;
+                  },
+
+                  // Id is not found :
+                  error: function () {
+
+                      // Redirect to error view page :
+                      window.location.href = urlPictureError;
+                  }
+              });
+          });
+          
+          // Ajax call to delete the picture :
+          //$("#deletePic").click(function () {
+
+          //    $.ajax({
+          //        url: urlPictureDelete,
+          //        type: 'POST',
+          //        //ajaxasync: true,
+          //        //dataType: 'html',
+          //        contentType: 'application/json; charset=utf-8',
+          //        data: { id: selectedPictureId },
+
+          //        // Id is found :
+          //        success: function () {
+
+          //            // Redirect to edition view page to update picture :
+          //            console.log(urlPictureDelConf);
+          //            alert(selectedPictureId);
+          //            //window.location.href = urlDeleteConfirmed;
+          //        },
+
+          //        // Id is not found :
+          //        error: function () {
+
+          //            // Redirect to error view page :
+          //            window.location.href = urlPictureError;
+          //            console.log(data.error);
+          //        }
+          //    });
+          //});
+          //
+
             // Display picture exifs with an ajax call :
             function displayPictureExifs() {
 
@@ -202,7 +261,7 @@
 
       // Display exifs data for the selected picture :
       $(function () {
-          $('[data-toggle="popover"]').popover({
+          $(".exifsBlue").popover({
               html: true,
               content: function () {
                   return $('#popover-content').html();
@@ -210,18 +269,38 @@
           });
       });
 
+      //// Display delete popover message :
+      //$(function () {
+      //    $(".delete").popover({
+      //        html: true,
+      //        sanitize: false, // sanitize property for security reasons !
+      //        content: function () {
+      //            return $("#popover-delete").html();
+      //        }
+      //    });
+      //});
+
       // Display exifs & hide some elements :
       $(".exifsBlue").mouseover(function () {
           $("#pictureDisplayed").css("opacity", "0");
+
           $(".prev").hide();
           $(".next").hide();
+          $("#pictureDescription").hide();
       });
       $(".exifsBlue").mouseleave(function () {
           $("#pictureDisplayed").css("opacity", "1");
           $(".prev").show();
           $(".next").show();
+          $("#pictureDescription").show();
       });
 
+      ////
+      //$("#cancelDel").click(function () {
+      //    alert("toto");
+       
+      //});
+      //
 
       //
             // New Code here:

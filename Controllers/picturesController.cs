@@ -360,35 +360,25 @@ namespace Modells.Controllers
 
         #region PICTURE REMOVING
 
-        // GET: pictures/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult pictureDelete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             picture picture = db.picture.Find(id);
-            
+
             if (picture == null)
             {
                 return HttpNotFound();
             }
-                return View(picture);
-        }
 
-        // POST: pictures/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            picture picture = db.picture.Find(id);
-            
             db.picture.Remove(picture);
-            
+
             db.SaveChanges();
-            
-            return RedirectToAction("Index");
+
+            return RedirectToAction("pictureDeleteOk");
         }
 
         #endregion
@@ -403,6 +393,12 @@ namespace Modells.Controllers
 
         // Display success view :
         public ActionResult pictureSuccess()
+        {
+            return View();
+        }
+
+        // Display picture delete ok view :
+        public ActionResult pictureDeleteOk()
         {
             return View();
         }
