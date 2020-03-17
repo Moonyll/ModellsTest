@@ -83,6 +83,7 @@ footer {
     color: white;
 }
 
+/* Card title transparent */
 .card-title {
     color: transparent;
 }
@@ -239,12 +240,12 @@ ul li {
 }
 
 /* Set hover effect for modal prev, next, edit buttons */
-.greenify:hover i, .greenify:hover text {
+.greenify:hover i, .greenify:hover text, .exifsGreen:hover i, .exifsGreen:hover text {
     color: chartreuse !important;
 }
 
 /* Set hover effect for modal exif button */
-.exifsBlue:hover i {
+.exifsBlue:hover i, .deepBlue:hover, .exifsBlue:hover text {
     color: deepskyblue !important;
 }
 
@@ -270,3 +271,49 @@ ul li {
     font-size:17px;
     font-weight:bold;
 }
+
+/* Set all exifs colors data */
+
+/* Brand */
+.exifBrand, .exifBrand > i {
+    color: ivory;
+}
+/* Model */
+.exifModel, .exifModel > i {
+    color: wheat;
+}
+/* Date */
+.exifDate, .exifDate > i {
+    color: sandybrown;
+}
+/* Open */
+.exifOpen, .exifOpen > i {
+    color: turquoise;
+}
+/* Expos */
+.exifExpos, .exifExpos > i {
+    color: lightseagreen;
+}
+/* Isos */
+.exifIsos, .exifIsos > i {
+    color: orchid;
+}
+/* Focal */
+.exifFocal, .exifFocal > i {
+    color: fuchsia;
+}
+/* Flash */
+.exifFlash, .exifFlash > i {
+    color: mediumseagreen;
+}
+/* Dims */
+.exifDims, .exifDims > i {
+    color: chartreuse;
+}
+/* Size */
+.exifSize, .exifSize > i {
+    color: deepskyblue;
+}
+
+/* ********************* */
+

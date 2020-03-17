@@ -7,10 +7,11 @@
     var textLight = "text-light";
     var imgDispCss = "img-fluid img-thumbnail d-block mx-auto displayPicture";
     var btnDetailsCss = "btn text-light removeFocus";
-    var btnExifsAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Données&nbsp;EXIFS";
-
+    var btnExifsAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Données&nbsp;Exifs";
+    var btnLegendAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Legende&nbsp;Exifs";
 }
 
+<!--*** PICTURE DATA DISPLAY ***-->
 <!--Modal to display picture details-->
 <div class="modal fade bg-transparent " id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
     <!--Centered large modal :-->
@@ -45,13 +46,36 @@
                             Picture category
                         </text>
                     </button>
-
                 </div>
 
-                <!--Close button-->
-                <button type="button" class="@btnDetailsCss closing mr-0" data-dismiss="modal">
-                    <i class="fas fa-times-circle"></i>
+                <!--Button infos :-->
+                <button class="@btnDetailsCss exifsBlue mr-0" @btnExifsAttr>
+                    <i class="fas fa-camera-retro"></i>
+                    <text class="p-1 @textLight">
+                        Exifs
+                    </text>
                 </button>
+
+                <!--Button Group :-->
+                <div class="btn-group mr-0" role="group">
+
+                    <!--Button infos :-->
+                    <button class="@btnDetailsCss exifsGreen mr-0" @btnLegendAttr>
+                        <i class="far fa-lightbulb"></i>
+                        <text class="p-1 @textLight">
+                            Aide
+                        </text>
+                    </button>
+
+                    <!--Close button-->
+                    <button type="button" class="@btnDetailsCss closing mr-0" data-dismiss="modal">
+                        <text class="p-1 @textLight">
+                            Fermer
+                        </text>
+                        <i class="fas fa-times-circle"></i>
+
+                    </button>
+                </div>
             </div>
 
             <!--Modal body :-->
@@ -72,7 +96,7 @@
             </div>
 
             <!--Picture description :-->
-            <p class="text-center @textLight" id="pictureDescription">Picture description</p>
+            <p class="text-center @textLight deepBlue" id="pictureDescription">Picture description</p>
 
             <!--Modal footer :-->
             <div class="modal-footer justify-content-between">
@@ -87,84 +111,123 @@
                     <i class="fas fa-bullseye"></i> 10
                 </button>
 
-                <!--Button infos :-->
-                <button class="@btnDetailsCss mx-auto exifsBlue" @btnExifsAttr>
-                    <i class="fas fa-info-circle"></i>
-                    <text class="p-1 @textLight">
-                        Exifs
-                    </text>
-                </button>
+                <!--Button Group :-->
+                <div class="btn-group mr-0" role="group">
 
-                <!--Button edit :-->
-                <button type="button" class="@btnDetailsCss mr-0 editPicture greenify">
-                    <i class="fas fa-edit"></i>
-                </button>
+                    <!--Button edit :-->
+                    <button type="button" class="@btnDetailsCss mr-0 editPicture greenify">
+                        <i class="fas fa-edit"></i>
+                    </button>
 
-                <!--Button delete :-->
-                <button type="button" class="@btnDetailsCss mr-0 delete" data-toggle="modal" data-target="#deleteModal">
-                    <i class="far fa-trash-alt"></i>
-                </button>
+                    <!--Button delete :-->
+                    <button type="button" class="@btnDetailsCss mr-0 delete" data-toggle="modal" data-target="#deleteModal">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
 
-                <!--Button download :-->
-                <button type="button" class="@btnDetailsCss mr-0">
-                    <i class="fas fa-download"></i>
-                </button>
+                    <!--Button download :-->
+                    <button type="button" class="@btnDetailsCss mr-0">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!--*** PICTURE EXIFS DISPLAY ***-->
 <!--Display picture exifs data :-->
 <div class="exifsData" id="popover-content" hidden>
 
     <!--Display Picture :-->
     <img src="" alt="" title="" class="mx-auto d-block displayPicture smallPic" />
 
-    <!--A. Display main infos :-->
     <ul class="justify-content-between">
+
+        <!--*** A. Display main infos ***-->
         <!--Display camera make :-->
-        <li class="mx-auto"><i class="fas fa-industry"></i><span id="pictureCameraMake"></span></li>
+        <li class="mx-auto exifBrand"><i class="fas fa-industry"></i><span id="pictureCameraMake"></span></li>
 
         <!--Display camera model :-->
-        <li class="mx-auto"><i class="fas fa-camera"></i><span id="pictureCameraModel"></span></li>
-    </ul>
-    <ul>
-        <!--Display picture date time :-->
-        <li class="mx-auto"><i class="far fa-calendar-alt"></i><span id="pictureOriginalDateTime"></span></li>
-    </ul>
+        <li class="mx-auto exifModel"><i class="fas fa-camera"></i><span id="pictureCameraModel"></span></li>
 
-    <!--B. Display picture taking infos :-->
-    <ul>
+        <!--Display picture date time :-->
+        <li class="mx-auto exifDate"><i class="far fa-calendar-alt"></i><span id="pictureOriginalDateTime"></span></li>
+
+        <!--*** B. Display picture taking infos ***-->
         <!--Display picture aperture value :-->
-        <li class="mx-auto"><i class="fab fa-chrome"></i><span id="pictureApertureValue"></span></li>
+        <li class="mx-auto exifOpen"><i class="fab fa-chrome"></i><span id="pictureApertureValue"></span></li>
 
         <!--Display picture exposure time :-->
-        <li class="mx-auto"><i class="far fa-clock"></i><span id="pictureExposureTime"></span></li>
+        <li class="mx-auto exifExpos"><i class="far fa-clock"></i><span id="pictureExposureTime"></span></li>
 
         <!--Display picture speed ratings :-->
-        <li class="mx-auto"><i class="far fa-sun"></i><span id="pictureIsoSpeedRatings"></span></li>
+        <li class="mx-auto exifIsos"><i class="far fa-sun"></i><span id="pictureIsoSpeedRatings"></span></li>
 
         <!--Display picture focal length :-->
-        <li class="mx-auto"><i class="fab fa-periscope"></i><span id="pictureFocalLength"></span></li>
+        <li class="mx-auto exifFocal"><i class="fab fa-periscope"></i><span id="pictureFocalLength"></span></li>
 
         <!--Display picture flash :-->
-        <li class="mx-auto"><span></span><i class="fas fa-bolt"></i><span id="pictureFlash"></span></li>
-    </ul>
+        <li class="mx-auto exifFlash"><span></span><i class="fas fa-bolt"></i><span id="pictureFlash"></span></li>
 
-    <!--C. Display picture file infos :-->
-    <ul>
+        <!--*** C. Display picture file infos ***-->
         <!--Display picture width x height :-->
-        <li class="mx-auto"><i class="far fa-image"></i><span id="pictureDimensions"></span></li>
+        <li class="mx-auto exifDims"><i class="far fa-image"></i><span id="pictureDimensions"></span></li>
 
         <!--Display picture file size :-->
-        <li class="mx-auto"><i class="fas fa-weight-hanging"></i><span id="pictureFileSize"></span></li>
+        <li class="mx-auto exifSize"><i class="fas fa-weight-hanging"></i><span id="pictureFileSize"></span></li>
     </ul>
 </div>
 
-<!-- The Modal -->
+<!--Display exifs help legend :-->
+<div class="exifsGreenLegend" id="popover-content-legend" hidden>
+
+    <ul class="justify-content-between">
+
+        <!--*** A. Display main infos ***-->
+        <!--Display camera make :-->
+        <li class="mx-auto exifBrand"><i class="fas fa-industry"></i>&emsp;Marque de l'appareil</li>
+
+        <!--Display camera model :-->
+        <li class="mx-auto exifModel"><i class="fas fa-camera"></i>&emsp;Modèle de l'appareil</li>
+
+        <!--Display picture date time :-->
+        <li class="mx-auto exifDate"><i class="far fa-calendar-alt"></i>&emsp;Date prise de vue</li>
+
+        <!--*** B. Display picture taking infos ***-->
+        <!--Display picture aperture value :-->
+        <li class="mx-auto exifOpen"><i class="fab fa-chrome"></i>&emsp;Ouverture</li>
+
+        <!--Display picture exposure time :-->
+        <li class="mx-auto exifExpos"><i class="far fa-clock"></i>&emsp;Temps d'exposition</li>
+
+        <!--Display picture speed ratings :-->
+        <li class="mx-auto exifIsos "><i class="far fa-sun"></i>&emsp;Sensiblité Iso</li>
+
+        <!--Display picture focal length :-->
+        <li class="mx-auto exifFocal"><i class="fab fa-periscope"></i>&emsp;Longueur focale</li>
+
+        <!--Display picture flash :-->
+        <li class="mx-auto exifFlash"><i class="fas fa-bolt"></i>&emsp;Utilisation flash</li>
+
+        <!--*** C. Display picture file infos ***-->
+        <!--Display picture width x height :-->
+        <li class="mx-auto exifDims "><i class="far fa-image"></i>&emsp;Largeur x Hauteur</li>
+
+        <!--Display picture file size :-->
+        <li class="mx-auto exifSize"><i class="fas fa-weight-hanging"></i>&emsp;Taille de l'image</li>
+    </ul>
+</div>
+
+<!--*** DELETE PICTURE FUNCTION ***-->
+<!-- Delete picture modal -->
 <div class="modal fade bg-transparent" id="deleteModal">
+
+    <!-- Small centered modal -->
     <div class="modal-dialog modal-dialog-centered">
+
+        <!-- Modal Content -->
         <div class="modal-content border border-light delModal">
+
             <!-- Modal Header -->
             <div class="modal-header d-block text-light text-center">
                 <p class="text-center">Supprimer cette image ?</p>
@@ -172,7 +235,7 @@
 
             <!-- Modal body -->
             <div class="modal-body d-block">
-                @TempData["WarningMessage"]
+
                 <!--Display Picture :-->
                 <img src="" alt="" title="" class="d-block displayPicture smallDelPic float-left" />
 

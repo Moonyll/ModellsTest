@@ -269,39 +269,33 @@
           });
       });
 
-      //// Display delete popover message :
-      //$(function () {
-      //    $(".delete").popover({
-      //        html: true,
-      //        sanitize: false, // sanitize property for security reasons !
-      //        content: function () {
-      //            return $("#popover-delete").html();
-      //        }
-      //    });
-      //});
-
-      // Display exifs & hide some elements :
-      $(".exifsBlue").mouseover(function () {
-          $("#pictureDisplayed").css("opacity", "0");
-
-          $(".prev").hide();
-          $(".next").hide();
-          $("#pictureDescription").hide();
-      });
-      $(".exifsBlue").mouseleave(function () {
-          $("#pictureDisplayed").css("opacity", "1");
-          $(".prev").show();
-          $(".next").show();
-          $("#pictureDescription").show();
+      // Display exifs help legend :
+      $(function () {
+          $(".exifsGreen").popover({
+              html: true,
+              content: function () {
+                  return $('#popover-content-legend').html();
+              }
+          });
       });
 
-      ////
-      //$("#cancelDel").click(function () {
-      //    alert("toto");
-       
-      //});
-      //
+      // Tip : sanitize: false, => sanitize property for security reasons !
 
+      //// Display exifs & hide some elements :
+      //$(".exifsBlue").mouseover(function () {
+      //    //$("#pictureDisplayed").css("visibility", "hidden");
+      //    //$(".exifsData").css("display","block");
+      //    //$(".prev").hide();
+      //    //$(".next").hide();
+      //    //$("#pictureDescription").hide();
+      //});
+      //$(".exifsBlue").mouseleave(function () {
+      //    $("#pictureDisplayed").show();
+      //    //$(".prev").show();
+      //    $(".exifsData").hide();
+      //    //$(".next").show();
+      //    //$("#pictureDescription").show();
+      //});
       //
             // New Code here:
       //
