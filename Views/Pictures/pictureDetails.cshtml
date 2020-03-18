@@ -96,7 +96,7 @@
             </div>
 
             <!--Picture description :-->
-            <p class="text-center @textLight deepBlue" id="pictureDescription">Picture description</p>
+            <p class="text-center @textLight" id="pictureDescription">Picture description</p>
 
             <!--Modal footer :-->
             <div class="modal-footer justify-content-between">
@@ -229,32 +229,36 @@
         <div class="modal-content border border-light delModal">
 
             <!-- Modal Header -->
-            <div class="modal-header d-block text-light text-center">
-                <p class="text-center">Supprimer cette image ?</p>
+            <div class="modal-header p-2 d-block text-light text-center">
+                Supprimer cette image ?
             </div>
 
             <!-- Modal body -->
             <div class="modal-body d-block">
 
                 <!--Display Picture :-->
-                <img src="" alt="" title="" class="d-block displayPicture smallDelPic float-left" />
+                <img src="" alt="" title="" class="d-block mx-auto displayPicture smallDelPic" />
 
-                <!--Delete button-->
-                <button type="button" class="@btnDetailsCss closing deletePicture">
-                    <text class="p-1 @textLight">
-                        Supprimer
-                    </text>
-                    <i class="far fa-trash-alt"></i>
-                </button>
+                <!--Button Group :-->
+                <div class="btn-group d-block" role="group">
 
-                <!--Back button-->
-                <button type="button" class="@btnDetailsCss greenify" data-dismiss="modal">
-                    <text class="p-1 @textLight">
-                        Retour
-                    </text>
-                    <i class="fas fa-backspace"></i>
-                </button>
+                    <!--Delete button-->
+                    <button type="button" class="@btnDetailsCss closing deletePicture ">
+                        <text class="p-1 @textLight">
+                            Supprimer
+                        </text>
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+
+                    <!--Back button-->
+                    <button type="button" class="@btnDetailsCss float-right greenify" data-dismiss="modal">
+                        <text class="p-1 @textLight">
+                            Retour
+                        </text>
+                        <i class="fas fa-backspace"></i>
+                    </button>
+                </div>
+                </div>
             </div>
-        </div>
     </div>
 </div>

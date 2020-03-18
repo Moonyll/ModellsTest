@@ -234,6 +234,18 @@ ul li {
     color: white;
 }
 
+/* Set form error messages */
+.errorMessage {
+    color:red !important;
+    font-size:75%;
+
+}
+
+/* Set form buttons */
+.formButton {
+    height:40px;
+}
+
 /* Set hover effect for modal close, delete buttons */
 .closing:hover i, .delete:hover i, .closing:hover text {
     color: red !important;
@@ -244,9 +256,15 @@ ul li {
     color: chartreuse !important;
 }
 
-/* Set hover effect for modal exif button */
-.exifsBlue:hover i, .deepBlue:hover, .exifsBlue:hover text {
+/* Set hover effect 1 for modal exif button */
+.exifsBlue:hover i, .exifsBlue:hover text {
     color: deepskyblue !important;
+}
+
+/* Set hover effect 2 for modal exif button */
+.exifsBlue:hover {
+    border:1px solid white;
+    background-color: rgba(127, 255, 212, .3);
 }
 
 /* Set small picture in exifs popover */
@@ -265,9 +283,13 @@ ul li {
     border: 2px solid white;
     padding: 2px;
 }
+/* Fix scroll to be blocked when close the delete modal */
+.modal {
+    overflow-y: auto;
+}
 
 /* Set picture description */
-#pictureDescription {
+p[id="pictureDescription"] {
     font-size:17px;
     font-weight:bold;
 }

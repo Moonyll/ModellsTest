@@ -87,12 +87,14 @@ namespace Modells.Models
         public const string ErrorMessageForPictureOutOfSize = "La taille maximale de l'image doit être de 7 Mo.";
         
         // Extension :
-        public static string[] pictureFileToUploadExtension = { "image/jpg", "image/jpeg" };
+        public static string[] pictureFileToUploadExtension = { "image/jpg", "image/jpeg", ".jpg",".jpeg" };
         public const string errorMessageForPictureOutOfExt = "L'image doit être au format jpg / jpeg";
 
         // Diretory :
         public const string pictureFileDirectory = "/Content/Images/Pictures/";
+        public const string tempFileDirectory = "/Content/Images/Temp/";
         public const string ErrorMessageForPictureFileUnicity = "Une image ayant le même nom existe déjà.";
+        public const string ErrorMessageForPictureEmptyUpload = "Veuillez ajouter une image.";
 
         // Patterns for original date & time regex :
         public const string OriginalDateFormatA = @"\d{2}-\d{2}-\d{4}";

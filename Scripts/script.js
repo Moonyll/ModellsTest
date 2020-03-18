@@ -9,6 +9,35 @@
         // Refresh page (relocate) :
         window.location.href = window.location.href;
     });
+
+    // Upload file required :
+    //$('#submitPicture').bind("click", function () {
+
+    //    var imgVal = $('[type=file]').val();
+
+    //    if (imgVal == '')
+    //    {
+    //        alert("empty input file");
+    //        return false;
+    //    }
+
+    //    var label = $("label[for='newPictureToUpload']");
+
+    //    console.log(label);
+
+    //});
+
+
+    // Enable the popover elements in the view :
+    $(function() {
+        $('[data-toggle="popover"]').popover();
+    });
+
+    $('#submitPicture').click(function () {
+
+        $('[data-toggle="popover"]').popover('toggle');
+
+    });
 });
 
 var integratePicture = function (event) {
@@ -54,9 +83,6 @@ function isValid(input) {
     var removeBlank = inputValue.trim();
     var removeBlankLength = removeBlank.length;
 
-    // Tests in console :
-    console.log(removeBlank,removeBlankLength);
-
     // Input label entity :
     var inputEntity = input.name;
 
@@ -93,13 +119,13 @@ function clearCss(input) {
 
 }
 
-// Enable the popover elements in the view :
-$(function () {
-    $('[data-toggle="popover"]').popover();
-})
+//// Enable the popover elements in the view :
+//$(function () {
+//    $('[data-toggle="popover"]').popover();
+//})
 
-$(function ValidateForm() {
+//$(function ValidateForm() {
 
-    $('[data-toggle="popover"]').popover('toggle');
+//    $('[data-toggle="popover"]').popover('toggle');
 
-})
+//})

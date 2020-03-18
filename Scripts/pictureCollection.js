@@ -284,17 +284,10 @@
       //// Display exifs & hide some elements :
       //$(".exifsBlue").mouseover(function () {
       //    //$("#pictureDisplayed").css("visibility", "hidden");
-      //    //$(".exifsData").css("display","block");
-      //    //$(".prev").hide();
-      //    //$(".next").hide();
-      //    //$("#pictureDescription").hide();
+     
       //});
       //$(".exifsBlue").mouseleave(function () {
-      //    $("#pictureDisplayed").show();
-      //    //$(".prev").show();
-      //    $(".exifsData").hide();
-      //    //$(".next").show();
-      //    //$("#pictureDescription").show();
+ 
       //});
       //
             // New Code here:

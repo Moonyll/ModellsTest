@@ -195,18 +195,52 @@ namespace Modells.Controllers
         HttpPostedFileBase newPictureToUpload
         )
         {
-            #region Generate a dropdownlist
+            #region DROPDOWNLIST
 
             Selection();
 
-            #endregion
+            #endregion DROPDOWNLIST
 
-            #region Save picture in the directory
+            #region CHECK PICTURE & CREATE A TEMP SAVE
 
+            // Initialise the temp picture file :
+            FileInfo tempPictureFile = null;
+
+            // Picture is already in temp directory ?
+            if (newPictureToUpload == null)
+            {
+                // Check the temp directory :
+                DirectoryInfo tempDirectory = new DirectoryInfo
+                                              (
+                                                Server.MapPath(pictureControls.tempFileDirectory)
+                                              );
+                
+                // Get the picture in temp directory :
+                tempPictureFile = tempDirectory.GetFiles()
+                                                   .ToList()
+                                                   .SingleOrDefault();
+            }
+
+            if (newPictureToUpload == null && tempPictureFile == null)
+            {
+            
+                ModelState.AddModelError
+                (
+                    "newPictureToUpload",
+                    pictureControls.ErrorMessageForPictureEmptyUpload
+                );
+
+            }
+
+
+            var newPictureSourcePath = string.Empty;
+
+            var newPictureTempPath = string.Empty;
+            
             // Get size in octets of uploaded picture :
-            var uploadedPictureLength = newPictureToUpload?.ContentLength;
+            var uploadedPictureLength = newPictureToUpload?.ContentLength ?? tempPictureFile?.Length;
 
-            // Check if the size is correct with the limit:
+            // 1° Check if the size is correct with the limit:
             var isTooHigh = (uploadedPictureLength >= pictureControls.pictureFileToUploadMaxSize) || false;
 
             // Add error message if size is over limitations :
@@ -220,14 +254,30 @@ namespace Modells.Controllers
             }
 
             // Get extension of uploaded picture :
-            var uploadedPictureExtension = newPictureToUpload?.ContentType;
+            var uploadedPictureExtension = newPictureToUpload?.ContentType ?? tempPictureFile?.Extension;
 
-            // Check if the extension is authorized :
+            // 2° Check if the extension is authorized :
+            
+            // 2-1 Check file extension :
             var isOutExt = (!pictureControls.pictureFileToUploadExtension
                                             .Contains(uploadedPictureExtension)) || false;
 
-            // Add error message if extension is not enable :
-            if (isOutExt)
+            // 2-2 Check input extension :
+            var inputName = newPicture?.pictureStandardUrl;
+            
+            var inputExt = Path.GetExtension(inputName);
+
+            var inputExtIsOut = false;
+
+            if(inputExt != pictureControls.pictureFileToUploadExtension[2] || inputExt != pictureControls.pictureFileToUploadExtension[3])
+            {
+                inputExtIsOut = true;
+            }
+
+            var extensionNotValid = isOutExt || inputExtIsOut;
+
+            // Add error message if extension is not authorized :
+            if (extensionNotValid)
             {
                 ModelState.AddModelError
                 (
@@ -236,67 +286,106 @@ namespace Modells.Controllers
                 );
             }
 
-            // Save uploaded picture if all limitations are ok :
-            if (newPictureToUpload != null && !isTooHigh && !isOutExt)
+            // 3° Picture name - Get input value by user or default filename :
+            var nameFromInput = newPicture?.pictureStandardUrl;
+            
+            var nameFromUpload = Path.GetFileName(newPictureToUpload?.FileName);
+            
+            var nameFromTemp = Path.GetFileName(tempPictureFile?.Name);
+
+            var newPictureSourceName = string.Empty;
+
+            if (!extensionNotValid)
             {
-                // Picture name - Get input value by user or default filename :
-                var newPictureSourceName = (!string.IsNullOrEmpty(newPicture?.pictureStandardUrl)) ?
-                                           newPicture?.pictureStandardUrl :
-                                           Path.GetFileName(newPictureToUpload.FileName);
 
-                // Combine directory path & picture name to make the source picture :
-                var newPictureSourcePath = Path.Combine
-                                           (
-                                                Server.MapPath(pictureControls.pictureFileDirectory),
-                                                newPictureSourceName
-                                           );
+                newPictureSourceName = (!string.IsNullOrEmpty(nameFromInput)) ?
+                                       nameFromInput :
+                                       (
+                                            (!string.IsNullOrEmpty(nameFromUpload)) ?
+                                            nameFromUpload :
+                                            nameFromTemp
+                                       );
+            }
 
-                // Check if file path exists :
-                if (!System.IO.File.Exists(newPictureSourcePath))
-                {
-                    // Picture Source is uploaded and saved in the directory :
-                    newPictureToUpload.SaveAs(newPictureSourcePath);
+            // 4° Combine directory path & picture name to make the temp picture :
+            if (!string.IsNullOrEmpty(newPictureSourceName))
+            {
+                newPictureTempPath = Path.Combine
+                                               (
+                                                    Server.MapPath(pictureControls.tempFileDirectory),
+                                                    newPictureSourceName
+                                               );
 
-                    // Set relative picture path :
-                    var relativePicturePath = newPictureSourcePath
-                                              .Replace
-                                              (
-                                                Server.MapPath("~/"),
-                                                "/"
-                                              )
-                                              .Replace(@"\", "/");
 
-                    // Set a viewbag to keep & display preview picture when submit :
-                    ViewBag.picturePreviewSrc = (!ModelState.IsValid) ?
-                                                relativePicturePath :
-                                                pictureGlobalLabels.DefaultPictureUrl;
-                }
+                // 5° Picture Temp is uploaded and saved in the temp directory :
+                newPictureToUpload?.SaveAs(newPictureTempPath);
+                
+                tempPictureFile?.MoveTo(newPictureTempPath);
 
-                else
-                {
-                    ModelState.AddModelError
-                    (
-                        "newPictureToUpload",
-                        pictureControls.ErrorMessageForPictureFileUnicity
-                    );
-                }
-             }
+            }
 
-            #endregion
+            // 6° Set relative picture path :
+            var relativePicturePath = newPictureTempPath
+                                      .Replace
+                                      (
+                                        Server.MapPath("~/"),
+                                        "/"
+                                      )
+                                      .Replace(@"\", "/");
 
-            #region Save picture in the database
+            // 7° Set a viewbag to keep & display preview picture when submit :
+            ViewBag.picturePreviewSrc = (!ModelState.IsValid) ?
+                                        relativePicturePath :
+                                        pictureGlobalLabels.DefaultPictureUrl;
 
-            // Add & Save picture entity to database :
+            // 8° Combine directory path & picture name to make the source picture :
+            if (!string.IsNullOrEmpty(newPictureSourceName))
+            {
+                newPictureSourcePath = Path.Combine
+                                       (
+                                            Server.MapPath(pictureControls.pictureFileDirectory),
+                                            newPictureSourceName
+                                       );
+            }
+            
+            // 9° Check if source picture already exists:
+            if (System.IO.File.Exists(newPictureSourcePath))
+            {
+                ModelState.AddModelError
+                (
+                    "newPictureToUpload",
+                    pictureControls.ErrorMessageForPictureFileUnicity
+                );
+            }
+
+            #endregion CHECK PICTURE & CREATE A TEMP SAVE
+
+            #region SAVE PICTURE IN DIRECTORY & INFOS IN DATABASE
+
             if (ModelState.IsValid)
             {
+                // Picture Source is uploaded and saved in the directory :
+                newPictureToUpload?.SaveAs(newPictureSourcePath);
+
+                tempPictureFile?.CopyTo(newPictureSourcePath);
+
+                // Picture Temp is removed from the temp directory :
+                if (System.IO.File.Exists(newPictureTempPath))
+                {
+                    System.IO.File.Delete(newPictureTempPath);
+                }
+
+                // Add picture data properties in database :
                 db.picture.Add(newPicture);
 
+                // Save picture creation :
                 db.SaveChanges();
 
+                // Redirect to success page :
                 return RedirectToAction("pictureSuccess");
             }
 
-            #endregion
+            #endregion SAVE PICTURE IN DIRECTORY & INFOS IN DATABASE
 
             return View(newPicture);
         }
