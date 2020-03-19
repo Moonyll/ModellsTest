@@ -223,8 +223,30 @@ ul li {
     color: black !important;
 }
 
+/* Set hover effect for add button menu */
+.adding:hover, #addPic:hover {
+    background-color: rgba(102, 205, 170, .3) !important;
+    border-color: chartreuse !important;
+}
+
+/* Set hover effect for add button menu */
+.adding:hover i, .adding:hover text {
+    color: chartreuse !important;
+}
+
+/* Set hover effect for add button menu */
+.removing:hover {
+    background-color: rgba(0, 206, 209, .3) !important;
+    border-color: darkturquoise !important;
+}
+
+/* Set hover effect for add button menu */
+.removing:hover i {
+    color: darkturquoise !important;
+}
+
 /* Set recurrent buttons */
-.recButton, .delModal {
+.recButton, .delModal, #addPic {
     background-color: black !important;
 }
 
@@ -248,18 +270,19 @@ ul li {
     border-color: red !important;
 }
 
-/* Set form error messages */
+/* Set hidden form error messages */
 .hiddenErrorMessage {
     visibility:hidden;
-    color: orange !important;
+    color: ivory !important;
     font-size: 75%;
     border-color: red !important;
     background-color: rgba(139, 0, 0, .6) !important;
 }
 
+/* Set visible form error messages */
 .visibleErrorMessage {
     visibility: visible;
-    color: orange !important;
+    color: ivory !important;
     font-size: 75%;
     border-color: red !important;
     background-color: rgba(139, 0, 0, .6) !important;
@@ -362,4 +385,14 @@ p[id="pictureDescription"] {
 }
 
 /* ********************* */
+
+/* Set bottom border */
+.lineHB {
+    border-bottom: 5px solid white;
+}
+
+/* Set top border */
+.lineHT {
+    border-top: 5px solid white;
+}
 

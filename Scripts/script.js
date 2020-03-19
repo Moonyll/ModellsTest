@@ -19,6 +19,11 @@
 
         $('[data-toggle="popover"]').popover('toggle');
     });
+
+    $('#addPic').click(function () {
+
+        $('#newPictureToUpload').click(); 
+    });
 });
 
 var integratePicture = function (event) {
