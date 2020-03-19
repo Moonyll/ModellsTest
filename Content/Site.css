@@ -230,20 +230,44 @@ ul li {
 
 /* Set input form */
 .currentInput {
-    background-color: black !important;
     color: white;
+    background-color: black !important;
+}
+
+/* Set input valid form */
+.validInput {
+    color: chartreuse !important;
+    border-color:chartreuse !important;
+    background-color: rgba(102, 205, 170, .3) !important;
+}
+
+/* Set input invalid form */
+.invalidInput {
+    color: red !important;
+    background-color: black !important;
+    border-color: red !important;
 }
 
 /* Set form error messages */
-.errorMessage {
-    color:red !important;
-    font-size:75%;
+.hiddenErrorMessage {
+    visibility:hidden;
+    color: orange !important;
+    font-size: 75%;
+    border-color: red !important;
+    background-color: rgba(139, 0, 0, .6) !important;
+}
 
+.visibleErrorMessage {
+    visibility: visible;
+    color: orange !important;
+    font-size: 75%;
+    border-color: red !important;
+    background-color: rgba(139, 0, 0, .6) !important;
 }
 
 /* Set form buttons */
 .formButton {
-    height:40px;
+    height: 40px;
 }
 
 /* Set hover effect for modal close, delete buttons */

@@ -10,24 +10,6 @@
         window.location.href = window.location.href;
     });
 
-    // Upload file required :
-    //$('#submitPicture').bind("click", function () {
-
-    //    var imgVal = $('[type=file]').val();
-
-    //    if (imgVal == '')
-    //    {
-    //        alert("empty input file");
-    //        return false;
-    //    }
-
-    //    var label = $("label[for='newPictureToUpload']");
-
-    //    console.log(label);
-
-    //});
-
-
     // Enable the popover elements in the view :
     $(function() {
         $('[data-toggle="popover"]').popover();
@@ -36,7 +18,6 @@
     $('#submitPicture').click(function () {
 
         $('[data-toggle="popover"]').popover('toggle');
-
     });
 });
 
@@ -94,12 +75,25 @@ function isValid(input) {
     // Result from the test of input value with pattern :
     var inputControl = inputPattern.test(inputValue);
 
+    // Check extenions value for picture file name :
+    var inputExtension = inputValue.endsWith('.jpg') || inputValue.endsWith('.jpeg');
+
+    inputControl = (inputEntity == 'pictureStandardUrl') ? (inputControl && inputExtension) : inputControl;
+
+    // Display validations :
     if (inputControl && inputLength > 2 && removeBlankLength!=0) {
         $(input).addClass('is-valid');
-        $(input).next('.btn').children().css('color', 'silver');
+        $(input).removeClass('currentInput');
+        $(input).addClass('validInput');
+        $(input).parent().next('.col-11').removeClass('visibleErrorMessage');
+        $(input).parent().next('.col-11').addClass('hiddenErrorMessage');
+
+        console.log($(input).parent().next('.col-11'));
     }
     else if (!inputControl && inputLength > 2){
         $(input).addClass('is-invalid');
+        $(input).removeClass('currentInput');
+        $(input).addClass('invalidInput');
         $(input).prev('label').attr({ 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': 'Autorisés [ . - _ ] seulement' });
         $(input).prev('label').tooltip('show');
     }
@@ -114,18 +108,10 @@ function clearCss(input) {
     }
     $(input).removeClass('is-valid');
     $(input).removeClass('is-invalid');
+    $(input).removeClass('validInput');
+    $(input).removeClass('invalidInput');
+    $(input).addClass('currentInput');
     $(input).prev('label').tooltip('hide');
     $(input).next('[data-toggle="popover"]').popover('hide');
 
 }
-
-//// Enable the popover elements in the view :
-//$(function () {
-//    $('[data-toggle="popover"]').popover();
-//})
-
-//$(function ValidateForm() {
-
-//    $('[data-toggle="popover"]').popover('toggle');
-
-//})

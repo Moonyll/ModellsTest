@@ -9,11 +9,13 @@
     var formGroupCss = "form-group d-flex mx-auto justify-content-center mb-0";
     var labelCss = "control-label col-4 btn recButton text-light text-center text-wrap border border-light";
     var controlLabelCss = "control-label d-flex btn recButton border border-light col-1 justify-content-center";
-    //var controlLabelAttr = "data-container = body data-toggle = popover data-placement = right";
     var buttonToolAttr = "data-toggle = tooltip data-placement = bottom";
     var editCss = "form-control col-6 text-light border border-light was-validated currentInput";
     var btnCss = "d-flex btn recButton border border-light col-sm-6 col-md-1 col-lg-1 justify-content-center hovering";
     var previewCss = "col-sm-12 col-md-4 col-lg-4 border border-danger";
+
+    // Class templates for error message display :
+    var errorCss = "control-label col-11 btn recButton d-flex mx-auto mb text-center mb-3 text-wrap";
 
     // Global labels & titles :
 
@@ -30,7 +32,7 @@
 
     @functions
     {
-        // Display error messages for each property in a popover :
+        // Display error messages for each property :
         string displayErrorMessage(string pictureItem)
         {
             var modelStateErrors = string.Join(" - ", ViewData.ModelState
@@ -41,6 +43,18 @@
                 .ToList());
 
             return modelStateErrors;
+        }
+
+        // Display error message after submitting form :
+        string displayErrorCss(string pictureError)
+        {
+            string showError = "hiddenErrorMessage";
+            
+            if (IsPost)
+            {
+                showError = (string.IsNullOrEmpty(pictureError)) ? "hiddenErrorMessage" : "visibleErrorMessage";
+            }
+                return showError;
         }
     }
 }
@@ -85,7 +99,7 @@
                         <i class="far fa-image"></i>
                     </label>
                 </div>
-                <div class="control-label col-11 btn recButton d-flex mx-auto text-center mb-3 text-wrap border border-light errorMessage">
+                <div class="@errorCss + @displayErrorCss(@displayErrorMessage("newPictureToUpload"))">
                 !   @displayErrorMessage("newPictureToUpload")
                 </div>
 
@@ -97,7 +111,7 @@
                         <i class="fas fa-bookmark"></i>
                     </label>
                 </div>
-                <div class="control-label col-11 btn recButton d-flex mx-auto mb text-center mb-3 text-wrap border border-light errorMessage">
+                <div class="@errorCss + @displayErrorCss(@displayErrorMessage("pictureTitle"))">
                 !   @displayErrorMessage("pictureTitle")
                 </div>
 
@@ -109,7 +123,7 @@
                         <i class="far fa-bookmark"></i>
                     </label>
                 </div>
-                <div class="control-label col-11 btn recButton d-flex mx-auto text-center mb-3 text-wrap border border-light errorMessage">
+                <div class="@errorCss @displayErrorCss(@displayErrorMessage("pictureAlternateTitle"))">
                  !   @displayErrorMessage("pictureAlternateTitle")
                 </div>
                 <!--Input of picture description :-->
@@ -120,7 +134,7 @@
                         <i class="fas fa-pen"></i>
                     </label>
                 </div>
-                <div class="control-label col-11 btn recButton d-flex mx-auto text-center mb-3 text-wrap border border-light errorMessage">
+                <div class="@errorCss + @displayErrorCss(@displayErrorMessage("pictureDescription"))">
                 !   @displayErrorMessage("pictureDescription")
                 </div>
 

@@ -269,7 +269,7 @@ namespace Modells.Controllers
 
             var inputExtIsOut = false;
 
-            if(inputExt != pictureControls.pictureFileToUploadExtension[2] || inputExt != pictureControls.pictureFileToUploadExtension[3])
+            if(inputExt != pictureControls.pictureFileToUploadExtension[2] && inputExt != pictureControls.pictureFileToUploadExtension[3])
             {
                 inputExtIsOut = true;
             }
