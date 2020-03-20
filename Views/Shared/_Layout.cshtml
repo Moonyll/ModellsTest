@@ -28,8 +28,6 @@
         var headerPictureCss = "img-fluid col-2 d-inline-block p-0 mt-0";
     }
 
-
-
 </head>
 <body>
     <!--Header :-->
@@ -83,12 +81,12 @@
         </button>
 
         <!--Collection button :-->
-        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureCollection", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Collection">
+        <button type="button" class="btn border border-light nav-item m-2 removing" onclick="location.href='@Url.Action("pictureCollection", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Collection">
             <i class="far fa-images"></i>
         </button>
 
         <!--Add picture button :-->
-        <button type="button" class="btn border border-light nav-item m-2 hovering" onclick="location.href='@Url.Action("pictureCreate", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
+        <button type="button" class="btn border border-light nav-item m-2 adding" onclick="location.href='@Url.Action("pictureCreate", "Pictures")'" data-toggle="tooltip" data-placement="bottom" title="Ajouter image">
             <i class="far fa-image"></i>
         </button>
     </nav>

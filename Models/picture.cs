@@ -185,6 +185,8 @@ namespace Modells.Models
 
         public const string AddPicture = "Ajouter image";
 
+        public const string UpPicture = "Valider";
+
         public const string BackToColl = "Retour collection";
 
         public const string ResetForm = "Réinitialiser";
