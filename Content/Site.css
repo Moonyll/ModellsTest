@@ -386,13 +386,53 @@ p[id="pictureDescription"] {
 
 /* ********************* */
 
-/* Set bottom border */
-.lineHB {
-    border-bottom: 5px solid white;
+/* Set special border line */
+.specialPictureBorderLine {
+    
+    /* Draw the image with */
+    background-image: linear-gradient(crimson, coral),
+                      linear-gradient(coral, darkorchid),
+                      linear-gradient(darkorchid, deepskyblue),
+                      linear-gradient(mediumpurple, darkorchid),
+                      linear-gradient(transparent,transparent);
+    
+    background-repeat: no-repeat;
+
+    /* Width Height */
+    background-size: 5px 50%,
+                     50% 5px,
+                     5px 50%,
+                     50% 5px,
+                     calc(100% - 10px) calc(100% - 10px);
+    
+    /* Position */
+    background-position: left bottom,
+                         left bottom,
+                         right top,
+                         right top, 5px 5px;
+    
+    /* Image Width Height */
+    height: auto;
+    width: 100%;
+
+    border-top :1px solid mediumpurple;
+    border-bottom:1px solid darkorchid;
+    border-left:1px solid crimson;
+    border-right:1px solid deepskyblue;
 }
 
-/* Set top border */
-.lineHT {
-    border-top: 5px solid white;
+/* Set special border line */
+.specialFormBorderLine {
+    border:3px solid white;
+    border-radius: 0.50rem;
 }
+
+/* Set special border line */
+.previewTitle {
+    /*position:relative;
+    top:0;
+    z-index:5;*/
+
+}
+
 

@@ -232,7 +232,6 @@ namespace Modells.Controllers
 
             }
 
-
             var newPictureSourcePath = string.Empty;
 
             var newPictureTempPath = string.Empty;
@@ -269,7 +268,12 @@ namespace Modells.Controllers
 
             var inputExtIsOut = false;
 
-            if(inputExt != pictureControls.pictureFileToUploadExtension[2] && inputExt != pictureControls.pictureFileToUploadExtension[3])
+            if
+            (
+                inputExt != pictureControls.pictureFileToUploadExtension[2]
+                    &&
+                inputExt != pictureControls.pictureFileToUploadExtension[3]
+            )
             {
                 inputExtIsOut = true;
             }
@@ -311,11 +315,10 @@ namespace Modells.Controllers
             if (!string.IsNullOrEmpty(newPictureSourceName))
             {
                 newPictureTempPath = Path.Combine
-                                               (
-                                                    Server.MapPath(pictureControls.tempFileDirectory),
-                                                    newPictureSourceName
-                                               );
-
+                                         (
+                                              Server.MapPath(pictureControls.tempFileDirectory),
+                                              newPictureSourceName
+                                         );
 
                 // 5° Picture Temp is uploaded and saved in the temp directory :
                 newPictureToUpload?.SaveAs(newPictureTempPath);
@@ -342,10 +345,10 @@ namespace Modells.Controllers
             if (!string.IsNullOrEmpty(newPictureSourceName))
             {
                 newPictureSourcePath = Path.Combine
-                                       (
-                                            Server.MapPath(pictureControls.pictureFileDirectory),
-                                            newPictureSourceName
-                                       );
+                                           (
+                                                Server.MapPath(pictureControls.pictureFileDirectory),
+                                                newPictureSourceName
+                                           );
             }
             
             // 9° Check if source picture already exists:
@@ -369,10 +372,19 @@ namespace Modells.Controllers
 
                 tempPictureFile?.CopyTo(newPictureSourcePath);
 
-                // Picture Temp is removed from the temp directory :
-                if (System.IO.File.Exists(newPictureTempPath))
+                // Check the temp directory :
+                var tempDirToCheck = Server.MapPath(pictureControls.tempFileDirectory);
+                
+                // Pictures Temp are removed from the temp directory :
+                var tempFilesToClean = System.IO.Directory.GetFiles(tempDirToCheck);
+
+                // Temp directory is not empty :
+                if (tempFilesToClean.Length > 0)
                 {
-                    System.IO.File.Delete(newPictureTempPath);
+                    foreach (string fileToRemove in tempFilesToClean)
+                    {
+                        System.IO.File.Delete(fileToRemove);
+                    }
                 }
 
                 // Add picture data properties in database :
