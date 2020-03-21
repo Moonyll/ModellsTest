@@ -126,3 +126,24 @@ function clearCss(input) {
     $(input).next('[data-toggle="popover"]').popover('hide');
 
 }
+
+// Show the button when the user scrolls down 50px :
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        $("#topButton").css("display", "block");
+    }
+    else {
+        $("#topButton").css("display", "none");
+    }
+}
+
+// Scrolls to the top of the document :
+function topFunction() {
+
+    document.body.scrollTop = 0;
+
+    document.documentElement.scrollTop = 0;
+}

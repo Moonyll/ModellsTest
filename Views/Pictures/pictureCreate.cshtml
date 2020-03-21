@@ -11,10 +11,10 @@
     var controlLabelCss = "control-label d-flex btn recButton border border-light col-2 justify-content-center align-items-center";
     var buttonToolAttr = "data-toggle = tooltip data-placement = bottom";
     var editCss = "form-control col-5 text-light border border-light was-validated currentInput";
-    
+
     var btnAddCss = "d-flex btn recButton border border-light col-sm-6 col-md-2 col-lg-2 justify-content-center " +
                     "adding offset-md-1 offset-lg-1 formButton";
-    
+
     var btnRemCss = "d-flex btn recButton border border-light col-sm-6 col-md-2 col-lg-2 justify-content-center " +
                     "removing offset-md-2 offset-lg-2 resetForm formButton";
 
@@ -30,6 +30,7 @@
     // Global labels & titles :
 
     var addPic = globalLabels.AddPicture;
+    var uploadPic = globalLabels.UpLoad;
     var resetFm = globalLabels.ResetForm;
     var previewImgTtl = globalLabels.PreviewImgMTitle;
     var previewImgAlt = globalLabels.PreviewImgATitle;
@@ -93,7 +94,7 @@
         <div class="@formCss">
 
             <!--Button to add a picture :-->
-            <button class="@addBtnCss" id="addPic">
+            <button class="@addBtnCss" id="addPic" title="@uploadPic">
                 <i class="far fa-image"></i>
                 <text class="p-2 text-light">
                     Ajouter une image
@@ -114,7 +115,7 @@
                         @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
                         <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
                         @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
-                        <label for="newPictureToUpload" class="@controlLabelCss adding">
+                        <label for="newPictureToUpload" class="@controlLabelCss adding" title="@uploadPic">
                             <i class="fas fa-upload"></i>
                         </label>
                     </div>
@@ -193,3 +194,8 @@
         </div>
     </div>
 </div>
+
+<!--Top button :-->
+<button class="btn removeFocus" onclick="topFunction()" id="topButton">
+    <i class="fas fa-arrow-alt-circle-up"></i>
+</button>

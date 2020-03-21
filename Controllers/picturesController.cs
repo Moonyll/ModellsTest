@@ -29,19 +29,7 @@ namespace Modells.Controllers
 
         #region PICTURE COLLECTION
 
-            /// <summary>
-            /// List of pictures.
-            /// </summary>
-            /// <returns></returns>
-            public ActionResult Index()
-        {
-            // Picture list :
-            var picture = db.picture.Include(p => p.category);
-
-            return View(picture.ToList());
-        }
-
-        /// <summary>
+         /// <summary>
         /// Pictures list with pagination.
         /// </summary>
         /// <param name="pageToDisplay"></param>
@@ -406,7 +394,11 @@ namespace Modells.Controllers
 
         #region PICTURE EDITION
 
-        // GET: pictures/Edit/5
+        /// <summary>
+        /// Get picture to edit.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult pictureEdit(int? id)
         {
@@ -424,6 +416,11 @@ namespace Modells.Controllers
                 return View(picture);
         }
 
+        /// <summary>
+        /// Post edit picture.
+        /// </summary>
+        /// <param name="updatePicture"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult pictureEdit
@@ -462,6 +459,11 @@ namespace Modells.Controllers
 
         #region PICTURE REMOVING
 
+        /// <summary>
+        /// Delete picture.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult pictureDelete(int? id)
         {
             if (id == null)
@@ -515,6 +517,10 @@ namespace Modells.Controllers
 
         #region PROTECTION
 
+        /// <summary>
+        /// Protect data.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -547,19 +553,21 @@ namespace Modells.Controllers
             {
 
                 // Retrieve directories of picture file properties :
-                var pictureDirectories = ImageMetadataReader.ReadMetadata(pathPictureFile).ToList();
-
-            
+                var pictureDirectories = ImageMetadataReader.ReadMetadata(pathPictureFile)
+                                                            .ToList();
                 // 1° Read directories metadata files :
 
                 // Read "Exif IFD0" directory file :
-                var subIfd0Directory = pictureDirectories.OfType<ExifIfd0Directory>().FirstOrDefault();
+                var subIfd0Directory = pictureDirectories.OfType<ExifIfd0Directory>()
+                                                         .FirstOrDefault();
 
                 // Read "Exif SubIFD" directory file :
-                var subIfdDirectory = pictureDirectories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
+                var subIfdDirectory = pictureDirectories.OfType<ExifSubIfdDirectory>()
+                                                        .FirstOrDefault();
 
                 // Read "MetadataDirectory" directory file :
-                var subMetadataDirectory = pictureDirectories.OfType<FileMetadataDirectory>().FirstOrDefault();
+                var subMetadataDirectory = pictureDirectories.OfType<FileMetadataDirectory>()
+                                                             .FirstOrDefault();
 
                 // 2° Get Exifs data from read file :
 
@@ -572,15 +580,18 @@ namespace Modells.Controllers
                 // Get original date time :
                 var datetimeString = GetExifData(subIfdDirectory, ExifDirectoryBase.TagDateTimeOriginal);
 
-                var picutreDateTimeValues = (!string.IsNullOrEmpty(datetimeString)) ? GetDateTimeValues(datetimeString)
-                                                                                    : new string[]
-                                                                                      {
-                                                                                            pictureExifMetaData.EmptyValue,
-                                                                                            pictureExifMetaData.EmptyValue
-                                                                                      };
+                var picutreDateTimeValues = (!string.IsNullOrEmpty(datetimeString)) ?
+                                            GetDateTimeValues(datetimeString) :
+                                            new string[]
+                                            {
+                                                  pictureExifMetaData.EmptyValue,
+                                                  pictureExifMetaData.EmptyValue
+                                            };
 
-                pictureExifs.pictureOriginalDateTime = pictureExifMetaData.SpaceTabulation + picutreDateTimeValues[0] + pictureExifMetaData.SpaceTabulation + picutreDateTimeValues[1];
-
+                pictureExifs.pictureOriginalDateTime = pictureExifMetaData.SpaceTabulation +
+                                                       picutreDateTimeValues[0] +
+                                                       pictureExifMetaData.SpaceTabulation +
+                                                       picutreDateTimeValues[1];
                 // Get aperture value :
                 pictureExifs.pictureApertureValue = GetExifData(subIfdDirectory, ExifDirectoryBase.TagAperture);
 
@@ -591,8 +602,9 @@ namespace Modells.Controllers
 
                 var isoSpeedValues = GetExifData(subIfdDirectory, ExifDirectoryBase.TagIsoEquivalent);
                 
-                pictureExifs.pictureIsoSpeedRatings = (isoSpeedValues != pictureExifMetaData.TabEmpty) ? isoSpeedValues + pictureExifMetaData.ISO
-                                                                                                       : isoSpeedValues;
+                pictureExifs.pictureIsoSpeedRatings = (isoSpeedValues != pictureExifMetaData.TabEmpty) ?
+                                                       isoSpeedValues + pictureExifMetaData.ISO :
+                                                       isoSpeedValues;
                 // Get picture flash :
                 pictureExifs.pictureFlash = GetExifData(subIfdDirectory, ExifDirectoryBase.TagFlash);
 
@@ -606,13 +618,16 @@ namespace Modells.Controllers
                 pictureExifs.pictureHeight = DisplayPictureDimension(GetExifData(subIfdDirectory, ExifDirectoryBase.TagExifImageHeight));
 
                 // Get picture dimensions :
-                pictureExifs.pictureDimensions = (pictureExifs.pictureWidth != pictureExifMetaData.TabEmpty
-                                                 && pictureExifs.pictureHeight != pictureExifMetaData.TabEmpty) ?
-                                                    (
-                                                        pictureExifMetaData.SpaceTabulation + pictureExifs.pictureWidth +
-                                                        "   x   " + pictureExifs.pictureHeight + pictureExifMetaData.Pixels
-                                                    )
-                                                    : pictureExifMetaData.TabEmpty;
+                pictureExifs.pictureDimensions = (pictureExifs.pictureWidth != pictureExifMetaData.TabEmpty &&
+                                                  pictureExifs.pictureHeight != pictureExifMetaData.TabEmpty) ?
+                                                 (
+                                                    pictureExifMetaData.SpaceTabulation +
+                                                    pictureExifs.pictureWidth +
+                                                    pictureExifMetaData.Times +
+                                                    pictureExifs.pictureHeight +
+                                                    pictureExifMetaData.Pixels
+                                                 ) :
+                                                 pictureExifMetaData.TabEmpty;
                 // Get picture file size :
                 pictureExifs.pictureFileSize = DisplayPictureSize((GetExifData(subMetadataDirectory, FileMetadataDirectory.TagFileSize)));
 
@@ -632,8 +647,9 @@ namespace Modells.Controllers
         {
             var exifData = pictureDirectory?.GetDescription(pictureExiftag);
 
-            var pictureExifData = (!string.IsNullOrEmpty(exifData)) ? (pictureExifMetaData.SpaceTabulation + exifData)
-                                                                    : (pictureExifMetaData.TabEmpty);
+            var pictureExifData = (!string.IsNullOrEmpty(exifData)) ?
+                                  (pictureExifMetaData.SpaceTabulation + exifData) :
+                                   pictureExifMetaData.TabEmpty;
 
             return pictureExifData;
         }
@@ -646,22 +662,29 @@ namespace Modells.Controllers
         public string DisplayPictureSize(string exifDataTagFileSize)
         {
             // Extract bytes numbers of picture file size :
-            var extractBytesNumbers = string.Join("", exifDataTagFileSize.ToCharArray().Where(Char.IsDigit));
-
+            var extractBytesNumbers = string.Join(
+                                                    string.Empty,
+                                                    exifDataTagFileSize.ToCharArray()
+                                                                       .Where(Char.IsDigit)
+                                                 );
             // Convert bytes to Ko :
             var convertNumbersToKo = Math.Round(Convert.ToDecimal(extractBytesNumbers) / 1000);
 
             // Display picture file size in Ko :
-            var displayPictureFileSize = pictureExifMetaData.SpaceTabulation + convertNumbersToKo + pictureExifMetaData.KiloOctets;
+            var displayPictureFileSize = pictureExifMetaData.SpaceTabulation +
+                                         convertNumbersToKo +
+                                         pictureExifMetaData.KiloOctets;
 
-            // Diplay picture file size in Mo : 
+            // Diplay picture file size in Mo :
             if (convertNumbersToKo >= 1000)
             {
                 var convertNumbersToMo = Math.Round(convertNumbersToKo / 1000);
-                return displayPictureFileSize = pictureExifMetaData.SpaceTabulation + convertNumbersToMo + pictureExifMetaData.MegaOctets;
+                
+                return displayPictureFileSize = pictureExifMetaData.SpaceTabulation +
+                                                convertNumbersToMo +
+                                                pictureExifMetaData.MegaOctets;
             }
-
-            return displayPictureFileSize;
+                return displayPictureFileSize;
         }
 
         /// <summary>
@@ -675,12 +698,15 @@ namespace Modells.Controllers
             if (exifDataTagDimension != pictureExifMetaData.TabEmpty)
             {
                 // Extract pixels dimension numbers of picture width or height :
-                var displayDimensionNumbers = string.Join("", exifDataTagDimension.ToCharArray().Where(Char.IsDigit));
-
+                var displayDimensionNumbers = string.Join(
+                                                            string.Empty,
+                                                            exifDataTagDimension.ToCharArray()
+                                                                                .Where(Char.IsDigit)
+                                                         );
                 return displayDimensionNumbers;
             }
 
-            return exifDataTagDimension;
+                return exifDataTagDimension;
         }
 
         public string TestDateTimeString(Regex patternFormat, string datetimeString)
@@ -710,8 +736,9 @@ namespace Modells.Controllers
             };
 
             // Get date & time expressions values from dico :
-            var datetimeValues = datetimeDico.Values.Where(value => value.Length > 0).OrderByDescending(x => x.Length).ToList();
-
+            var datetimeValues = datetimeDico.Values.Where(value => value.Length > 0)
+                                                    .OrderByDescending(x => x.Length)
+                                                    .ToList();
             if (datetimeValues.Count > 0)
             {
 
@@ -731,8 +758,10 @@ namespace Modells.Controllers
 
                 bool isDateValueBeenFormated = DateTime.TryParse(dateValue, out dateValueFormated);
 
-                var finalDateValue = (isDateValueBeenFormated) ? dateValueFormated.ToString("dd/MM/yyyy")
-                                                               : dateValue.ToString();
+                var finalDateValue = isDateValueBeenFormated ?
+                                     dateValueFormated.ToString("dd/MM/yyyy") :
+                                     dateValue.ToString();
+                
                 // 2. Manage time value :
 
                 var timeValue = datetimeValues.ElementAt(1);
@@ -741,8 +770,9 @@ namespace Modells.Controllers
 
                 bool isTimeValueBeenFormated = DateTime.TryParse(timeValue, out timeValueFormated);
 
-                var finalTimeValue = (isTimeValueBeenFormated) ? timeValueFormated.ToString("hh:mm:ss")
-                                                               : timeValue.ToString();
+                var finalTimeValue = isTimeValueBeenFormated ?
+                                     timeValueFormated.ToString("hh:mm:ss") :
+                                     timeValue.ToString();
                 // Fill the array :
                 datetimeArrayValues[0] = finalDateValue;
                 datetimeArrayValues[1] = finalTimeValue;

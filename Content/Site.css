@@ -39,16 +39,30 @@ html {
 body {
     font-family: Brie_Light;
     height: 100vh;
-    background-image: url('../Content/Images/AppPics/NightPort.jpg');
+    
+    /*Set diaporama animation */
+    -webkit-animation: backgroundDiapo 10s infinite ease-in-out;
+    animation-direction: alternate;
+  
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
 
+/* FOR SAFARI & CHROME - Set background image diaporama */
+@-webkit-keyframes backgroundDiapo {
+    0% {
+        background-image: url('../Content/Images/AppPics/NightPort.jpg');
+    }
+     100% {
+        background-image: url('../Content/Images/AppPics/SeaBoat.jpg');
+    }
+}
+
 /* Set the header */
 header {
     height: 10vh;
-    background-image: url('../Content/Images/AppPics/Shadows.jpg');
+    background-image: url('../Content/Images/AppPics/Recco.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -62,7 +76,6 @@ nav {
 /* Set the main content */
 main {
     height: auto;
-    /*background-color: black !important;*/
 }
 
 /* Set the footer */
@@ -98,16 +111,33 @@ footer {
     display: block !important;
 }
 
-/* Make image border color change on hover */
+/* Make image border color change on hover & add a zoom effect for the picture */
 .card:hover .img-thumbnail {
-    border: 1px solid silver !important;
-    background: silver;
+    /*border: 1px solid wheat !important;*/
+    background: wheat;
+    
+    transform: scale(1.1);
+    transition: transform 1s ease-in-out;
 }
 
 /* Make card border color change on hover */
 .card:hover {
-    background: silver;
+    background: wheat;
+    overflow: hidden;
 }
+
+/* Make image border color change on hover */
+.card:hover .btn > i, .card:hover .card-title {
+    color: wheat;
+}
+
+/* Set selected picture with black & white appearence on hover */
+    .card:hover img {
+        filter: grayscale(100%);
+
+    }
+
+
 
 /*Set icons color white */
 i {
@@ -130,6 +160,7 @@ i {
     left: 0;
     bottom: 0;
     border: none;
+    color: wheat !important;
 }
 
 /* Remove focus on eye button icon */
@@ -205,22 +236,25 @@ ul li {
     z-index: 5;
     cursor: pointer;
     padding: 15px;
+    font-size:150%;
 }
 
 /* Set 'back to top' button icon effect */
 #topButton:hover i {
-    color: silver;
+    color: deepskyblue;
+    background-color:transparent;
 }
 
 /* Set hover effect for button menu */
 .hovering:hover {
-    background-color: white !important;
-    color: black !important;
+    background-color: rgba(245, 222, 170, .3) !important;
+    border-color: wheat !important;
+    color: wheat !important;
 }
 
 /* Set hover effect for button menu icon */
 .hovering:hover i {
-    color: black !important;
+    color: wheat !important;
 }
 
 /* Set hover effect for add button menu */
@@ -234,13 +268,13 @@ ul li {
     color: chartreuse !important;
 }
 
-/* Set hover effect for add button menu */
+/* Set hover effect for del button menu */
 .removing:hover {
     background-color: rgba(0, 206, 209, .3) !important;
     border-color: darkturquoise !important;
 }
 
-/* Set hover effect for add button menu */
+/* Set hover effect for del button menu */
 .removing:hover i {
     color: darkturquoise !important;
 }
@@ -419,12 +453,14 @@ p[id="pictureDescription"] {
     border-bottom:1px solid darkorchid;
     border-left:1px solid crimson;
     border-right:1px solid deepskyblue;
+    border-radius: 0.50rem;
+
+     background-color: rgba(119,136, 153, .3);
 }
 
 /* Set special border line */
 .specialFormBorderLine {
-    border:3px solid white;
+    border: 3px solid white;
     border-radius: 0.50rem;
+    background-color: rgba(119,136, 153, .3);
 }
-
-

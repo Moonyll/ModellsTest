@@ -134,8 +134,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\opicturesController.cs" />
     <Compile Include="Controllers\PicturesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1739,9 +1737,11 @@
     <Content Include="Content\Icons\webfonts\fa-regular-400.svg" />
     <Content Include="Content\Icons\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Images\AppPics\Arche_LH.jpg" />
+    <Content Include="Content\Images\AppPics\Beacon.jpg" />
     <Content Include="Content\Images\AppPics\Boats.jpg" />
     <Content Include="Content\Images\AppPics\Bokeh.jpg" />
     <Content Include="Content\Images\AppPics\CaboSanLucas.jpg" />
+    <Content Include="Content\Images\AppPics\FisherBoat.jpg" />
     <Content Include="Content\Images\AppPics\Landscape.jpg" />
     <Content Include="Content\Images\AppPics\MilkyWay.jpg" />
     <Content Include="Content\Images\AppPics\NightPort.jpg" />
@@ -1750,6 +1750,7 @@
     <Content Include="Content\Images\AppPics\Piles.jpg" />
     <Content Include="Content\Images\AppPics\Recco.jpg" />
     <Content Include="Content\Images\AppPics\ScubaDiver.jpg" />
+    <Content Include="Content\Images\AppPics\SeaBoat.jpg" />
     <Content Include="Content\Images\AppPics\SeaMoon.jpg" />
     <Content Include="Content\Images\AppPics\SeaTempest.jpg" />
     <Content Include="Content\Images\AppPics\Shadows.jpg" />
@@ -1951,11 +1952,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\pictureError.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
-    <Content Include="Views\Home\pictureDetails.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -1966,18 +1962,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Pictures\Create.cshtml" />
     <Content Include="Views\Pictures\pictureDelete.cshtml" />
-    <Content Include="Views\Pictures\Details.cshtml" />
-    <Content Include="Views\Pictures\Edit.cshtml" />
-    <Content Include="Views\Pictures\Index.cshtml" />
     <Content Include="Views\Pictures\pictureCollection.cshtml" />
     <Content Include="Views\Pictures\pictureDetails.cshtml" />
-    <Content Include="Views\users\Create.cshtml" />
-    <Content Include="Views\users\Delete.cshtml" />
-    <Content Include="Views\users\Details.cshtml" />
-    <Content Include="Views\users\Edit.cshtml" />
-    <Content Include="Views\users\Index.cshtml" />
     <Content Include="Views\Pictures\pictureCreate.cshtml" />
     <Content Include="Views\Shared\pictureSuccess.cshtml" />
     <Content Include="Views\Pictures\pictureEdit.cshtml" />

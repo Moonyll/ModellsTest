@@ -278,18 +278,30 @@
               }
           });
       });
-
-      // Tip : sanitize: false, => sanitize property for security reasons !
-
-      //// Display exifs & hide some elements :
-      //$(".exifsBlue").mouseover(function () {
-      //    //$("#pictureDisplayed").css("visibility", "hidden");
-     
-      //});
-      //$(".exifsBlue").mouseleave(function () {
- 
-      //});
+       //
+            // If needed - new Code here:
       //
-            // New Code here:
-      //
-    });
+  });
+
+// Show the button when the user scrolls down 50px :
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        $("#topButton").css("display", "block");
+    }
+    else {
+        $("#topButton").css("display", "none");
+    }
+}
+
+// Scrolls to the top of the document :
+function topFunction() {
+
+    document.body.scrollTop = 0;
+
+    document.documentElement.scrollTop = 0;
+}
+
+// Tip : sanitize: false, => sanitize property for security reasons !

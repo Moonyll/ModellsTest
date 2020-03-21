@@ -134,6 +134,8 @@ namespace Modells.Models
 
         public const string TimeLabel = "Heure : ";
 
+        public const string Times = "   x   ";
+
         // Camera make :
         public string pictureCameraMake { get; set; }
 
@@ -190,6 +192,12 @@ namespace Modells.Models
         public const string DelPicture = "Supprimer image";
 
         public const string UpPicture = "Valider";
+        
+        public const string collHome = "Accueil";
+        
+        public const string collPicture = "Collection";
+        
+        public const string UpLoad = "Upload";
 
         public const string BackToColl = "Retour collection";
 
