@@ -185,6 +185,10 @@ namespace Modells.Models
 
         public const string AddPicture = "Ajouter image";
 
+        public const string EditPicture = "Editer image";
+
+        public const string DelPicture = "Supprimer image";
+
         public const string UpPicture = "Valider";
 
         public const string BackToColl = "Retour collection";

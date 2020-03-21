@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Modells.Models.picture>
+@using globalLabels = Modells.Models.pictureGlobalLabels;
 
 @{
     ViewBag.Title = "pictureDetails";
@@ -9,6 +10,12 @@
     var btnDetailsCss = "btn text-light removeFocus";
     var btnExifsAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Données&nbsp;Exifs";
     var btnLegendAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Legende&nbsp;Exifs";
+
+    // Global labels & titles :
+
+    var edPic = globalLabels.EditPicture;
+    var delPic = globalLabels.DelPicture;
+
 }
 
 <!--*** PICTURE DATA DISPLAY ***-->
@@ -115,12 +122,12 @@
                 <div class="btn-group mr-0" role="group">
 
                     <!--Button edit :-->
-                    <button type="button" class="@btnDetailsCss mr-0 editPicture greenify">
+                    <button type="button" class="@btnDetailsCss mr-0 editPicture greenify" title="@edPic">
                         <i class="fas fa-edit"></i>
                     </button>
 
                     <!--Button delete :-->
-                    <button type="button" class="@btnDetailsCss mr-0 delete" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="@btnDetailsCss mr-0 delete" data-toggle="modal" data-target="#deleteModal" title="@delPic">
                         <i class="far fa-trash-alt"></i>
                     </button>
 
@@ -258,7 +265,7 @@
                         <i class="fas fa-backspace"></i>
                     </button>
                 </div>
-                </div>
             </div>
+        </div>
     </div>
 </div>

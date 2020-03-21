@@ -115,7 +115,7 @@
                         <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
                         @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
                         <label for="newPictureToUpload" class="@controlLabelCss adding">
-                            <i class="far fa-file-image"></i>
+                            <i class="fas fa-upload"></i>
                         </label>
                     </div>
 
@@ -169,7 +169,7 @@
                     <!--Input of picture category :-->
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
-                        @Html.DropDownList("categoryId", null, new { @class = @editCss })
+                        @Html.DropDownList("categoryId", null, new { @class = @editCss, @onfocus = "clearCss(this)", @onchange = "isValid(this)" })
                         <label class="@controlLabelCss">
                             <i class="fas fa-book-open"></i>
                         </label>

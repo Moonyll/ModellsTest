@@ -20,7 +20,7 @@
 
     var previewCss = "col-sm-12 col-md-5 col-lg-5 m-2";
     var formCss = "col-sm-12 col-md-6 col-lg-6 m-3 p-2 specialFormBorderLine";
-    var addBtnCss = "btn d-block mx-auto m-2 btn-outline-light removeFocus adding";
+    var addBtnCss = "d-block btn col-6 my-3 recButton border-light removeFocus";
 
     var menuBtnCss = "d-flex justify-content-center col-sm-12 my-3";
 
@@ -93,10 +93,10 @@
         <div class="@formCss">
 
             <!--Button to add a picture :-->
-            <button class="@addBtnCss" id="addPic">
-                <i class="far fa-image"></i>
+            <button class="@addBtnCss offset-4">
+                <i class="fas fa-edit"></i>
                 <text class="p-2 text-light">
-                    Ajouter une image
+                    Mettre à jour image
                 </text>
             </button>
 
@@ -105,93 +105,79 @@
                 @Html.AntiForgeryToken()
 
                 // Diplay the picture creation form :
-                <form class="form-horizontal form-control m-1">
+        <form class="form-horizontal form-control m-1">
 
-                    <!--Hidden Id to enable savings :-->
-                    @Html.HiddenFor(model => model.pictureId)
+            <!--Hidden Id / Src to enable savings :-->
+            @Html.HiddenFor(model => model.pictureId)
+            @Html.HiddenFor(model => model.pictureStandardUrl)
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <!--Input of picture standard url :-->
-                    <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
-                        <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
-                        @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
-                        <label for="newPictureToUpload" class="@controlLabelCss adding">
-                            <i class="far fa-file-image"></i>
-                        </label>
-                    </div>
+            <!--Input of picture title :-->
+            <div class="@formGroupCss">
+                @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
+                @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                <label class="@controlLabelCss text-light">
+                    <i class="fas fa-bookmark"></i>
+                </label>
+            </div>
 
-                    <!--Display error for picture file name :-->
-                    <div class="@errorCss + @displayErrorCss(@displayErrorMessage("newPictureToUpload"))">
-                        !   @displayErrorMessage("newPictureToUpload")
-                    </div>
+            <!--Display error for picture title :-->
+            <div class="@errorCss @displayErrorCss(@displayErrorMessage("pictureTitle"))">
+                !   @displayErrorMessage("pictureTitle")
+            </div>
 
-                    <!--Input of picture title :-->
-                    <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
-                        <label class="@controlLabelCss text-light">
-                            <i class="fas fa-bookmark"></i>
-                        </label>
-                    </div>
+            <!--Input of picture alternative title :-->
+            <div class="@formGroupCss">
+                @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
+                @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                <label class="@controlLabelCss">
+                    <i class="far fa-bookmark"></i>
+                </label>
+            </div>
 
-                    <!--Display error for picture title :-->
-                    <div class="@errorCss @displayErrorCss(@displayErrorMessage("pictureTitle"))">
-                        !   @displayErrorMessage("pictureTitle")
-                    </div>
+            <!--Display error for alt. picture title :-->
+            <div class="@errorCss @displayErrorCss(@displayErrorMessage("pictureAlternateTitle"))">
+                !   @displayErrorMessage("pictureAlternateTitle")
+            </div>
 
-                    <!--Input of picture alternative title :-->
-                    <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
-                        <label class="@controlLabelCss">
-                            <i class="far fa-bookmark"></i>
-                        </label>
-                    </div>
+            <!--Input of picture description :-->
+            <div class="@formGroupCss">
+                @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
+                @Html.EditorFor(model => model.pictureDescription, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                <label class="@controlLabelCss">
+                    <i class="fas fa-pen"></i>
+                </label>
+            </div>
 
-                    <!--Display error for alt. picture title :-->
-                    <div class="@errorCss @displayErrorCss(@displayErrorMessage("pictureAlternateTitle"))">
-                        !   @displayErrorMessage("pictureAlternateTitle")
-                    </div>
+            <!--Display error for picture description :-->
+            <div class="@errorCss @displayErrorCss(@displayErrorMessage("pictureDescription"))">
+                !   @displayErrorMessage("pictureDescription")
+            </div>
 
-                    <!--Input of picture description :-->
-                    <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureDescription, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
-                        <label class="@controlLabelCss">
-                            <i class="fas fa-pen"></i>
-                        </label>
-                    </div>
+            <!--Input of picture category :-->
+            <div class="@formGroupCss">
+                @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
+                @Html.DropDownList("categoryId", null, new { @class = @editCss, @onfocus = "clearCss(this)", @onchange = "isValid(this)" })
+                <label class="@controlLabelCss">
+                    <i class="fas fa-book-open"></i>
+                </label>
+            </div>
 
-                    <!--Display error for picture description :-->
-                    <div class="@errorCss @displayErrorCss(@displayErrorMessage("pictureDescription"))">
-                        !   @displayErrorMessage("pictureDescription")
-                    </div>
+            <!--Back - Clear Submit buttons :-->
+            <div class="@menuBtnCss">
 
-                    <!--Input of picture category :-->
-                    <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
-                        @Html.DropDownList("categoryId", null, new { @class = @editCss })
-                        <label class="@controlLabelCss">
-                            <i class="fas fa-book-open"></i>
-                        </label>
-                    </div>
+                <!--Clear button :-->
+                <button class="@btnRemCss" value="Reset" @buttonToolAttr title=@resetFm>
+                    <i class="fas fa-redo"></i>
+                </button>
 
-                    <!--Back - Clear Submit buttons :-->
-                    <div class="@menuBtnCss">
-
-                        <!--Clear button :-->
-                        <button class="@btnRemCss" value="Reset" @buttonToolAttr title=@resetFm>
-                            <i class="fas fa-redo"></i>
-                        </button>
-
-                        <!--Submit button :-->
-                        <button class="@btnAddCss" type="submit" value="pictureCreate" id="submitPicture" @buttonToolAttr title=@upPic>
-                            <i class="fas fa-check-circle"></i>
-                        </button>
-                    </div>
-                </form>
+                <!--Submit button :-->
+                <button class="@btnAddCss" type="submit" value="pictureCreate" id="submitPicture" @buttonToolAttr title=@upPic>
+                    <i class="fas fa-check-circle"></i>
+                </button>
+            </div>
+        </form>
             }
         </div>
     </div>

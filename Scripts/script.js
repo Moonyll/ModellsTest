@@ -86,7 +86,7 @@ function isValid(input) {
     inputControl = (inputEntity == 'pictureStandardUrl') ? (inputControl && inputExtension) : inputControl;
 
     // Display validations :
-    if (inputControl && inputLength > 2 && removeBlankLength!=0) {
+    if (inputControl && inputLength > 2 && removeBlankLength != 0) {
         $(input).addClass('is-valid');
         $(input).removeClass('currentInput');
         $(input).addClass('validInput');
@@ -95,12 +95,18 @@ function isValid(input) {
 
         console.log($(input).parent().next('.col-11'));
     }
-    else if (!inputControl && inputLength > 2){
+    else if (!inputControl && inputLength > 2) {
         $(input).addClass('is-invalid');
         $(input).removeClass('currentInput');
         $(input).addClass('invalidInput');
         $(input).prev('label').attr({ 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': 'Autorisés [ . - _ ] seulement' });
         $(input).prev('label').tooltip('show');
+    }
+    else if (inputEntity == 'categoryId')
+    {
+        $(input).addClass('is-valid');
+        $(input).removeClass('currentInput');
+        $(input).addClass('validInput');
     }
 }
 
