@@ -209,5 +209,9 @@ namespace Modells.Models
 
         public const string DefaultPictureUrl = "/Content/Images/Pictures/upload.png";
 
+        public const string NormLogoPictureUrl = "/Content/Images/Logos/modells.jpg";
+
+        public const string MiniLogoPictureUrl = "/Content/Images/Logos/logo.jpg";
+
     }
 }

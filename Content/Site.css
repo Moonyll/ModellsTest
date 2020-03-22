@@ -38,7 +38,7 @@ html {
 /* Set the body */
 body {
     font-family: Brie_Light;
-    height: 100vh;
+    height: 100%;
     
     /*Set diaporama animation */
     -webkit-animation: backgroundDiapo 10s infinite ease-in-out;
@@ -61,7 +61,7 @@ body {
 
 /* Set the header */
 header {
-    height: 10vh;
+    height: 10%;
     background-image: url('../Content/Images/AppPics/Recco.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -69,7 +69,7 @@ header {
 
 /* Set the navigation bar */
 nav {
-    height: 10vh;
+    height: 10%;
     background-color: black !important;
 }
 
@@ -80,14 +80,14 @@ main {
 
 /* Set the footer */
 footer {
-    height: 10vh;
+    height: 10%;
     color: white;
     background-color: black !important;
 }
 
 /* Set the logo brand image */
 .logobrand {
-   height : 10vh;
+   height : 100%;
 }
 
 /* Make title picture appears on hover */
@@ -113,31 +113,24 @@ footer {
 
 /* Make image border color change on hover & add a zoom effect for the picture */
 .card:hover .img-thumbnail {
-    /*border: 1px solid wheat !important;*/
-    background: wheat;
-    
-    transform: scale(1.1);
-    transition: transform 1s ease-in-out;
+    border: 1px solid ivory !important;
+    background: ivory;
 }
 
 /* Make card border color change on hover */
 .card:hover {
-    background: wheat;
-    overflow: hidden;
+    background: ivory;
 }
 
 /* Make image border color change on hover */
 .card:hover .btn > i, .card:hover .card-title {
-    color: wheat;
+    color: ivory;
 }
 
 /* Set selected picture with black & white appearence on hover */
-    .card:hover img {
-        filter: grayscale(100%);
-
-    }
-
-
+.card:hover img {
+    filter: grayscale(100%);
+}
 
 /*Set icons color white */
 i {
@@ -160,7 +153,7 @@ i {
     left: 0;
     bottom: 0;
     border: none;
-    color: wheat !important;
+    color: ivory !important;
 }
 
 /* Remove focus on eye button icon */
@@ -344,7 +337,7 @@ ul li {
 
 /* Set hover effect 2 for modal exif button */
 .exifsBlue:hover {
-    border:1px solid white;
+    border: 1px solid deepskyblue;
     background-color: rgba(127, 255, 212, .3);
 }
 

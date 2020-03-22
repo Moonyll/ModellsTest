@@ -27,7 +27,14 @@
 
     @{
         // Css Templates :
-        var btnNav = "btn border border-light nav-item m-2";
+
+        var navBarCss = "navbar-expand-lg border border-light sticky-top container-fluid";
+
+        var btnNormNav = "btn nav-item col-1 d-inline-block my-0 border border-light logobrand";
+
+        var btnMiniNav = "btn nav-item col-3 d-inline-block my-0 border border-light logobrand";
+
+        var imgLogoCss = "img-fluid col-3 d-inline-block my-0 logobrand";
 
         // Global labels & titles :
 
@@ -36,66 +43,71 @@
         var homePic = globalLabels.collHome;
         var collPic = globalLabels.collPicture;
 
+        // Src Url :
+        var normLogo = globalLabels.NormLogoPictureUrl;
+        var miniLogo = globalLabels.MiniLogoPictureUrl;
+
         // Navigation Url :
         var urlHome = @Url.Action("pictureHome", "Pictures");
         var urlCollPic = @Url.Action("pictureCollection", "Pictures");
         var urlAddPic = @Url.Action("pictureCreate", "Pictures");
+
     }
 
 </head>
 <body>
     <!--Header :-->
     <header class="bg-transparent border border-light d-flex">
-        @*<img src="~/Content/Images/AppPics/CaboSanLucas.jpg" class="@headerPictureCss ml-0" alt="modells" id="toto" />
-            <img src="~/Content/Images/AppPics/SunBeams.jpg" class="@headerPictureCss" alt="modells" />
-            <img src="~/Content/Images/AppPics/SeaTempest.jpg" class="@headerPictureCss" alt="modells" />
-            <img src="~/Content/Images/AppPics/ScubaDiver.jpg" class="@headerPictureCss" alt="modells" />
-            <img src="~/Content/Images/AppPics/Recco.jpg" class="@headerPictureCss" alt="modells" />
-            <img src="~/Content/Images/AppPics/Landscape.jpg" class="@headerPictureCss" alt="modells" />*@
     </header>
 
     <!--Normal Navigation Bar :-->
-    <nav class="navbar-expand-lg border border-light sticky-top" id="normalNavBar">
+    <nav class="@navBarCss" id="normalNavBar">
 
-        <!--Application Logo :-->
-        <img src="~/Content/Images/Logos/modells.jpg" class="btn border border-light logobrand" alt="modells" />
+        <div class="row logobrand">
 
-        <!--Home button :-->
-        <button type="button" class="@btnNav hovering" onclick="location.href='@urlHome'" title="@homePic">
-            <i class="fas fa-home"></i>
-        </button>
+            <!--Application Logo :-->
+            <img src="@normLogo" class="@imgLogoCss" alt="modells" />
 
-        <!--Collection button :-->
-        <button type="button" class="@btnNav removing" onclick="location.href='@urlCollPic'" title="@collPic">
-            <i class="far fa-images"></i>
-        </button>
+            <!--Home button :-->
+            <button type="button" class="@btnNormNav hovering" onclick="location.href='@urlHome'" title="@homePic">
+                <i class="fas fa-home"></i>
+            </button>
 
-        <!--Add picture button :-->
-        <button type="button" class="@btnNav adding" onclick="location.href='@urlAddPic'" title="@addPic">
-            <i class="far fa-image"></i>
-        </button>
+            <!--Collection button :-->
+            <button type="button" class="@btnNormNav removing" onclick="location.href='@urlCollPic'" title="@collPic">
+                <i class="far fa-images"></i>
+            </button>
+
+            <!--Add picture button :-->
+            <button type="button" class="@btnNormNav adding" onclick="location.href='@urlAddPic'" title="@addPic">
+                <i class="far fa-image"></i>
+            </button>
+        </div>
     </nav>
 
     <!--Mini responsive navigation Bar :-->
-    <nav class="navbar-expand-lg border border-light sticky-top" id="responsiveNavBar">
+    <nav class="@navBarCss" id="responsiveNavBar">
 
-        <!--Application Logo :-->
-        <img src="~/Content/Images/Logos/logo.jpg" class="btn border border-light logobrand" alt="modells" />
+        <div class="row logobrand">
 
-        <!--Home button :-->
-        <button type="button" class="@btnNav hovering" onclick="location.href='@urlHome'" title="@homePic">
-            <i class="fas fa-home"></i>
-        </button>
+            <!--Application Logo :-->
+            <img src="@miniLogo" class="@imgLogoCss" alt="modells" />
 
-        <!--Collection button :-->
-        <button type="button" class="@btnNav removing" onclick="location.href='@urlAddPic'" title="@addPic">
-            <i class="far fa-images"></i>
-        </button>
+            <!--Home button :-->
+            <button type="button" class="@btnMiniNav hovering" onclick="location.href='@urlHome'" title="@homePic">
+                <i class="fas fa-home"></i>
+            </button>
 
-        <!--Add picture button :-->
-        <button type="button" class="@btnNav adding" onclick="location.href='@urlAddPic'" title="@addPic">
-            <i class="far fa-image"></i>
-        </button>
+            <!--Collection button :-->
+            <button type="button" class="@btnMiniNav removing" onclick="location.href='@urlCollPic'" title="@addPic">
+                <i class="far fa-images"></i>
+            </button>
+
+            <!--Add picture button :-->
+            <button type="button" class="@btnMiniNav adding" onclick="location.href='@urlAddPic'" title="@addPic">
+                <i class="far fa-image"></i>
+            </button>
+        </div>
     </nav>
 
     <!--Main Content :-->
