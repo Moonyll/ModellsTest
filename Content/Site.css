@@ -212,12 +212,15 @@ ul li {
 /* Set the rounded pagination buttons */
 .rounded {
     background-color: black !important;
+    font-weight: bold;
 }
 
 /* Set the pagination buttons effects */
 .rounded:hover {
-    background-color: white !important;
-    color: black !important;
+    background-color: rgba(119,136, 153, .3) !important;
+    color: deepskyblue !important;
+    
+
 }
 
 /* Set 'back to top' button */
@@ -229,7 +232,7 @@ ul li {
     z-index: 5;
     cursor: pointer;
     padding: 15px;
-    font-size:150%;
+    font-size: 150%;
 }
 
 /* Set 'back to top' button icon effect */

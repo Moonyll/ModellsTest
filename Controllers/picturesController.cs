@@ -135,9 +135,31 @@ namespace Modells.Controllers
 
             // Set viewbag & viewdata :
 
+            // Array :
             ViewData["pictureElements"] = pictureElements;
 
+            // Number of pages :
             ViewBag.totalPages = numberOfPages;
+
+            // Set pages as list item :
+            var listOfPage = new List<SelectListItem>();
+
+            for (var i = 1; i <= numberOfPages; i++)
+            {
+                listOfPage.Add(
+                                    new SelectListItem 
+                                    {
+                                        Text = i.ToString(),
+                                        Value = "Page n°" + i.ToString()
+                                    }
+                              );
+            }
+
+            // Current page :
+            ViewBag.CurrentPage = elementToDisplay;
+
+            // List of page :
+            ViewBag.listOfPages = listOfPage;
 
             #endregion
 

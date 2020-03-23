@@ -8,12 +8,41 @@
     // Class template for the picture :
     var imgCss = "card-img img-fluid img-thumbnail d-block mx-auto";
 
+    var pagBtn = "btn text-light rounded rounded-circle m-2 removeFocus";
+
+    var pagBtnList = "btn text-light rounded rounded-pill m-2 removeFocus";
+
     // Total pictures to display :
     var totalPictures = ViewBag.totalPictures;
+
+    var totalPages = ViewBag.totalPages;
+
+    var currentPage = ViewBag.CurrentPage;
+
+    var prevPage = (currentPage == 0) ? currentPage : (currentPage - 1);
+
+    var nextPage = (currentPage == totalPages) ? currentPage : (currentPage + 1);
 
     // Table of pictures to display :
     var pictureElements = ViewData["pictureElements"] as string[,];
 
+    @functions{
+
+        string RedirectToPage(int pageNumber)
+        {
+            string urlPicturePage;
+
+            IDictionary<string, object> routeValues = new Dictionary<string, object>();
+
+            routeValues.Add("pageToDisplay", pageNumber);
+
+            return urlPicturePage = Url.Action("pictureCollection", new RouteValueDictionary(routeValues));
+
+        }
+
+    }
+
+    var toto = true;
 }
 
 @section Scripts
@@ -26,7 +55,6 @@
     var urlPictureDelete = '@Url.Action("pictureDelete", "Pictures")';
     var urlPictureDelConf = '@Url.Action("DeleteConfirmed", "Pictures")';
     var urlPictureDeleteOk = '@Url.Action("pictureDeleteOk", "Pictures")';
-
     </script>
 
     <!--Load pictureCollection script :-->
@@ -327,17 +355,40 @@
 <!--Loading the partial view to display the modal :-->
 @Html.Partial("~/Views/pictures/pictureDetails.cshtml")
 
+
+@Html.DropDownList("pageList", new SelectList(ViewBag.listOfPages, "Text", "Value"), "Page n° : ", new {@class=pagBtnList ,onchange = "GoToPage(this)" }))
+
 <!--Enable Pagination :-->
-<div class="text-center">
-    @for (int page = 1; page <= ViewBag.totalPages; page++)
+<div class="text-center align-items-center">
+
+    <!--Previous page button :-->
+    <button type="button" class="@pagBtn" onclick="location.href='@RedirectToPage(prevPage)'">
+        &#11164;
+    </button>
+
+    @for (int page = 1; page <= totalPages; page++)
     {
-        <button type="button" class="btn text-light rounded rounded-circle m-2" onclick="location.href='@Url.Action("pictureCollection", new { pageToDisplay = page })'">
+        <button type="button" class="@pagBtn" onclick="location.href='@RedirectToPage(page)'">
             @page
         </button>
     }
+
+    <!--Next page button :-->
+    <button type="button" class="@pagBtn" onclick="location.href='@RedirectToPage(nextPage)'">
+        &#11166;
+    </button>
+
 </div>
 
 <!--Top button :-->
 <button class="btn removeFocus" onclick="topFunction()" id="topButton">
     <i class="fas fa-arrow-alt-circle-up"></i>
 </button>
+
+
+<script>
+    function GoToPage(selectedPage)
+    {
+        window.location.href='/Pictures/pictureCollection?pageToDisplay='+ selectedPage.value;
+    }
+</script>
