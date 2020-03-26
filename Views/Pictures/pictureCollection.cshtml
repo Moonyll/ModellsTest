@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "pictureCollection";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Class template for the column :
@@ -10,7 +10,13 @@
 
     var pagBtn = "btn text-light rounded rounded-circle m-2 removeFocus";
 
-    var pagBtnList = "btn text-light rounded rounded-pill m-2 removeFocus";
+    var pagBtnList = "btn text-light rounded rounded-pill m-2 removeFocus dropDownList dropCss dropdown-toggle ";
+
+    var paginationCss = "text-center align-items-center d-flex justify-content-center";
+
+    var dropMenuCss = "dropdown-menu bg-transparent border-0 dropPages";
+
+    var dropPageCss = "dropdown-item text-center dropCss rounded-pill";
 
     // Total pictures to display :
     var totalPictures = ViewBag.totalPictures;
@@ -26,8 +32,8 @@
     // Table of pictures to display :
     var pictureElements = ViewData["pictureElements"] as string[,];
 
-    @functions{
-
+    @functions
+    {
         string RedirectToPage(int pageNumber)
         {
             string urlPicturePage;
@@ -37,12 +43,9 @@
             routeValues.Add("pageToDisplay", pageNumber);
 
             return urlPicturePage = Url.Action("pictureCollection", new RouteValueDictionary(routeValues));
-
         }
-
     }
 
-    var toto = true;
 }
 
 @section Scripts
@@ -60,6 +63,35 @@
     <!--Load pictureCollection script :-->
     <script src="~/Scripts/pictureCollection.js"></script>
 }
+
+<!--Enable Pagination :-->
+<div class="@paginationCss">
+
+    <!--Previous page button :-->
+    <button type="button" class="@pagBtn dropDownList" onclick="location.href='@RedirectToPage(prevPage)'">
+        &#11164;
+    </button>
+
+      <!--Page List-->
+    <div class="dropdown">
+
+        <a class="@pagBtnList" href="#" role="button" id="pageList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Pages
+        </a>
+
+        <div class="@dropMenuCss" aria-labelledby="pageList">
+            @for (int page = 1; page <= totalPages; page++)
+            {
+                <a class="@dropPageCss" href="@RedirectToPage(page)">@page</a>
+            }
+        </div>
+    </div>
+
+    <!--Next page button :-->
+    <button type="button" class="@pagBtn dropDownList" onclick="location.href='@RedirectToPage(nextPage)'">
+        &#11166;
+    </button>
+</div>
 
 <!--One fluid container of 2 rows & 4 columns :-->
 <div class="container-fluid bg-transparent p-4 d-table-cell">
@@ -355,40 +387,44 @@
 <!--Loading the partial view to display the modal :-->
 @Html.Partial("~/Views/pictures/pictureDetails.cshtml")
 
-
-@Html.DropDownList("pageList", new SelectList(ViewBag.listOfPages, "Text", "Value"), "Page n° : ", new {@class=pagBtnList ,onchange = "GoToPage(this)" }))
-
 <!--Enable Pagination :-->
-<div class="text-center align-items-center">
+<div class="@paginationCss">
 
     <!--Previous page button :-->
     <button type="button" class="@pagBtn" onclick="location.href='@RedirectToPage(prevPage)'">
         &#11164;
     </button>
 
+    <!--Display buttons :-->
     @for (int page = 1; page <= totalPages; page++)
     {
-        <button type="button" class="@pagBtn" onclick="location.href='@RedirectToPage(page)'">
+        <button type="button" class="@pagBtn paginationBtn" onclick="location.href='@RedirectToPage(page)'">
             @page
         </button>
     }
+
+    <!--Page List-->
+    <div class="dropdown">
+
+        <a class="@pagBtnList" href="#" role="button" id="pageList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Pages
+        </a>
+
+        <div class="@dropMenuCss" aria-labelledby="pageList">
+            @for (int page = 1; page <= totalPages; page++)
+            {
+                <a class="@dropPageCss" href="@RedirectToPage(page)">@page</a>
+            }
+        </div>
+    </div>
 
     <!--Next page button :-->
     <button type="button" class="@pagBtn" onclick="location.href='@RedirectToPage(nextPage)'">
         &#11166;
     </button>
-
 </div>
 
 <!--Top button :-->
 <button class="btn removeFocus" onclick="topFunction()" id="topButton">
     <i class="fas fa-arrow-alt-circle-up"></i>
 </button>
-
-
-<script>
-    function GoToPage(selectedPage)
-    {
-        window.location.href='/Pictures/pictureCollection?pageToDisplay='+ selectedPage.value;
-    }
-</script>

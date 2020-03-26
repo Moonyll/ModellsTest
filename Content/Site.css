@@ -5,30 +5,6 @@
     font-weight: normal;
     src: url('../Content/Fonts/BRI293.woff');
 }
-/* Set nav bar in accordance with responsive features */
-
-/* Display mini nav */
-@media screen and (max-width: 700px) {
-    
-    #normalNavBar {
-        display: none;
-    }
-
-    #responsiveNavBar {
-        display: block;
-    }
-}
-
-/* Display normal nav */
-@media screen and (min-width: 701px) {
-    
-    #normalNavBar {
-        display: block;
-    }
-    #responsiveNavBar {
-        display: none;
-    }
-}
 
 /* Set the html page */
 html {
@@ -62,9 +38,6 @@ body {
 /* Set the header */
 header {
     height: 10%;
-    background-image: url('../Content/Images/AppPics/Recco.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 /* Set the navigation bar */
@@ -83,6 +56,68 @@ footer {
     height: 10%;
     color: white;
     background-color: black !important;
+}
+
+/* Display mini nav */
+@media screen and (max-width: 700px) {
+
+    #normalNavBar {
+        display: none;
+    }
+
+    #responsiveNavBar {
+        display: block;
+    }
+}
+
+/* Display normal nav */
+@media screen and (min-width: 701px) {
+
+    #normalNavBar {
+        display: block;
+    }
+
+    #responsiveNavBar {
+        display: none;
+    }
+}
+
+/* Display buttons - hide dropdown list */
+@media screen and (max-width: 700px) {
+
+    .dropDownList {
+        display: block;
+    }
+
+    .paginationBtn {
+        display: none;
+    }
+}
+
+/* Display dropdown list - hide buttons */
+@media screen and (min-width: 701px) {
+
+    .dropDownList {
+        display: none;
+    }
+
+    .paginationBtn {
+        display: block;
+    }
+}
+
+/* Set dropdown list */
+.dropCss {
+    font-weight: bold;
+    color: white;
+    background-color: rgba(119,136, 153, .3) !important;
+  
+}
+
+/* Set dropdown list */
+.dropPages {
+    min-width: 15px !important;
+    right: 15px !important;
 }
 
 /* Set the logo brand image */
@@ -219,8 +254,6 @@ ul li {
 .rounded:hover {
     background-color: rgba(119,136, 153, .3) !important;
     color: deepskyblue !important;
-    
-
 }
 
 /* Set 'back to top' button */
