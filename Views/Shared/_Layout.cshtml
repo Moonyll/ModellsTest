@@ -36,6 +36,16 @@
 
         var imgLogoCss = "img-fluid col-3 d-inline-block my-0 border border-light logobrand";
 
+        var footerCss = "border border-light container-fluid text-light";
+
+        var footerRowCss = "row align-items-center logobrand text-center";
+
+        var elToDispCss = "col-sm-6 col-md-3 col-lg-3 w-50";
+
+        var elToHideCss = "col-md-3 col-lg-3 d-none d-md-block";
+
+        var socialMedCss = "btn col-md-2 col-sm-3 w-25 p-1 removeFocus";
+
         // Global labels & titles :
 
         //var headerPictureCss = "img-fluid col-2 d-inline-block p-0 mt-0";
@@ -46,6 +56,22 @@
         // Src Url :
         var normLogo = globalLabels.NormLogoPictureUrl;
         var miniLogo = globalLabels.MiniLogoPictureUrl;
+
+        var pxlogo = globalLabels.MiniLogoPixabay;
+
+        var blank = globalLabels.Blank;
+
+        var pxU = globalLabels.MiniLogoPixabayUrl;
+        var pxT = globalLabels.Pixabay;
+
+        var fbU = globalLabels.MiniLogoFacebookUrl;
+        var fbT = globalLabels.Facebook;
+
+        var inU = globalLabels.MiniLogoInstagramUrl;
+        var inT = globalLabels.Instragam;
+
+        var twU = globalLabels.MiniLogoTwitterUrl;
+        var twT = globalLabels.Twitter;
 
         // Navigation Url :
         var urlHome = @Url.Action("pictureHome", "Pictures");
@@ -117,36 +143,44 @@
     </main>
 
     <!--Footer :-->
-    <footer class="border border-light container-fluid text-light">
+    <footer class="@footerCss">
 
-        <div class="row align-items-center logobrand text-center">
+        <div class="@footerRowCss">
 
-            <div class="col-sm-6 col-md-3 col-lg-3 w-50 p-1">
+            <!--modells :-->
+            <div class="@elToDispCss p-1">
                 <span class="modells">modells</span> &copy; @DateTime.Now.Year
             </div>
 
-            <div class="col-md-3 col-lg-3 d-none d-md-block">
+            <!--Mentions légales :-->
+            <div class="@elToHideCss">
                 Mentions Légales
             </div>
 
-            <div class="col-md-3 col-lg-3 d-none d-md-block">
-                <img src="~/Content/Images/Logos/pixabay.png" width="128" height="25" class="iconp" />
+            <!--pixabay :-->
+            <div class="@elToHideCss">
+                <button class="btn pixab">
+                    <img src="@pxlogo" class="pixam" onclick="window.open('@pxU','@blank')" title="@pxT" />
+                </button>
             </div>
 
-            <div class="col-sm-6 col-md-3 col-lg-3 w-50">
-                <button class="btn col-3 p-1 removeFocus">
-                <i class="fab fa-facebook-f"></i>
+            <!--Social medias :-->
+            <div class="@elToDispCss">
+
+                <!--facebook :-->
+                <button class="@socialMedCss face" onclick="window.open('@fbU','@blank')" title="@fbT">
+                    <i class="fab fa-facebook-f"></i>
                 </button>
-                <button class="btn col-3 p-1 removeFocus">
+                <!--instagram :-->
+                <button class="@socialMedCss inst" onclick="window.open('@inU','@blank')" title="@inT">
                     <i class="fab fa-instagram"></i>
                 </button>
-                <button class="btn col-3 p-1 removeFocus">
+                <!--twitter :-->
+                <button class="@socialMedCss twit" onclick="window.open('@twU','@blank')" title="@twT">
                     <i class="fab fa-twitter"></i>
                 </button>
-
             </div>
         </div>
     </footer>
-
 </body>
 </html>

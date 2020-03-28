@@ -125,10 +125,43 @@ footer {
    height : 100%;
 }
 
-/**/
+/* Set modells brand footer */
 .modells {
     font-weight:bold;
     font-size:150%;
+}
+
+/* Set pixabay brand footer */
+.pixab:hover {
+    border-color: white;
+}
+
+/* Set pixabay logo footer */
+.pixam {
+    width:128px;
+    height:25px;
+}
+
+/* Set facebook brand footer */
+.face:hover {
+    background-color: #4267b2 !important; /* official facebook color */
+    border-color: white;
+}
+
+/* Set instagram brand footer */
+.inst:hover {
+    background: linear-gradient(20deg, #ffa94a 5%, #f0495b 25%, #515bc9 50%, #a133c2 85%) !important; /* official instagram colors */
+    border-color: white;
+}
+
+/* Set twitter brand footer */
+.twit:hover {
+    background-color: white !important;
+    border: 2px solid #5dbcd2; /* official twitter color */
+}
+/* Set twitter brand footer icon */
+.twit:hover i {
+    color: #5dbcd2; /* twitter color */
 }
 
 /* Make title picture appears on hover */
@@ -266,8 +299,8 @@ ul li {
 #topButton {
     display: none;
     position: fixed;
-    bottom: 20px;
-    right: 30px;
+    bottom: 9%;
+    right: 2%;
     z-index: 5;
     cursor: pointer;
     padding: 15px;

@@ -1763,6 +1763,7 @@
     <Content Include="Content\Images\Logos\logo.jpg" />
     <Content Include="Content\Images\Logos\modells.jpg" />
     <Content Include="Content\Images\Logos\pixabay.png" />
+    <Content Include="Content\Images\Logos\pixabay_green.png" />
     <Content Include="Content\Images\Pictures\auto.jpg" />
     <Content Include="Content\Images\Pictures\autumn.jpg" />
     <Content Include="Content\Images\Pictures\cat.jpg" />

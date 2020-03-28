@@ -281,6 +281,16 @@
        //
             // If needed - new Code here:
       //
+      $(".pixab").mouseover(function () {
+          alert("toto");
+          $("#pixabayLogo").attr("src", "/Content/Images/Logos/pixabay_green.png");
+      });
+
+      $(".pixab").mouseout(function () {
+          $("#pixabayLogo").attr("src", "/Content/Images/Logos/pixabay.png");
+
+
+
   });
 
 // Show the button when the user scrolls down 50px :

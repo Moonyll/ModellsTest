@@ -207,11 +207,31 @@ namespace Modells.Models
 
         public const string PreviewImgATitle = "Ici votre image";
 
+        public const string Blank = "_blank";
+
+        public const string Facebook = "Facebook";
+        
+        public const string Instragam = "Instragam";
+
+        public const string Twitter = "Twitter";
+
+        public const string Pixabay = "Pixabay";
+
         public const string DefaultPictureUrl = "/Content/Images/Pictures/upload.png";
 
         public const string NormLogoPictureUrl = "/Content/Images/Logos/modells.jpg";
 
         public const string MiniLogoPictureUrl = "/Content/Images/Logos/logo.jpg";
+
+        public const string MiniLogoPixabay = "/Content/Images/Logos/pixabay.png";
+
+        public const string MiniLogoPixabayUrl = "https://pixabay.com/";
+
+        public const string MiniLogoFacebookUrl = "https://www.facebook.com/";
+
+        public const string MiniLogoInstagramUrl = "https://www.instagram.com/";
+
+        public const string MiniLogoTwitterUrl = "https://twitter.com/";
 
     }
 }
