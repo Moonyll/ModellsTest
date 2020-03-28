@@ -118,23 +118,32 @@
 
     <!--Footer :-->
     <footer class="border border-light container-fluid text-light">
-        <div class="row align-items-center text-center border logobrand d-flex">
-            <div class="col-sm-4 col-md-3 col-lg-3 d-sm-flex d-md-flex d-lg-flex">
-                &copy; @DateTime.Now.Year - Modells
+
+        <div class="row align-items-center logobrand text-center">
+
+            <div class="col-sm-6 col-md-3 col-lg-3 w-50 p-1">
+                <span class="modells">modells</span> &copy; @DateTime.Now.Year
             </div>
-            <div class="col-md-3 col-lg-3 d-none d-md-flex d-lg-flex">
+
+            <div class="col-md-3 col-lg-3 d-none d-md-block">
                 Mentions Légales
             </div>
-            <div class="col-md-6 col-lg-6 col-sm-4 d-sm-flex d-md-flex d-lg-flex btn-group border border-primary justify-content-end" role="group" aria-label="Basic example">
-                <button type="button" class="btn text-light">
-                    Left
+
+            <div class="col-md-3 col-lg-3 d-none d-md-block">
+                <img src="~/Content/Images/Logos/pixabay.png" width="128" height="25" class="iconp" />
+            </div>
+
+            <div class="col-sm-6 col-md-3 col-lg-3 w-50">
+                <button class="btn col-3 p-1 removeFocus">
+                <i class="fab fa-facebook-f"></i>
                 </button>
-                <button type="button" class="btn text-light">
-                    Middle
+                <button class="btn col-3 p-1 removeFocus">
+                    <i class="fab fa-instagram"></i>
                 </button>
-                <button type="button" class=" btn text-light">
-                    Right
+                <button class="btn col-3 p-1 removeFocus">
+                    <i class="fab fa-twitter"></i>
                 </button>
+
             </div>
         </div>
     </footer>

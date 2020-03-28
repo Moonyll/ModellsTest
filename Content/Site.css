@@ -125,6 +125,12 @@ footer {
    height : 100%;
 }
 
+/**/
+.modells {
+    font-weight:bold;
+    font-size:150%;
+}
+
 /* Make title picture appears on hover */
 .card-img-overlay:hover .card-title {
     display: block !important;
