@@ -484,8 +484,29 @@ p[id="pictureDescription"] {
     font-weight:bold;
 }
 
-/* Set all exifs colors data */
+/**/
+.ContainerCss {
+    position: relative;
+    text-align: center;
+    color: white;
+}
 
+/**/
+.messageToDisplay {
+    position: absolute;
+    font-size: 3vw;
+    color: rgba(127, 255, 0, .7) !important;
+    top: 75%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.messageToDisplay i {
+    font-size: 3vw;
+    color: rgba(127, 255, 0, .9) !important;
+}
+
+/* Set all exifs colors data */
 /* Brand */
 .exifBrand, .exifBrand > i {
     color: ivory;

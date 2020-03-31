@@ -28,6 +28,10 @@
     @{
         // Css Templates :
 
+        var headerCss = "bg-transparent text-light";
+
+        var headerJumboCss = "jumbotron-fluid border border-light d-flex bg-transparent text-center justify-content-center";
+
         var navBarCss = "navbar-expand-lg border border-light sticky-top container-fluid";
 
         var btnNormNav = "btn nav-item col-1 d-inline-block my-0 logobrand";
@@ -48,7 +52,7 @@
 
         // Global labels & titles :
 
-        //var headerPictureCss = "img-fluid col-2 d-inline-block p-0 mt-0";
+        
         var addPic = globalLabels.AddPicture;
         var homePic = globalLabels.collHome;
         var collPic = globalLabels.collPicture;
@@ -83,10 +87,8 @@
 </head>
 <body>
     <!--Header :-->
-    <header class="bg-transparent text-light">
-        <div class="jumbotron-fluid border border-light d-flex bg-transparent text-center justify-content-center">
-            hello i'm the header !
-
+    <header class="@headerCss">
+        <div class="@headerJumboCss">
         </div>
     </header>
 

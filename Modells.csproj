@@ -1742,6 +1742,7 @@
     <Content Include="Content\Images\AppPics\NightPort.jpg" />
     <Content Include="Content\Images\AppPics\Papagyo.jpg" />
     <Content Include="Content\Images\AppPics\SeaBoat.jpg" />
+    <Content Include="Content\Images\AppPics\Success.jpg" />
     <Content Include="Content\Images\AppPics\Surfing.jpg" />
     <Content Include="Content\Images\AppPics\Town.jpg" />
     <Content Include="Content\Images\Logos\logo.jpg" />
