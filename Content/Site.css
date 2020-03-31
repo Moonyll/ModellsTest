@@ -15,11 +15,10 @@ html {
 body {
     font-family: Brie_Light;
     height: 100%;
-    
+
     /*Set diaporama animation */
     -webkit-animation: backgroundDiapo 10s infinite ease-in-out;
     animation-direction: alternate;
-  
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -58,9 +57,8 @@ footer {
     background-color: black !important;
 }
 
-/* Display mini nav */
+/* Display mini nav - adjust the footer */
 @media screen and (max-width: 700px) {
-
     #normalNavBar {
         display: none;
     }
@@ -68,9 +66,13 @@ footer {
     #responsiveNavBar {
         display: block;
     }
+
+    footer, nav, {
+        height:12%;
+    }
 }
 
-/* Display normal nav */
+/* Display normal nav - adjust the footer */
 @media screen and (min-width: 701px) {
 
     #normalNavBar {
@@ -80,6 +82,18 @@ footer {
     #responsiveNavBar {
         display: none;
     }
+
+    footer, nav {
+        height: 10%;
+    }
+}
+
+/* Adjust the footer */
+@media screen and (min-width: 750px) {
+
+     footer, nav {
+        height: 12%;
+     }
 }
 
 /* Display buttons - hide dropdown list */
@@ -106,12 +120,39 @@ footer {
     }
 }
 
+/* Set header jumbotron */
+.jumbotron-fluid {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 20% !important;
+    background-image: url('../Content/Images/AppPics/HeaderNB.jpg');
+    
+    /*Set diaporama animation*/
+    -webkit-animation: backgroundJumboDiapo 10s infinite ease-in-out;
+    animation-direction: alternate;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:contain;
+
+}
+
+/* FOR SAFARI & CHROME - Set header background image jumbotron diaporama */
+@-webkit-keyframes backgroundJumboDiapo {
+    0% {
+        background-image: url('../Content/Images/AppPics/HeaderNB.jpg');
+    }
+
+    100% {
+        background-image: url('../Content/Images/AppPics/HeaderCL.jpg');
+    }
+}
+
 /* Set dropdown list */
 .dropCss {
     font-weight: bold;
     color: white;
     background-color: rgba(119,136, 153, .3) !important;
-  
 }
 
 /* Set dropdown list */
