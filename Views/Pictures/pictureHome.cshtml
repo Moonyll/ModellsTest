@@ -1,31 +1,84 @@
-﻿
+﻿@using globalLabels = Modells.Models.pictureGlobalLabels;
 @{
     ViewBag.Title = "pictureHome";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Css Templates :
+    var carI = "carousel-item";
+    var carM = "carouselModells";
+    var carC = "carousel-caption car";
+    var imgC = "d-block w-100";
+
+    // Global labels & titles :
+
+    var sl1A = globalLabels.FirstSlide;
+    var sl2A = globalLabels.SecondSlide;
+    var sl3A = globalLabels.ThirdSlide;
+
+
+    // Src Url :
+    var sl1U = globalLabels.CarFirstSlide;
+    var sl2U = globalLabels.CarSecondSlide;
+    var sl3U = globalLabels.CarThirdSlide;
+
 }
 
-    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-interval="10000">
-                <img src="~/Content/Images/AppPics/Arche_LH.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
+<!--Carousel of 3 slides, with tabs & fade effect :-->
+<div id="@carM" class="carousel slide carousel-fade" data-ride="carousel">
+
+    <!--Carousel tabs :-->
+    <ol class="carousel-indicators">
+        <li data-target="#@carM" data-slide-to="0" class="d-none d-md-block active"></li>
+        <li data-target="#@carM" data-slide-to="1" class="d-none d-md-block"></li>
+        <li data-target="#@carM" data-slide-to="2" class="d-none d-md-block"></li>
+    </ol>
+
+    <!--Carousel :-->
+    <div class="carousel-inner">
+
+        <!--First Slide :-->
+        <div class="@carI active" href="#@carM" data-interval="10000">
+
+            <div class="@carC carUp">
+                <h1>Bienvenue sur Modells.</h1>
             </div>
-            <div class="carousel-item" data-interval="10000">
-                <img src="~/Content/Images/AppPics/Papagyo.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
+            
+            <img src="@sl1U" class="@imgC" alt="@sl1A">
+            
+            <div class="@carC d-none d-md-block">
+                <h1>Le Havre</h1>
+                <p>Catène des 500 ans.</p>
             </div>
-            <div class="carousel-item" data-interval="10000">
-                <img src="~/Content/Images/AppPics/Surfing.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
+        
+        </div>
+
+        <!--Second Slide :-->
+        <div class="@carI" href="#@carM" data-interval="10000">
+
+            <div class="@carC carUp">
+                <h1>Mise en ligne des photos...</h1>
+            </div>
+            
+            <img src="@sl2U" class="@imgC" alt="@sl2A">
+            
+            <div class="@carC d-none d-md-block">
+                <h1>Lanzarote</h1>
+                <p>Plage de Papagyo.</p>
+            </div>
+        </div>
+
+        <!--Third Slide :-->
+        <div class="@carI" href="#@carM" data-interval="10000">
+
+            <div class="@carC carUp">
+                <h1>Galerie photos sous forme de collection.</h1>
+            </div>
+
+            <img src="@sl3U" class="@imgC" alt="@sl3A">
+            <div class="@carC d-none d-md-block">
+                <h1>Fuenteventura</h1>
+                <p>Mer et surfeur.</p>
             </div>
         </div>
     </div>
+</div>

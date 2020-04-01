@@ -576,6 +576,43 @@ p[id="pictureDescription"] {
     color: rgba(30, 144, 255, .7) !important;
 }
 
+/* Set carousel */
+.car {
+    color: white;
+    font-weight:bold;
+}
+
+/* Set indicators round */
+.carousel-indicators li {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.carousel-caption.carUp {
+    top: 35%;
+    bottom: auto;
+}
+
+/*.carousel-caption h1 {
+    font-size: 1.5rem !important;
+}*/
+
+/**/
+@media screen and (min-width: 701px) {
+    .carousel-caption.carUp h1 {
+        font-size: 3rem !important;
+    }
+}
+
+/**/
+@media screen and (max-width: 700px) {
+    .carousel-caption.carUp h1 {
+        font-size: 1.5rem !important;
+    }
+}
+
+
 /* Set all exifs colors data */
 /* Brand */
 .exifBrand, .exifBrand > i {

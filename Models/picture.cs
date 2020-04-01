@@ -229,6 +229,12 @@ namespace Modells.Models
 
         public const string WwayErrorMessage = "\u2003Erreur 404...";
 
+        public const string FirstSlide = "First Slide";
+
+        public const string SecondSlide = "Second Slide";
+
+        public const string ThirdSlide = "Third Slide";
+
         public const string BackToColl = "Retour collection";
 
         public const string ResetForm = "Réinitialiser";
@@ -272,5 +278,13 @@ namespace Modells.Models
         public const string WWayErrorUrl = "/Content/Images/AppPics/404.jpg";
 
         public const string RemovePictureUrl = "/Content/Images/AppPics/Removed.jpg";
+
+        public const string CarFirstSlide = "/Content/Images/AppPics/Arche_LH.jpg";
+
+        public const string CarSecondSlide = "/Content/Images/AppPics/Papagyo.jpg";
+
+        public const string CarThirdSlide = "/Content/Images/AppPics/Surfing.jpg";
+
+
     }
 }
