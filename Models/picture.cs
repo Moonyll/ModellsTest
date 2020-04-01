@@ -199,6 +199,30 @@ namespace Modells.Models
         
         public const string UpLoad = "Upload";
 
+        public const string Success = "Success";
+
+        public const string Successful = "Succès";
+
+        public const string Update = "Update";
+
+        public const string Updated = "Mise à jour";
+
+        public const string Error = "Error";
+
+        public const string ErrorOccurred = "Erreur";
+
+        public const string WWayError = "404Error";
+
+        public const string WWayErrorOccurred = "Erreur 404";
+
+        public const string SuccessMessage = "\u2003Image ajoutée avec succès !";
+
+        public const string UpdateMessage = "\u2003Image mise à jour avec succès !";
+
+        public const string ErrorMessage = "\u2003Une erreur s'est produite lors du traitement de votre demande.";
+
+        public const string WwayErrorMessage = "\u2003Erreur 404...";
+
         public const string BackToColl = "Retour collection";
 
         public const string ResetForm = "Réinitialiser";
@@ -233,5 +257,12 @@ namespace Modells.Models
 
         public const string MiniLogoTwitterUrl = "https://twitter.com/";
 
+        public const string AddPictureSuccessUrl = "/Content/Images/AppPics/Success.jpg";
+
+        public const string UpdatePictureUrl = "/Content/Images/AppPics/Update.jpg";
+
+        public const string ErrorUrl = "/Content/Images/AppPics/Error.jpg";
+
+        public const string WWayErrorUrl = "/Content/Images/AppPics/404.jpg";
     }
 }

@@ -1,0 +1,34 @@
+﻿@using globalLabels = Modells.Models.pictureGlobalLabels;
+@{
+    ViewBag.Title = "pictureUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Css Templates :
+
+    var containerCss = "container-fluid ContainerCss p-0";
+    var imgCss = "img-fluid img-thumbnail d-flex";
+    var msgCss = "updateMessageToDisplay justify-content-center align-items-center";
+
+    // Global labels & titles :
+
+    var upA = globalLabels.Update;
+    var upT = globalLabels.Updated;
+    var upM = globalLabels.UpdateMessage;
+
+    // Src Url :
+
+    var upU = globalLabels.UpdatePictureUrl;
+
+}
+
+<div class="@containerCss">
+
+    <!--Picture Update :-->
+    <img src="@upU" class="@imgCss" alt="@upA" title="@upT" />
+
+    <!-- Update message :-->
+    <p class="@msgCss">
+        <i class="far fa-image"></i>@upM
+    </p>
+
+</div>

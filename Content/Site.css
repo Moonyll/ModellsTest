@@ -484,26 +484,79 @@ p[id="pictureDescription"] {
     font-weight:bold;
 }
 
-/**/
+/* Set containers views messages */
 .ContainerCss {
     position: relative;
     text-align: center;
     color: white;
 }
 
-/**/
-.messageToDisplay {
+/* Set success message */
+.successMessageToDisplay {
     position: absolute;
     font-size: 3vw;
+    font-weight:bold;
     color: rgba(127, 255, 0, .7) !important;
-    top: 75%;
+    top: 20%;
     left: 45%;
     transform: translate(-50%, -50%);
 }
 
-.messageToDisplay i {
+/* Set icon success message */
+.successMessageToDisplay i {
     font-size: 3vw;
     color: rgba(127, 255, 0, .9) !important;
+}
+
+/* Set update message */
+.updateMessageToDisplay {
+    position: absolute;
+    font-size: 3vw;
+    font-weight: bold;
+    color: rgba(0, 191,255, .9) !important;
+    top: 22%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
+
+/* Set icon update message */
+.updateMessageToDisplay i {
+    font-size: 3vw;
+    color: rgba(0, 191,255, .9) !important;
+}
+
+/* Set error message */
+.errorMessageToDisplay {
+    position: absolute;
+    font-size: 3vw;
+    font-weight: bold;
+    color: rgba(265, 69, 0, .9) !important;
+    top: 17%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Set icon error message */
+.errorMessageToDisplay i {
+    font-size: 3vw;
+    color: rgba(255, 69, 0, .9) !important;
+}
+
+/* Set error 404 message */
+.errorWwMessageToDisplay {
+    position: absolute;
+    font-size: 5vw;
+    font-weight: bold;
+    color: rgba(30, 144, 255, .7) !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Set icon error 404 message */
+.errorWwMessageToDisplay i {
+    font-size: 5vw;
+    color: rgba(30, 144, 255, .7) !important;
 }
 
 /* Set all exifs colors data */

@@ -1,12 +1,34 @@
-﻿
+﻿@using globalLabels = Modells.Models.pictureGlobalLabels;
 @{
     ViewBag.Title = "pictureSuccess";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Css Templates :
+
+    var containerCss = "container-fluid ContainerCss p-0";
+    var imgCss = "img-fluid img-thumbnail d-flex";
+    var msgCss = "successMessageToDisplay justify-content-center align-items-center";
+
+    // Global labels & titles :
+
+    var scA = globalLabels.Success;
+    var scT = globalLabels.Successful;
+    var scM = globalLabels.SuccessMessage;
+
+    // Src Url :
+
+    var scU = globalLabels.AddPictureSuccessUrl;
+
 }
 
-<div class="container-fluid ContainerCss">
-    <img src="~/Content/Images/AppPics/Success.jpg" class="img-fluid img-thumbnail d-flex" alt="success" title="succès" />
-    <p class="messageToDisplay justify-content-center align-items-center">
-        <i class="fas fa-check"></i>&emsp;Image ajoutée avec succès !
+<div class="@containerCss">
+
+    <!--Picture Success :-->
+    <img src="@scU" class="@imgCss" alt="@scA" title="@scT" />
+    
+    <!-- Success message :-->
+    <p class="@msgCss">
+        <i class="fas fa-check"></i>@scM
     </p>
+
 </div>

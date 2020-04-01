@@ -487,7 +487,7 @@ namespace Modells.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("pictureDeleteOk");
+            return RedirectToAction("pictureRemoved");
         }
 
         #endregion
@@ -500,20 +500,32 @@ namespace Modells.Controllers
             return View();
         }
 
-        // Display success view :
+        // Display picture created success view :
         public ActionResult pictureSuccess()
         {
             return View();
         }
 
-        // Display picture delete ok view :
-        public ActionResult pictureDeleteOk()
+        // Display picture updated view :
+        public ActionResult pictureUpdate()
+        {
+            return View();
+        }
+
+        // Display picture removed view :
+        public ActionResult pictureRemoved()
         {
             return View();
         }
 
         // Display error view :
         public ActionResult pictureError()
+        {
+            return View();
+        }
+
+        // Display 404 error view :
+        public ActionResult picture404()
         {
             return View();
         }

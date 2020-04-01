@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "picture404";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using globalLabels = Modells.Models.pictureGlobalLabels;
+@{
+    ViewBag.Title = "pictureError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Css Templates :
+
+    var containerCss = "container-fluid ContainerCss p-0";
+    var imgCss = "img-fluid img-thumbnail d-flex";
+    var msgCss = "errorWwMessageToDisplay justify-content-center align-items-center";
+
+    // Global labels & titles :
+
+    var wwA = globalLabels.WWayError;
+    var wwT = globalLabels.WWayErrorOccurred;
+    var wwM = globalLabels.WwayErrorMessage;
+
+    // Src Url :
+
+    var wwU = globalLabels.WWayErrorUrl;
+
+}
+
+<div class="@containerCss">
+
+    <!--Error 404 :-->
+    <img src="@wwU" class="@imgCss" alt="@wwA" title="@wwT" />
+
+    <!-- Error 404 message :-->
+    <p class="@msgCss">
+        <i class="fas fa-ghost"></i>@wwM
+    </p>
+
+</div>

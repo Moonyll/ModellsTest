@@ -1,14 +1,34 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width" />
-    <title>Erreur</title>
-</head>
-<body>
-    <hgroup class="text-light">
-        <h1>Erreur.</h1>
-        <h2>Une erreur s'est produite lors du traitement de votre demande.</h2>
-    </hgroup>
-</body>
-</html>
+﻿@using globalLabels = Modells.Models.pictureGlobalLabels;
+@{
+    ViewBag.Title = "pictureError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Css Templates :
+
+    var containerCss = "container-fluid ContainerCss p-0";
+    var imgCss = "img-fluid img-thumbnail d-flex";
+    var msgCss = "errorMessageToDisplay justify-content-center align-items-center";
+
+    // Global labels & titles :
+
+    var erA = globalLabels.Error;
+    var erT = globalLabels.ErrorOccurred;
+    var erM = globalLabels.ErrorMessage;
+
+    // Src Url :
+
+    var erU = globalLabels.ErrorUrl;
+
+}
+
+<div class="@containerCss">
+
+    <!--Global Error :-->
+    <img src="@erU" class="@imgCss" alt="@erA" title="@erT" />
+
+    <!-- Error message :-->
+    <p class="@msgCss">
+        <i class="fas fa-exclamation"></i>@erM
+    </p>
+
+</div>

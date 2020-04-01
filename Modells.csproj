@@ -1736,7 +1736,9 @@
     <Content Include="Content\Icons\webfonts\fa-brands-400.svg" />
     <Content Include="Content\Icons\webfonts\fa-regular-400.svg" />
     <Content Include="Content\Icons\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\Images\AppPics\404.jpg" />
     <Content Include="Content\Images\AppPics\Arche_LH.jpg" />
+    <Content Include="Content\Images\AppPics\Error.jpg" />
     <Content Include="Content\Images\AppPics\HeaderCL.jpg" />
     <Content Include="Content\Images\AppPics\HeaderNB.jpg" />
     <Content Include="Content\Images\AppPics\NightPort.jpg" />
@@ -1745,6 +1747,7 @@
     <Content Include="Content\Images\AppPics\Success.jpg" />
     <Content Include="Content\Images\AppPics\Surfing.jpg" />
     <Content Include="Content\Images\AppPics\Town.jpg" />
+    <Content Include="Content\Images\AppPics\Update.jpg" />
     <Content Include="Content\Images\Logos\logo.jpg" />
     <Content Include="Content\Images\Logos\modells.jpg" />
     <Content Include="Content\Images\Logos\pixabay.png" />
@@ -1956,7 +1959,9 @@
     <Content Include="Views\Shared\pictureSuccess.cshtml" />
     <Content Include="Views\Pictures\pictureEdit.cshtml" />
     <Content Include="Views\Pictures\pictureHome.cshtml" />
-    <Content Include="Views\Shared\pictureDeleteOk.cshtml" />
+    <Content Include="Views\Shared\pictureRemoved.cshtml" />
+    <Content Include="Views\Shared\picture404.cshtml" />
+    <Content Include="Views\Shared\pictureUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
