@@ -476,18 +476,40 @@ namespace Modells.Controllers
                 return RedirectToAction("picture404");
             }
 
-            picture picture = db.picture.Find(id);
+            picture pictureToRemove = db.picture.Find(id);
 
-            if (picture == null)
+            if (pictureToRemove == null)
             {
                 return RedirectToAction("pictureError");
             }
 
-            db.picture.Remove(picture);
+            // Get picture url to remove :
+            var pictureToRemoveUrl = Path.Combine
+                                         (
+                                              Server.MapPath(pictureControls.pictureFileDirectory),
+                                              pictureToRemove.pictureStandardUrl
+                                         );
 
-            db.SaveChanges();
+            // Check if picture url exists & remove the picture from the directory & database :
+            if (System.IO.File.Exists(pictureToRemoveUrl))
+            {
+                // Remove physical picture from directory :
+                System.IO.File.Delete(pictureToRemoveUrl);
 
-            return RedirectToAction("pictureRemoved");
+                // Remove data picture from databse :
+                db.picture.Remove(pictureToRemove);
+
+                // Saving :
+                db.SaveChanges();
+
+                return RedirectToAction("pictureRemoved");
+            }
+            
+            // Redirect to error view if picture url not found :
+            else
+            {
+                return RedirectToAction("pictureError");
+            }
         }
 
         #endregion
