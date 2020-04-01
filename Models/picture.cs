@@ -207,6 +207,10 @@ namespace Modells.Models
 
         public const string Updated = "Mise à jour";
 
+        public const string Remove = "Remove";
+
+        public const string Removed = "Suppression";
+
         public const string Error = "Error";
 
         public const string ErrorOccurred = "Erreur";
@@ -218,6 +222,8 @@ namespace Modells.Models
         public const string SuccessMessage = "\u2003Image ajoutée avec succès !";
 
         public const string UpdateMessage = "\u2003Image mise à jour avec succès !";
+
+        public const string RemoveMessage = "\u2003Image supprimée...";
 
         public const string ErrorMessage = "\u2003Une erreur s'est produite lors du traitement de votre demande.";
 
@@ -264,5 +270,7 @@ namespace Modells.Models
         public const string ErrorUrl = "/Content/Images/AppPics/Error.jpg";
 
         public const string WWayErrorUrl = "/Content/Images/AppPics/404.jpg";
+
+        public const string RemovePictureUrl = "/Content/Images/AppPics/Removed.jpg";
     }
 }

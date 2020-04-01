@@ -525,6 +525,23 @@ p[id="pictureDescription"] {
     color: rgba(0, 191,255, .9) !important;
 }
 
+/* Set remove message */
+.removeMessageToDisplay {
+    position: absolute;
+    font-size: 3vw;
+    font-weight: bold;
+    color: rgba(245, 222,179, .9) !important;
+    top: 30%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
+
+/* Set icon remove message */
+.removeMessageToDisplay i {
+    font-size: 3vw;
+    color: rgba(245, 222,179, .9) !important;
+}
+
 /* Set error message */
 .errorMessageToDisplay {
     position: absolute;

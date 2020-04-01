@@ -1,10 +1,36 @@
-﻿
+﻿@using globalLabels = Modells.Models.pictureGlobalLabels;
 @{
-    ViewBag.Title = "pictureDeleteOk";
+    ViewBag.Title = "pictureRemoved";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Css Templates :
+
+    var containerCss = "container-fluid ContainerCss p-0";
+    var imgCss = "img-fluid img-thumbnail d-flex";
+    var msgCss = "removeMessageToDisplay justify-content-center align-items-center";
+
+    // Global labels & titles :
+
+    var rmA = globalLabels.Remove;
+    var rmT = globalLabels.Removed;
+    var rmM = globalLabels.RemoveMessage;
+
+    // Src Url :
+
+    var rmU = globalLabels.RemovePictureUrl;
+
 }
 
-    <h2>pictureDeleteOk</h2>
+<div class="@containerCss">
 
-Votre image a été supprimée avec succès !
+    <!--Picture Remove :-->
+    <img src="@rmU" class="@imgCss" alt="@rmA" title="@rmT" />
+
+    <!-- Remove message :-->
+    <p class="@msgCss">
+        <i class="fas fa-minus-square"></i>@rmM
+    </p>
+
+</div>
+
 

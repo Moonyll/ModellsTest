@@ -1952,7 +1952,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Pictures\pictureDelete.cshtml" />
     <Content Include="Views\Pictures\pictureCollection.cshtml" />
     <Content Include="Views\Pictures\pictureDetails.cshtml" />
     <Content Include="Views\Pictures\pictureCreate.cshtml" />

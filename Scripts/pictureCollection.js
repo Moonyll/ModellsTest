@@ -189,37 +189,6 @@
                   }
               });
           });
-          
-          // Ajax call to delete the picture :
-          //$("#deletePic").click(function () {
-
-          //    $.ajax({
-          //        url: urlPictureDelete,
-          //        type: 'POST',
-          //        //ajaxasync: true,
-          //        //dataType: 'html',
-          //        contentType: 'application/json; charset=utf-8',
-          //        data: { id: selectedPictureId },
-
-          //        // Id is found :
-          //        success: function () {
-
-          //            // Redirect to edition view page to update picture :
-          //            console.log(urlPictureDelConf);
-          //            alert(selectedPictureId);
-          //            //window.location.href = urlDeleteConfirmed;
-          //        },
-
-          //        // Id is not found :
-          //        error: function () {
-
-          //            // Redirect to error view page :
-          //            window.location.href = urlPictureError;
-          //            console.log(data.error);
-          //        }
-          //    });
-          //});
-          //
 
             // Display picture exifs with an ajax call :
             function displayPictureExifs() {

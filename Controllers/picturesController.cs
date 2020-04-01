@@ -409,12 +409,12 @@ namespace Modells.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("picture404");
             }
             picture picture = db.picture.Find(id);
             if (picture == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("pictureError");
             }
                 Selection();
 
@@ -452,7 +452,7 @@ namespace Modells.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("pictureCollection");
+                return RedirectToAction("pictureUpdate");
             }
 
             Selection();
@@ -473,14 +473,14 @@ namespace Modells.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("picture404");
             }
 
             picture picture = db.picture.Find(id);
 
             if (picture == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("pictureError");
             }
 
             db.picture.Remove(picture);
