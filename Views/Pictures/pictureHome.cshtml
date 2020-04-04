@@ -6,7 +6,7 @@
     // Css Templates :
     var carI = "carousel-item";
     var carM = "carouselModells";
-    var carC = "carousel-caption car";
+    var carC = "carousel-caption";
     var imgC = "d-block w-100";
 
     // Global labels & titles :
@@ -28,9 +28,9 @@
 
     <!--Carousel tabs :-->
     <ol class="carousel-indicators">
-        <li data-target="#@carM" data-slide-to="0" class="d-none d-md-block active"></li>
-        <li data-target="#@carM" data-slide-to="1" class="d-none d-md-block"></li>
-        <li data-target="#@carM" data-slide-to="2" class="d-none d-md-block"></li>
+        <li data-target="#@carM" data-slide-to="0" class="d-none d-md-block active ind1"></li>
+        <li data-target="#@carM" data-slide-to="1" class="d-none d-md-block ind2"></li>
+        <li data-target="#@carM" data-slide-to="2" class="d-none d-md-block ind3"></li>
     </ol>
 
     <!--Carousel :-->
@@ -39,15 +39,16 @@
         <!--First Slide :-->
         <div class="@carI active" href="#@carM" data-interval="10000">
 
-            <div class="@carC carUp">
-                <h1>Bienvenue sur Modells.</h1>
+            <div class="@carC carUp carb1">
+                <h1><span class="car1 p-1">&nbsp; Bienvenue sur Modells &nbsp;</span></h1>
+                <h2><span class="car1 p-1">&nbsp; Conçu pour les passionnés de photographie &nbsp;</span></h2>
             </div>
             
             <img src="@sl1U" class="@imgC" alt="@sl1A">
             
             <div class="@carC d-none d-md-block">
-                <h1>Le Havre</h1>
-                <p>Catène des 500 ans.</p>
+                <h1><span class="carDown1">&nbsp; Le Havre &nbsp;</span></h1>
+                <p><span class="carDown1">&nbsp; Catène des 500 ans &nbsp;</span></p>
             </div>
         
         </div>
@@ -55,29 +56,31 @@
         <!--Second Slide :-->
         <div class="@carI" href="#@carM" data-interval="10000">
 
-            <div class="@carC carUp">
-                <h1>Mise en ligne des photos...</h1>
+            <div class="@carC carUp carb2">
+                <h1><span class="car2 p-1">&nbsp; Mise en ligne des photos &nbsp;</span></h1>
+                <h2><span class="car2 p-1">&nbsp; Adaptée à tous les supports &nbsp;</span></h2>
             </div>
             
             <img src="@sl2U" class="@imgC" alt="@sl2A">
             
             <div class="@carC d-none d-md-block">
-                <h1>Lanzarote</h1>
-                <p>Plage de Papagyo.</p>
+                <h1><span class="carDown2">&nbsp; Lanzarote &nbsp;</span></h1>
+                <p><span class="carDown2">&nbsp; Plage de Papagyo &nbsp;</span></p>
             </div>
         </div>
 
         <!--Third Slide :-->
         <div class="@carI" href="#@carM" data-interval="10000">
 
-            <div class="@carC carUp">
-                <h1>Galerie photos sous forme de collection.</h1>
+            <div class="@carC carUp carb3">
+                <h1><span class="car3 p-1">&nbsp; Galerie photos sous forme de collection &nbsp;</span></h1>
+                <h2 class="car3 p-1"><span>&nbsp; Affichage des métadonnées Exifs &nbsp;</span></h2>
             </div>
 
             <img src="@sl3U" class="@imgC" alt="@sl3A">
             <div class="@carC d-none d-md-block">
-                <h1>Fuenteventura</h1>
-                <p>Mer et surfeur.</p>
+                <h1><span class="carDown3">&nbsp; Fuenteventura &nbsp;</span></h1>
+                <p><span class="carDown3">&nbsp; Mer et surfeur &nbsp;</span></p>
             </div>
         </div>
     </div>

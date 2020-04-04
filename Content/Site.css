@@ -576,10 +576,22 @@ p[id="pictureDescription"] {
     color: rgba(30, 144, 255, .7) !important;
 }
 
-/* Set carousel */
-.car {
-    color: white;
-    font-weight:bold;
+/* Set slide 1's font */
+.car1 {
+    color: rgba(255, 255, 255, 1) !important;
+    font-weight: bold;
+}
+
+/* Set slide 2's font */
+.car2 {
+    color: rgba(210, 105, 30, 1) !important;
+    font-weight: bold;
+}
+
+/* Set slide 3's font */
+.car3 {
+    color: rgba(255, 255, 255, 1) !important;
+    font-weight: bold;
 }
 
 /* Set indicators round */
@@ -589,29 +601,94 @@ p[id="pictureDescription"] {
     border-radius: 100%;
 }
 
+/* Set slide 1's down background */
+.ind1 {
+    background-color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Set slide 2's down background */
+.ind2 {
+    background-color: rgba(255, 215, 0, 1) !important;
+}
+
+/* Set slide 3's down background */
+.ind3 {
+    background-color: rgba(0, 206, 209, 1) !important;
+}
+
+/* Set caption slides up position */
 .carousel-caption.carUp {
-    top: 35%;
+    top: 5%;
     bottom: auto;
 }
 
-/*.carousel-caption h1 {
-    font-size: 1.5rem !important;
-}*/
+/* Set caption slide 1 's up colors */
+.carousel-caption.carUp.carb1 {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
 
-/**/
+/* Set caption slide 2 's up colors */
+.carousel-caption.carUp.carb2 {
+    background-color: rgba(250, 250, 210, .1) !important;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+/* Set caption slide 3 's up colors */
+.carousel-caption.carUp.carb3 {
+    background-color: rgba(0, 206, 209, .1) !important;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+/* Set caption slide 1 's down colors */
+.carDown1 {
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: rgba(250, 250, 210, .1) !important;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+/* Set caption slide 2 's down colors */
+.carDown2 {
+    color: rgba(255, 215, 0, 1) !important;
+    background-color: rgba(250, 250, 210, .1) !important;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+/* Set caption slide 3 's down colors */
+.carDown3 {
+    color: rgba(255, 255, 255, 1) !important;
+    background-color: rgba(0, 206, 209, .5) !important;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+
+/* Set font-size carousel - Medium Screen */
 @media screen and (min-width: 701px) {
     .carousel-caption.carUp h1 {
         font-size: 3rem !important;
     }
+
+    .carousel-caption.carUp h2 {
+        font-size: 1.5rem !important;
+    }
+
 }
 
-/**/
+/* Set font-size carousel - Small Screen */
 @media screen and (max-width: 700px) {
     .carousel-caption.carUp h1 {
         font-size: 1.5rem !important;
     }
-}
 
+    .carousel-caption.carUp h2 {
+        font-size: 0.75rem !important;
+    }
+}
 
 /* Set all exifs colors data */
 /* Brand */
