@@ -235,6 +235,30 @@ namespace Modells.Models
 
         public const string ThirdSlide = "Third Slide";
 
+        public const string FirstSlideUpH1 = "\u0020Bienvenue sur Modells\u0020";
+        
+        public const string FirstSlideUpH2 = "\u0020Conçu pour les passionnés de photographie\u0020";
+
+        public const string SecondSlideUpH1 = "\u0020Mise en ligne des photos\u0020";
+
+        public const string SecondSlideUpH2 = "\u0020Adaptée à tous les supports\u0020";
+
+        public const string ThirdSlideUpH1 = "\u0020Galerie photos sous forme de collection\u0020";
+
+        public const string ThirdSlideUpH2 = "\u0020Affichage des métadonnées Exifs\u0020";
+
+        public const string FirstSlideDownH = "\u0020Le Havre\u0020";
+
+        public const string FirstSlideDownP = "\u0020Catène des 500 ans\u0020";
+
+        public const string SecondSlideDownH = "\u0020Lanzarote\u0020";
+
+        public const string SecondSlideDownP = "\u0020Plage de Papagyo\u0020";
+
+        public const string ThirdSlideDownH = "\u0020Fuenteventura\u0020";
+
+        public const string ThirdSlideDownP = "\u0020Mer et surfeur\u0020";
+
         public const string BackToColl = "Retour collection";
 
         public const string ResetForm = "Réinitialiser";

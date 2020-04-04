@@ -4,10 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Css Templates :
+    var carF = "carousel slide carousel-fade";
     var carI = "carousel-item";
     var carM = "carouselModells";
-    var carC = "carousel-caption";
+    var carU = "carousel-caption carUp carb";
+    var carD = "carousel-caption d-none d-md-block";
     var imgC = "d-block w-100";
+    var ind = "d-none d-md-block ind";
+    var spnU = "p-1 car";
+    var spnD = "carDown";
+
 
     // Global labels & titles :
 
@@ -15,7 +21,24 @@
     var sl2A = globalLabels.SecondSlide;
     var sl3A = globalLabels.ThirdSlide;
 
+    var sl1UH1 = globalLabels.FirstSlideUpH1;
+    var sl1UH2 = globalLabels.FirstSlideUpH2;
 
+    var sl2UH1 = globalLabels.SecondSlideUpH1;
+    var sl2UH2 = globalLabels.SecondSlideUpH2;
+
+    var sl3UH1 = globalLabels.ThirdSlideUpH1;
+    var sl3UH2 = globalLabels.ThirdSlideUpH2;
+
+    var sl1DH = globalLabels.FirstSlideDownH;
+    var sl1DP = globalLabels.FirstSlideDownP;
+
+    var sl2DH = globalLabels.SecondSlideDownH;
+    var sl2DP = globalLabels.SecondSlideDownP;
+
+    var sl3DH = globalLabels.ThirdSlideDownH;
+    var sl3DP = globalLabels.ThirdSlideDownP;
+    
     // Src Url :
     var sl1U = globalLabels.CarFirstSlide;
     var sl2U = globalLabels.CarSecondSlide;
@@ -24,13 +47,13 @@
 }
 
 <!--Carousel of 3 slides, with tabs & fade effect :-->
-<div id="@carM" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="@carM" class="@carF" data-ride="carousel">
 
     <!--Carousel tabs :-->
     <ol class="carousel-indicators">
-        <li data-target="#@carM" data-slide-to="0" class="d-none d-md-block active ind1"></li>
-        <li data-target="#@carM" data-slide-to="1" class="d-none d-md-block ind2"></li>
-        <li data-target="#@carM" data-slide-to="2" class="d-none d-md-block ind3"></li>
+        <li data-target="#@carM" data-slide-to="0" class="@(ind)1 active"></li>
+        <li data-target="#@carM" data-slide-to="1" class="@(ind)2"></li>
+        <li data-target="#@carM" data-slide-to="2" class="@(ind)3"></li>
     </ol>
 
     <!--Carousel :-->
@@ -39,48 +62,57 @@
         <!--First Slide :-->
         <div class="@carI active" href="#@carM" data-interval="10000">
 
-            <div class="@carC carUp carb1">
-                <h1><span class="car1 p-1">&nbsp; Bienvenue sur Modells &nbsp;</span></h1>
-                <h2><span class="car1 p-1">&nbsp; Conçu pour les passionnés de photographie &nbsp;</span></h2>
+            <!--First Slide Up Caption :-->
+            <div class="@(carU)1">
+                <h1><span class="@(spnU)1">@sl1UH1</span></h1>
+                <h2><span class="@(spnU)1">@sl1UH2</span></h2>
             </div>
-            
+
+            <!--First Slide Image :-->
             <img src="@sl1U" class="@imgC" alt="@sl1A">
-            
-            <div class="@carC d-none d-md-block">
-                <h1><span class="carDown1">&nbsp; Le Havre &nbsp;</span></h1>
-                <p><span class="carDown1">&nbsp; Catène des 500 ans &nbsp;</span></p>
+
+            <!--First Slide Down Caption :-->
+            <div class="@carD">
+                <h1><span class="@(spnD)1">@sl1DH</span></h1>
+                <p><span class="@(spnD)1">@sl1DP</span></p>
             </div>
-        
         </div>
 
         <!--Second Slide :-->
         <div class="@carI" href="#@carM" data-interval="10000">
 
-            <div class="@carC carUp carb2">
-                <h1><span class="car2 p-1">&nbsp; Mise en ligne des photos &nbsp;</span></h1>
-                <h2><span class="car2 p-1">&nbsp; Adaptée à tous les supports &nbsp;</span></h2>
+            <!--Second Slide Up Caption :-->
+            <div class="@(carU)2">
+                <h1><span class="@(spnU)2">@sl2UH1</span></h1>
+                <h2><span class="@(spnU)2">@sl2UH2</span></h2>
             </div>
-            
+
+            <!--Second Slide Image :-->
             <img src="@sl2U" class="@imgC" alt="@sl2A">
-            
-            <div class="@carC d-none d-md-block">
-                <h1><span class="carDown2">&nbsp; Lanzarote &nbsp;</span></h1>
-                <p><span class="carDown2">&nbsp; Plage de Papagyo &nbsp;</span></p>
+
+            <!--Secon Slide Down Caption :-->
+            <div class="@carD">
+                <h1><span class="@(spnD)2">@sl2DH</span></h1>
+                <p><span class="@(spnD)2">@sl2DP</span></p>
             </div>
         </div>
 
         <!--Third Slide :-->
         <div class="@carI" href="#@carM" data-interval="10000">
 
-            <div class="@carC carUp carb3">
-                <h1><span class="car3 p-1">&nbsp; Galerie photos sous forme de collection &nbsp;</span></h1>
-                <h2 class="car3 p-1"><span>&nbsp; Affichage des métadonnées Exifs &nbsp;</span></h2>
+            <!--Third Slide Up Caption :-->
+            <div class="@(carU)3">
+                <h1><span class="@(spnU)3">@sl3UH1</span></h1>
+                <h2><span class="@(spnU)3">@sl3UH2</span></h2>
             </div>
 
+            <!--Third Slide Image :-->
             <img src="@sl3U" class="@imgC" alt="@sl3A">
-            <div class="@carC d-none d-md-block">
-                <h1><span class="carDown3">&nbsp; Fuenteventura &nbsp;</span></h1>
-                <p><span class="carDown3">&nbsp; Mer et surfeur &nbsp;</span></p>
+
+            <!--Third Slide Down Caption :-->
+            <div class="@carD">
+                <h1><span class="@(spnD)3">@sl3DH</span></h1>
+                <p><span class="@(spnD)3">@sl3DP</span></p>
             </div>
         </div>
     </div>
