@@ -388,6 +388,14 @@ ul li {
     color: darkturquoise !important;
 }
 
+/* Set nav-item buttons */
+.nav-item {
+    align-self:center !important;
+    height:70%;
+    max-width:6%;
+}
+
+
 /* Set recurrent buttons */
 .recButton, .delModal, #addPic {
     background-color: black !important;
