@@ -42,6 +42,7 @@ header {
 /* Set the navigation bar */
 nav {
     height: 10%;
+    min-width :100%;
     background-color: black !important;
 }
 

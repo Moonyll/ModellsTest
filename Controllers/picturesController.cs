@@ -210,8 +210,8 @@ namespace Modells.Controllers
                 
                 // Get the picture in temp directory :
                 tempPictureFile = tempDirectory.GetFiles()
-                                                   .ToList()
-                                                   .SingleOrDefault();
+                                               .ToList()
+                                               .SingleOrDefault();
             }
 
             if (newPictureToUpload == null && tempPictureFile == null)

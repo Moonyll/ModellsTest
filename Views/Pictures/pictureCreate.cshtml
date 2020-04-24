@@ -7,7 +7,7 @@
 
     // Class templates for the picture create :
     var formGroupCss = "form-group d-flex mx-auto justify-content-center mb-0";
-    var labelCss = "control-label col-4 btn recButton text-light text-center text-wrap border border-light";
+    var labelCss = "control-label col-4 btn recButton text-light text-center text-nowrap border border-light";
     var controlLabelCss = "control-label d-flex btn recButton border border-light col-2 justify-content-center align-items-center";
     var buttonToolAttr = "data-toggle = tooltip data-placement = bottom";
     var editCss = "form-control col-5 text-light border border-light was-validated currentInput";
@@ -18,7 +18,10 @@
     var btnRemCss = "d-flex btn recButton border border-light col-sm-6 col-md-2 col-lg-2 justify-content-center " +
                     "removing offset-md-2 offset-lg-2 resetForm formButton";
 
+    var ctCss = "container-fluid d-flex";
+    var rowCss = "row mx-auto align-items-center";
     var previewCss = "col-sm-12 col-md-5 col-lg-5 m-2";
+    var formCreateCss = "form-horizontal form-control m-1";
     var formCss = "col-sm-12 col-md-6 col-lg-6 m-3 p-2 specialFormBorderLine";
     var addBtnCss = "btn d-block mx-auto m-2 btn-outline-light removeFocus adding";
 
@@ -38,6 +41,8 @@
                             globalLabels.DefaultPictureUrl :
                             ViewBag.picturePreviewSrc;
 
+    var previewImgCss = "card-img img-thumbnail m-3 mx-auto";
+    
     // Action Links :
     var urlToColl = Url.Action("pictureCollection", "Pictures");
 
@@ -81,13 +86,13 @@
     @Scripts.Render("~/Scripts/script.js");
 }
 
-<div class="container-fluid d-flex">
+<div class="@ctCss">
 
-    <div class="row mx-auto align-items-center">
+    <div class="@rowCss">
 
         <!--Display choosen picture to create :-->
         <div class="@previewCss specialPictureBorderLine">
-            <img id="pictureChoice" src="@previewDefaultSrc" alt="@previewImgAlt" title="@previewImgTtl" class="card-img img-thumbnail m-3 mx-auto" />
+            <img id="pictureChoice" src="@previewDefaultSrc" alt="@previewImgAlt" title="@previewImgTtl" class="@previewImgCss" />
         </div>
 
         <!--Display the form to add a picture :-->
@@ -106,7 +111,7 @@
                 @Html.AntiForgeryToken()
 
                 <!--Diplay the picture creation form :-->
-                <form class="form-horizontal form-control m-1">
+                <form class="@formCreateCss">
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -114,7 +119,12 @@
                     <div class="@formGroupCss mt-3">
                         @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
                         <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
-                        @Html.EditorFor(model => model.pictureStandardUrl, new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl", @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        @Html.EditorFor(model => model.pictureStandardUrl,
+                        new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl",
+                                                     @onfocus = "clearCss(this)",
+                                                     @onblur = "isValid(this)",
+                                                     @autocomplete = "off" } })
+                        <!--Label-->
                         <label for="newPictureToUpload" class="@controlLabelCss adding" title="@uploadPic">
                             <i class="fas fa-upload"></i>
                         </label>
@@ -128,7 +138,13 @@
                     <!--Input of picture title :-->
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        <!--Edit-->
+                        @Html.EditorFor(model => model.pictureTitle,
+                        new { htmlAttributes = new { @class = @editCss,
+                                                     @onfocus = "clearCss(this)",
+                                                     @onblur = "isValid(this)",
+                                                     @autocomplete = "off" } })
+                        <!--Label-->
                         <label class="@controlLabelCss text-light">
                             <i class="fas fa-bookmark"></i>
                         </label>
@@ -142,7 +158,13 @@
                     <!--Input of picture alternative title :-->
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureAlternateTitle, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        <!--Edit-->
+                        @Html.EditorFor(model => model.pictureAlternateTitle,
+                        new { htmlAttributes = new { @class = @editCss,
+                                                     @onfocus = "clearCss(this)",
+                                                     @onblur = "isValid(this)",
+                                                     @autocomplete = "off" } })
+                        <!--Label-->
                         <label class="@controlLabelCss">
                             <i class="far fa-bookmark"></i>
                         </label>
@@ -156,7 +178,13 @@
                     <!--Input of picture description :-->
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
-                        @Html.EditorFor(model => model.pictureDescription, new { htmlAttributes = new { @class = @editCss, @onfocus = "clearCss(this)", @onblur = "isValid(this)", @autocomplete = "off" } })
+                        <!--Edit-->
+                        @Html.EditorFor(model => model.pictureDescription,
+                        new { htmlAttributes = new { @class = @editCss,
+                                                     @onfocus = "clearCss(this)",
+                                                     @onblur = "isValid(this)",
+                                                     @autocomplete = "off" } })
+                        <!--Label-->
                         <label class="@controlLabelCss">
                             <i class="fas fa-pen"></i>
                         </label>
@@ -170,7 +198,10 @@
                     <!--Input of picture category :-->
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
-                        @Html.DropDownList("categoryId", null, new { @class = @editCss, @onfocus = "clearCss(this)", @onchange = "isValid(this)" })
+                        <!--Edit-->
+                        @Html.DropDownList("categoryId", null,
+                        new { @class = @editCss, @onfocus = "clearCss(this)", @onchange = "isValid(this)" })
+                        <!--Label-->
                         <label class="@controlLabelCss">
                             <i class="fas fa-book-open"></i>
                         </label>

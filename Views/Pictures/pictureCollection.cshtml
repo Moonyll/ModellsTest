@@ -2,10 +2,16 @@
     ViewBag.Title = "pictureCollection";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    // Class template for the column :
-    var colcss = "col-md-3 p-2 bg-transparent d-flex align-items-center justify-content-center";
+    // Class templates :
+    var ctCss = "container-fluid bg-transparent p-4 d-table-cell";
+    var colCss = "col-md-3 p-2 bg-transparent d-flex align-items-center justify-content-center";
+    var cardCss = "card-img-overlay";
+    var cardDivCss = "justify-content-between d-flex";
+    var pictureTitleCss = "card-title text-left pictureTitle";
+    var pictureCategoryCss = "card-title text-right pictureCategory";
+    var btnRating = "btn text-light ratings";
 
-    // Class template for the picture :
+    // Class templates for the picture :
     var imgCss = "card-img img-fluid img-thumbnail d-block mx-auto";
 
     var pagBtn = "btn text-light rounded rounded-circle m-2 removeFocus";
@@ -94,22 +100,22 @@
 </div>
 
 <!--One fluid container of 2 rows & 4 columns :-->
-<div class="container-fluid bg-transparent p-4 d-table-cell">
+<div class="@ctCss">
     <!--First row of 4 pictures :-->
     <div class="row p-2">
         <!--1st column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <!--Picture source, title & alternative title :-->
                 <img src="@pictureElements[0,0]" alt="@pictureElements[0,2]" title="@pictureElements[0,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[0, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[0, 4]
                         </div>
                         <!--Picture description :-->
@@ -122,7 +128,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
@@ -134,17 +140,17 @@
             </div>
         </div>
         <!--2nd column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <img src="@pictureElements[1,0]" alt="@pictureElements[1,2]" title="@pictureElements[1,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[1, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[1, 4]
                         </div>
                         <!--Picture description :-->
@@ -157,7 +163,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
@@ -169,17 +175,17 @@
             </div>
         </div>
         <!--3rd column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <img src="@pictureElements[2,0]" alt="@pictureElements[2,2]" title="@pictureElements[2,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[2, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[2, 4]
                         </div>
                         <!--Picture description :-->
@@ -192,7 +198,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
@@ -204,17 +210,17 @@
             </div>
         </div>
         <!--4th column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <img src="@pictureElements[3,0]" alt="@pictureElements[3,2]" title="@pictureElements[3,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[3, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[3, 4]
                         </div>
                         <!--Picture description :-->
@@ -227,7 +233,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
@@ -242,17 +248,17 @@
     <!--Second row of 4 pictures :-->
     <div class="row p-2">
         <!--1st column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <img src="@pictureElements[4,0]" alt="@pictureElements[4,2]" title="@pictureElements[4,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[4, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[4, 4]
                         </div>
                         <!--Picture description :-->
@@ -265,7 +271,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
@@ -277,17 +283,17 @@
             </div>
         </div>
         <!--2nd column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <img src="@pictureElements[5,0]" alt="@pictureElements[5,2]" title="@pictureElements[5,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[5, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[5, 4]
                         </div>
                         <!--Picture description :-->
@@ -300,7 +306,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
@@ -312,17 +318,17 @@
             </div>
         </div>
         <!--3rd column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <img src="@pictureElements[6,0]" alt="@pictureElements[6,2]" title="@pictureElements[6,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[6, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[6, 4]
                         </div>
                         <!--Picture description :-->
@@ -335,7 +341,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
@@ -347,17 +353,17 @@
             </div>
         </div>
         <!--4th column :-->
-        <div class="@colcss">
+        <div class="@colCss">
             <div class="card">
                 <img src="@pictureElements[7,0]" alt="@pictureElements[7,2]" title="@pictureElements[7,1]" class="@imgCss" />
-                <div class="card-img-overlay">
-                    <div class="justify-content-between d-flex">
+                <div class="@cardCss">
+                    <div class="@cardDivCss">
                         <!--Picture title :-->
-                        <div class="card-title text-left pictureTitle">
+                        <div class="@pictureTitleCss">
                             @pictureElements[7, 1]
                         </div>
                         <!--Picture category :-->
-                        <div class="card-title text-right pictureCategory">
+                        <div class="@pictureCategoryCss">
                             @pictureElements[7, 4]
                         </div>
                         <!--Picture description :-->
@@ -370,7 +376,7 @@
                         </div>
                     </div>
                     <!--Picture ratings :-->
-                    <button type="button" class="btn text-light ratings">
+                    <button type="button" class="@btnRating">
                         <i class="far fa-heart"></i> 5
                         <i class="fas fa-bullseye"></i> 10
                     </button>
