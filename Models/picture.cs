@@ -189,7 +189,11 @@ namespace Modells.Models
 
         public const string EditPicture = "Editer image";
 
+        public const string Delete = "Supprimer";
+
         public const string DelPicture = "Supprimer image";
+
+        public const string RemovePicture = "Supprimer cette image ?";
 
         public const string UpPicture = "Valider";
         
@@ -260,6 +264,8 @@ namespace Modells.Models
         public const string ThirdSlideDownP = "\u0020Mer et surfeur\u0020";
 
         public const string BackToColl = "Retour collection";
+
+        public const string Back = "Retour";
 
         public const string ResetForm = "Réinitialiser";
 

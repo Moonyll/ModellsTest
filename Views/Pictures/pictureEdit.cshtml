@@ -180,6 +180,7 @@
                     <!--Input of picture category :-->
                     <div class="@formGroupCss">
                         @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
+                         <!--Edit-->
                         @Html.DropDownList("categoryId", null, new { @class = @editCss,
                                                                      @onfocus = "clearCss(this)",
                                                                      @onchange = "isValid(this)" })

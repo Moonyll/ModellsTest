@@ -13,27 +13,47 @@
 
     // Class templates for the modal details :
 
+    var mDetMn = "modal bg-transparent";
+    var mDetCn = "modal-dialog modal-dialog-centered modal-xl";
+    var mDetCt = "modal-content bg-transparent";
+    var mDetHd = "modal-header bg-transparent align-items-center justify-content-between d-flex";
+    var mDetTt = "modal-title d-inline-flex justify-content-between";
+    var mDetBd = "modal-body bg-transparent d-inline-flex justify-content-center";
+    var mDetFt = "modal-footer justify-content-between";
+
+    // Class templates for the modal delete :
+
+    var mDelMn = "modal fade bg-transparent";
+    var mDelCn = "modal-dialog modal-dialog-centered";
+    var mDelCt = "modal-content border border-light delModal";
+    var mDelHd = "modal-header p-2 d-block text-light text-center";
+    var mDelBd = "modal-body d-block";
+    var miniDel = "d-block mx-auto displayPicture smallDelPic";
+
     // Global labels & titles :
 
     var edPic = globalLabels.EditPicture;
     var delPic = globalLabels.DelPicture;
+    var delThis = globalLabels.RemovePicture;
+    var delT = globalLabels.Delete;
+    var backT = globalLabels.Back;
 
 }
 
 <!--*** PICTURE DATA DISPLAY ***-->
 <!--Modal to display picture details-->
-<div class="modal bg-transparent" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
+<div class="@mDetMn" id="showPictureDetails" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
     <!--Centered large modal :-->
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="@mDetCn" role="document">
 
         <!--Modal content :-->
-        <div class="modal-content bg-transparent">
+        <div class="@mDetCt">
 
             <!--Modal header :-->
-            <div class="modal-header bg-transparent align-items-center justify-content-between d-flex">
+            <div class="@mDetHd">
 
                 <!--Modal title :-->
-                <div class="modal-title d-inline-flex justify-content-between @textLight" id="pictureModalLabel">
+                <div class="@mDetTt @textLight" id="pictureModalLabel">
 
                     <!--Picture title :-->
                     <button type="button" class="@btnDetailsCss ml-0">
@@ -88,7 +108,7 @@
             </div>
 
             <!--Modal body :-->
-            <div class="modal-body bg-transparent d-inline-flex justify-content-center">
+            <div class="@mDetBd">
 
                 <!--Previous picture button :-->
                 <button type="button" class="@btnDetailsCss prev greenify">
@@ -108,7 +128,7 @@
             <p class="text-center @textLight" id="pictureDescription">Picture description</p>
 
             <!--Modal footer :-->
-            <div class="modal-footer justify-content-between">
+            <div class="@mDetFt">
 
                 <!--Justify-content-between enables to set button position :-->
                 <button type="button" class="@btnDetailsCss ml-0">
@@ -228,24 +248,24 @@
 
 <!--*** DELETE PICTURE FUNCTION ***-->
 <!-- Delete picture modal -->
-<div class="modal fade bg-transparent" id="deleteModal">
+<div class="@mDelMn" id="deleteModal">
 
     <!-- Small centered modal -->
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="@mDelCn">
 
         <!-- Modal Content -->
-        <div class="modal-content border border-light delModal">
+        <div class="@mDelCt">
 
             <!-- Modal Header -->
-            <div class="modal-header p-2 d-block text-light text-center">
-                Supprimer cette image ?
+            <div class="@mDelHd">
+                @delThis
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body d-block">
+            <div class="@mDelBd">
 
                 <!--Display Picture :-->
-                <img src="" alt="" title="" class="d-block mx-auto displayPicture smallDelPic" />
+                <img src="" alt="" title="" class="@miniDel" />
 
                 <!--Button Group :-->
                 <div class="btn-group d-block" role="group">
@@ -253,7 +273,7 @@
                     <!--Delete button-->
                     <button type="button" class="@btnDetailsCss closing deletePicture ">
                         <text class="p-1 @textLight">
-                            Supprimer
+                            @delT
                         </text>
                         <i class="far fa-trash-alt"></i>
                     </button>
@@ -261,7 +281,7 @@
                     <!--Back button-->
                     <button type="button" class="@btnDetailsCss float-right greenify" data-dismiss="modal">
                         <text class="p-1 @textLight">
-                            Retour
+                            @backT
                         </text>
                         <i class="fas fa-backspace"></i>
                     </button>
