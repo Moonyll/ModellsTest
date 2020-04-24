@@ -58,7 +58,7 @@ footer {
     background-color: black !important;
 }
 
-/* Display mini nav - adjust the footer */
+/* Display mini nav - adjust the footer - nav-item buttons */
 @media screen and (max-width: 700px) {
     #normalNavBar {
         display: none;
@@ -71,9 +71,15 @@ footer {
     footer, nav, {
         height:12%;
     }
+
+    .nav-item {
+        align-self: center !important;
+        height: 70%;
+        max-width: 15%;
+    }
 }
 
-/* Display normal nav - adjust the footer */
+/* Display normal nav - adjust the footer - nav-item buttons */
 @media screen and (min-width: 701px) {
 
     #normalNavBar {
@@ -87,6 +93,13 @@ footer {
     footer, nav {
         height: 10%;
     }
+
+    .nav-item {
+        align-self: center !important;
+        height: 70%;
+        max-width: 6%;
+    }
+
 }
 
 /* Adjust the footer */
@@ -388,14 +401,6 @@ ul li {
 .removing:hover i {
     color: darkturquoise !important;
 }
-
-/* Set nav-item buttons */
-.nav-item {
-    align-self:center !important;
-    height:70%;
-    max-width:6%;
-}
-
 
 /* Set recurrent buttons */
 .recButton, .delModal, #addPic {

@@ -8,6 +8,8 @@
     var textLight = "text-light";
     var imgDispCss = "img-fluid img-thumbnail d-block mx-auto displayPicture";
     var btnDetailsCss = "btn text-light removeFocus";
+    var btnCloseSm = "closing mx-auto d-block d-sm-none";
+    var btnCloseMd = "closing mr-0 d-none d-sm-block d-md-block d-lg-block";
     var btnExifsAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Données&nbsp;Exifs";
     var btnLegendAttr = "data-toggle = popover data-trigger = hover data-placement = top title = Legende&nbsp;Exifs";
 
@@ -48,9 +50,17 @@
 
         <!--Modal content :-->
         <div class="@mDetCt">
+            
+            <!--Close button only visible on small screen-->
+            <button type="button" class="@btnDetailsCss @btnCloseSm" data-dismiss="modal">
+                <text class="p-1 @textLight">
+                    Fermer
+                </text>
+                <i class="fas fa-times-circle"></i>
+            </button>
 
             <!--Modal header :-->
-            <div class="@mDetHd">
+            <div class="@mDetHd text-light">
 
                 <!--Modal title :-->
                 <div class="@mDetTt @textLight" id="pictureModalLabel">
@@ -88,7 +98,7 @@
                 <!--Button Group :-->
                 <div class="btn-group mr-0" role="group">
 
-                    <!--Button infos :-->
+                    <!--Button help :-->
                     <button class="@btnDetailsCss exifsGreen mr-0" @btnLegendAttr>
                         <i class="far fa-lightbulb"></i>
                         <text class="p-1 @textLight">
@@ -96,15 +106,15 @@
                         </text>
                     </button>
 
-                    <!--Close button-->
-                    <button type="button" class="@btnDetailsCss closing mr-0" data-dismiss="modal">
+                    <!--Close button hidden on small screen-->
+                    <button type="button" class="@btnDetailsCss @btnCloseMd" data-dismiss="modal">
                         <text class="p-1 @textLight">
                             Fermer
                         </text>
                         <i class="fas fa-times-circle"></i>
-
                     </button>
                 </div>
+
             </div>
 
             <!--Modal body :-->
