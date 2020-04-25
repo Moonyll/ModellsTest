@@ -330,9 +330,7 @@ namespace Modells.Controllers
                                       .Replace(@"\", "/");
 
             // 7° Set a viewbag to keep & display preview picture when submit :
-            ViewBag.picturePreviewSrc = (!ModelState.IsValid) ?
-                                        relativePicturePath :
-                                        pictureGlobalLabels.DefaultPictureUrl;
+            ViewBag.picturePreviewSrc = relativePicturePath ?? pictureGlobalLabels.DefaultPictureUrl;
 
             // 8° Combine directory path & picture name to make the source picture :
             if (!string.IsNullOrEmpty(newPictureSourceName))
@@ -395,16 +393,37 @@ namespace Modells.Controllers
             return View(newPicture);
         }
 
-        #endregion
-
-        #region PICTURE EDITION
-
         /// <summary>
-        /// Get picture to edit.
+        /// Clean the temp directory from all files.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
+        public void pictureCleanTempDir()
+        {
+            // Check the temp directory :
+            var tempDirToCheck = Server.MapPath(pictureControls.tempFileDirectory);
+
+            // Pictures Temp are removed from the temp directory :
+            var tempFilesToClean = System.IO.Directory.GetFiles(tempDirToCheck);
+
+            // Temp directory is not empty :
+            if (tempFilesToClean.Length > 0)
+            {
+                foreach (string fileToRemove in tempFilesToClean)
+                {
+                    System.IO.File.Delete(fileToRemove);
+                }
+            }
+        }
+
+            #endregion
+
+#region PICTURE EDITION
+
+/// <summary>
+/// Get picture to edit.
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
+[HttpGet]
         public ActionResult pictureEdit(int? id)
         {
             if (id == null)

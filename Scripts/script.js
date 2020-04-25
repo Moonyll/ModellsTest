@@ -22,8 +22,9 @@
 
     $('#addPic').click(function () {
 
-        $('#newPictureToUpload').click(); 
+        $('#newPictureToUpload').click();
     });
+
 });
 
 var integratePicture = function (event) {
@@ -125,6 +126,27 @@ function clearCss(input) {
     $(input).prev('label').tooltip('hide');
     $(input).next('[data-toggle="popover"]').popover('hide');
 
+}
+
+// Clean The Temp Directory :
+function cleanTempDir() {
+
+    $.ajax({
+        url: urlCleanTempDir,
+        // Temp Dir is cleaned :
+        success: function () {
+
+            // Redirect to edition view page to update picture :
+            console.log("Temp Directory is now cleaned");
+        },
+
+        // Error :
+        error: function () {
+
+            // Redirect to error view page :
+            console.log("Temp Directory is not cleaned");
+        }
+    });
 }
 
 // Show the button when the user scrolls down 50px :

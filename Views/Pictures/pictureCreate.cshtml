@@ -6,11 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Class templates for the picture create :
-    var formGroupCss = "form-group d-flex mx-auto justify-content-center mb-0";
-    var labelCss = "control-label col-4 btn recButton text-light text-center text-nowrap border border-light";
-    var controlLabelCss = "control-label d-flex btn recButton border border-light col-2 justify-content-center align-items-center";
+    var formGroupCss = "form-group d-md-flex d-sm-block mx-auto justify-content-center mb-0";
+    var labelCss = "control-label col-md-4 col-sm-10 btn recButton text-light text-center text-nowrap border border-light";
+    var controlLabelCss = "control-label d-flex btn recButton border border-light col-md-2 col-sm-10 justify-content-center align-items-center";
     var buttonToolAttr = "data-toggle = tooltip data-placement = bottom";
-    var editCss = "form-control col-5 text-light border border-light was-validated currentInput";
+    var editCss = "form-control col-md-5 col-sm-10 text-light border border-light was-validated currentInput";
 
     var btnAddCss = "d-flex btn recButton border border-light col-sm-6 col-md-2 col-lg-2 justify-content-center " +
                     "adding offset-md-1 offset-lg-1 formButton";
@@ -78,7 +78,8 @@
 {
     <!--Add actions url for ajax calls :-->
     <script type="text/javascript">
-    var urlPictureCreate = '@Url.Action("pictureCreate", "Pictures")';
+        var urlPictureCreate = '@Url.Action("pictureCreate", "Pictures")';
+        var urlCleanTempDir = '@Url.Action("pictureCleanTempDir", "Pictures")';
     </script>
 
     <!--Load scripts file :-->
@@ -117,7 +118,7 @@
                     <!--Input of picture standard url :-->
                     <div class="@formGroupCss mt-3">
                         @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
-                        <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) />
+                        <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) onclick="cleanTempDir()" />
                         @Html.EditorFor(model => model.pictureStandardUrl,
                         new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl",
                                                      @onfocus = "clearCss(this)",

@@ -6,11 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     // Class templates for the picture edit :
-    var formGroupCss = "form-group d-flex mx-auto justify-content-center mb-0";
-    var labelCss = "control-label col-4 btn recButton text-light text-center text-nowrap border border-light";
-    var controlLabelCss = "control-label d-flex btn recButton border border-light col-2 justify-content-center align-items-center";
+    var formGroupCss = "form-group d-md-flex d-sm-block mx-auto justify-content-center mb-0";
+    var labelCss = "control-label col-md-4 col-sm-10 btn recButton text-light text-center text-nowrap border border-light";
+    var controlLabelCss = "control-label d-flex btn recButton border border-light col-md-2 col-sm-10 justify-content-center align-items-center";
     var buttonToolAttr = "data-toggle = tooltip data-placement = bottom";
-    var editCss = "form-control col-5 text-light border border-light was-validated currentInput";
+    var editCss = "form-control col-md-5 col-sm-10 text-light border border-light was-validated currentInput";
 
     var btnAddCss = "d-flex btn recButton border border-light col-sm-6 col-md-2 col-lg-2 justify-content-center " +
                     "adding offset-md-1 offset-lg-1 formButton";
@@ -34,10 +34,15 @@
 
     // Global labels & titles :
 
+    var mainTitle = globalLabels.PictureMainTitle;
+    var textAlt = globalLabels.PictureAlTitle;
+    var descPic = globalLabels.PictureDecription;
+
     var upPic = globalLabels.UpPicture;
     var resetFm = globalLabels.ResetForm;
     var previewImgTtl = globalLabels.PreviewImgMTitle;
     var previewImgAlt = globalLabels.PreviewImgATitle;
+    var upDate = globalLabels.Updated;
 
 
     // Action Links :
@@ -100,8 +105,8 @@
             <!--Button to add a picture :-->
             <button class="@addBtnCss offset-4">
                 <i class="fas fa-edit"></i>
-                <text class="p-2 text-light text-nowrap">
-                    Mettre à jour image
+                <text class="p-2 text-light">
+                    @upDate
                 </text>
             </button>
 
@@ -120,13 +125,16 @@
 
                     <!--Input of picture title :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
+                        <!--1st Label-->
+                        @Html.LabelFor(model => model.pictureTitle,
+                        new { @class = @labelCss ,
+                              @title=@mainTitle })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureTitle,
                         new { htmlAttributes = new { @class = @editCss,
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)", @autocomplete = "off" } })
-                        <!--Label-->
+                        <!--2nd Label-->
                         <label class="@controlLabelCss text-light">
                             <i class="fas fa-bookmark"></i>
                         </label>
@@ -139,14 +147,18 @@
 
                     <!--Input of picture alternative title :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
+                        <!--1st Label-->
+                        @Html.LabelFor(model => model.pictureAlternateTitle,
+                        new { @class = @labelCss,
+                              @title=@textAlt })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureAlternateTitle,
                         new { htmlAttributes = new { @class = @editCss,
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
-                        <!--Label-->
+                        
+                        <!--2nd Label-->
                         <label class="@controlLabelCss">
                             <i class="far fa-bookmark"></i>
                         </label>
@@ -159,14 +171,17 @@
 
                     <!--Input of picture description :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
+                        <!--1st Label-->
+                        @Html.LabelFor(model => model.pictureDescription,
+                        new { @class = @labelCss,
+                              @title =@descPic })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureDescription,
                         new { htmlAttributes = new { @class = @editCss,
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
-                        <!--Label-->
+                        <!--2nd Label-->
                         <label class="@controlLabelCss">
                             <i class="fas fa-pen"></i>
                         </label>
