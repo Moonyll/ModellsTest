@@ -1,9 +1,9 @@
-﻿/* Set special family font Brie Light for the html page */
+﻿/* Set special family font Quicksand_Light for the html page */
 @font-face {
-    font-family: Brie_Light;
+    font-family: Quicksand_Light;
     font-style: normal;
     font-weight: normal;
-    src: url('../Content/Fonts/BRI293.woff');
+    src: url('../Content/Fonts/Quicksand_Light.woff');
 }
 
 /* Set the html page */
@@ -13,7 +13,7 @@ html {
 
 /* Set the body */
 body {
-    font-family: Brie_Light;
+    font-family: Quicksand_Light;
     height: 100%;
 
     /*Set diaporama animation */
@@ -315,7 +315,7 @@ i {
 
 /* Set modal background */
 #showPictureDetails {
-    background-image: url('../Content/Images/AppPics/Town.jpg');
+    background-image: url('../Content/Images/AppPics/Sea.jpg');
 }
 
 /* Set the popover header */
@@ -410,7 +410,7 @@ ul li {
 /* Set input form */
 .currentInput {
     color: white;
-    background-color: black !important;
+    background-color: rgba(0, 0, 0, .3) !important;
 }
 
 /* Set input valid form */

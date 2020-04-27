@@ -1743,6 +1743,8 @@
     <Content Include="Content\Images\AppPics\HeaderNB.jpg" />
     <Content Include="Content\Images\AppPics\NightPort.jpg" />
     <Content Include="Content\Images\AppPics\Papagyo.jpg" />
+    <Content Include="Content\Images\AppPics\Removed.jpg" />
+    <Content Include="Content\Images\AppPics\Sea.jpg" />
     <Content Include="Content\Images\AppPics\SeaBoat.jpg" />
     <Content Include="Content\Images\AppPics\Success.jpg" />
     <Content Include="Content\Images\AppPics\Surfing.jpg" />
@@ -1845,6 +1847,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\Fonts\Quicksand_Light.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\pictureCollection.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
