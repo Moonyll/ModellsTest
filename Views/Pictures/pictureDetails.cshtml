@@ -50,7 +50,7 @@
 
         <!--Modal content :-->
         <div class="@mDetCt">
-            
+
             <!--Close button only visible on small screen-->
             <button type="button" class="@btnDetailsCss @btnCloseSm" data-dismiss="modal">
                 <text class="p-1 @textLight">
@@ -66,7 +66,7 @@
                 <div class="@mDetTt @textLight" id="pictureModalLabel">
 
                     <!--Picture title :-->
-                    <button type="button" class="@btnDetailsCss ml-0">
+                    <button type="button" class="@btnDetailsCss ml-0 titlPic">
                         <i class="fas fa-bookmark"></i>
                         <text class="p-1 @textLight" id="pictureTitle">
                             Picture title
@@ -79,7 +79,7 @@
                     </div>
 
                     <!--Picture category :-->
-                    <button type="button" class="@btnDetailsCss">
+                    <button type="button" class="@btnDetailsCss catPic">
                         <i class="fas fa-book-open"></i>
                         <text class="p-1 @textLight" id="pictureCategory">
                             Picture category
@@ -135,7 +135,10 @@
             </div>
 
             <!--Picture description :-->
-            <p class="text-center @textLight" id="pictureDescription">Picture description</p>
+            <button type="button" class="@btnDetailsCss descPic mx-auto mt-2">
+                <i class="fas fa-pen text-center"></i>
+                <p class="text-center @textLight mt-2" id="pictureDescription">Picture description</p>
+            </button>
 
             <!--Modal footer :-->
             <div class="@mDetFt">

@@ -183,7 +183,7 @@ footer {
 /* Set modells brand footer */
 .modells {
     font-weight:bold;
-    font-size:150%;
+    font-size:140%;
 }
 
 /* Set pixabay brand footer */
@@ -494,8 +494,56 @@ ul li {
 
 /* Set picture description */
 p[id="pictureDescription"] {
-    font-size:17px;
-    font-weight:bold;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* Set picture title, category, description p animation transition */
+button.titlPic, button.catPic, .descPic p, button.descPic {
+    transition: .5s ease-in-out;
+}
+
+/* Set picture title, category animation on hover */
+button.titlPic:hover, button.catPic:hover {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+/* Set picture description animation on hover */
+button.descPic:hover {
+    background-color: rgba(245, 222, 179, .1) !important;
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+/* Set picture title icon effect on hover */
+.titlPic:hover i {
+    color: darkcyan !important;
+}
+
+/* Set picture title text effect on hover */
+.titlPic:hover text {
+    color: paleturquoise !important;
+}
+
+/* Set picture category icon effect on hover */
+.catPic:hover i {
+    color: fuchsia !important;
+}
+
+/* Set picture category text effect on hover */
+.catPic:hover text {
+    color: plum !important;
+}
+
+/* Set picture description icon effect on hover */
+.descPic:hover i {
+    color: sandybrown !important;
+}
+
+/* Set picture description p effect on hover */
+.descPic:hover p {
+    color: gold !important;
 }
 
 /* Set containers views messages */
