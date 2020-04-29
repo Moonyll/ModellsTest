@@ -89,7 +89,7 @@ function isValid(input) {
     // Display validations :
     if (inputControl && inputLength > 2 && removeBlankLength != 0) {
         $(input).addClass('is-valid');
-        $(input).removeClass('currentInput');
+        //$(input).removeClass('currentInput');
         $(input).addClass('validInput');
         $(input).parent().next('.col-11').removeClass('visibleErrorMessage');
         $(input).parent().next('.col-11').addClass('hiddenErrorMessage');
@@ -98,16 +98,22 @@ function isValid(input) {
     }
     else if (!inputControl && inputLength > 2) {
         $(input).addClass('is-invalid');
-        $(input).removeClass('currentInput');
+        //$(input).removeClass('currentInput');
         $(input).addClass('invalidInput');
         $(input).prev('label').attr({ 'data-toggle': 'tooltip', 'data-placement': 'left', 'title': 'Autorisés [ . - _ ] seulement' });
         $(input).prev('label').tooltip('show');
     }
-    else if (inputEntity == 'categoryId')
+    else if (inputEntity == 'categoryId' && inputValue != 0)
     {
         $(input).addClass('is-valid');
-        $(input).removeClass('currentInput');
-        $(input).addClass('validInput');
+        //$(input).removeClass('currentInput');
+        $(input).addClass('validInputCat');
+    }
+    else if (inputEntity == 'categoryId' && inputValue == 0)
+    {
+        $(input).removeClass('is-valid');
+        $(input).addClass('is-invalid');
+        $(input).addClass('invalidInput');
     }
 }
 

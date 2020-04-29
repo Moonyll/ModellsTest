@@ -117,10 +117,10 @@
 
                     <!--Input of picture standard url :-->
                     <div class="@formGroupCss mt-3">
-                        @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss })
+                        @Html.LabelFor(model => model.pictureStandardUrl, new { @class = @labelCss + " picPic" })
                         <input type="file" class="form-control" name="newPictureToUpload" id="newPictureToUpload" onchange=integratePicture(event) onclick="cleanTempDir()" />
                         @Html.EditorFor(model => model.pictureStandardUrl,
-                        new { htmlAttributes = new { @class = @editCss + " pictureStandardUrl",
+                        new { htmlAttributes = new { @class = @editCss + " picPic pictureStandardUrl",
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
@@ -137,15 +137,15 @@
 
                     <!--Input of picture title :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss })
+                        @Html.LabelFor(model => model.pictureTitle, new { @class = @labelCss + " titlPic" })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureTitle,
-                        new { htmlAttributes = new { @class = @editCss,
+                        new { htmlAttributes = new { @class = @editCss + " titlPic",
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
                         <!--Label-->
-                        <label class="@controlLabelCss text-light">
+                        <label class="@controlLabelCss text-light titlPic">
                             <i class="fas fa-bookmark"></i>
                         </label>
                     </div>
@@ -157,15 +157,15 @@
 
                     <!--Input of picture alternative title :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss })
+                        @Html.LabelFor(model => model.pictureAlternateTitle, new { @class = @labelCss + " altPic" })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureAlternateTitle,
-                        new { htmlAttributes = new { @class = @editCss,
+                        new { htmlAttributes = new { @class = @editCss + " altPic",
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
                         <!--Label-->
-                        <label class="@controlLabelCss">
+                        <label class="@controlLabelCss altPic">
                             <i class="far fa-bookmark"></i>
                         </label>
                     </div>
@@ -177,15 +177,15 @@
 
                     <!--Input of picture description :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss })
+                        @Html.LabelFor(model => model.pictureDescription, new { @class = @labelCss + " descPic" })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureDescription,
-                        new { htmlAttributes = new { @class = @editCss,
+                        new { htmlAttributes = new { @class = @editCss + " descPic",
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
                         <!--Label-->
-                        <label class="@controlLabelCss">
+                        <label class="@controlLabelCss descPic">
                             <i class="fas fa-pen"></i>
                         </label>
                     </div>
@@ -197,12 +197,12 @@
 
                     <!--Input of picture category :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
+                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss + " catPic" })
                         <!--Edit-->
-                        @Html.DropDownList("categoryId", null,
-                        new { @class = @editCss, @onfocus = "clearCss(this)", @onchange = "isValid(this)" })
+                        @Html.DropDownList("categoryId", null, "Sélectionner",
+                        new { @class = @editCss + " catPic", @onfocus = "clearCss(this)", @onchange = "isValid(this)" })
                         <!--Label-->
-                        <label class="@controlLabelCss">
+                        <label class="@controlLabelCss catPic">
                             <i class="fas fa-book-open"></i>
                         </label>
                     </div>

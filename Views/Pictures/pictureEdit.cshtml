@@ -127,15 +127,15 @@
                     <div class="@formGroupCss">
                         <!--1st Label-->
                         @Html.LabelFor(model => model.pictureTitle,
-                        new { @class = @labelCss ,
+                        new { @class = @labelCss + " titlPic" ,
                               @title=@mainTitle })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureTitle,
-                        new { htmlAttributes = new { @class = @editCss,
+                        new { htmlAttributes = new { @class = @editCss + " titlPic",
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)", @autocomplete = "off" } })
                         <!--2nd Label-->
-                        <label class="@controlLabelCss text-light">
+                        <label class="@controlLabelCss text-light titlPic">
                             <i class="fas fa-bookmark"></i>
                         </label>
                     </div>
@@ -149,17 +149,17 @@
                     <div class="@formGroupCss">
                         <!--1st Label-->
                         @Html.LabelFor(model => model.pictureAlternateTitle,
-                        new { @class = @labelCss,
+                        new { @class = @labelCss + " altPic",
                               @title=@textAlt })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureAlternateTitle,
-                        new { htmlAttributes = new { @class = @editCss,
+                        new { htmlAttributes = new { @class = @editCss + " altPic",
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
                         
                         <!--2nd Label-->
-                        <label class="@controlLabelCss">
+                        <label class="@controlLabelCss altPic">
                             <i class="far fa-bookmark"></i>
                         </label>
                     </div>
@@ -173,16 +173,16 @@
                     <div class="@formGroupCss">
                         <!--1st Label-->
                         @Html.LabelFor(model => model.pictureDescription,
-                        new { @class = @labelCss,
+                        new { @class = @labelCss + " descPic",
                               @title =@descPic })
                         <!--Edit-->
                         @Html.EditorFor(model => model.pictureDescription,
-                        new { htmlAttributes = new { @class = @editCss,
+                        new { htmlAttributes = new { @class = @editCss + " descPic",
                                                      @onfocus = "clearCss(this)",
                                                      @onblur = "isValid(this)",
                                                      @autocomplete = "off" } })
                         <!--2nd Label-->
-                        <label class="@controlLabelCss">
+                        <label class="@controlLabelCss descPic">
                             <i class="fas fa-pen"></i>
                         </label>
                     </div>
@@ -194,13 +194,12 @@
 
                     <!--Input of picture category :-->
                     <div class="@formGroupCss">
-                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss })
+                        @Html.LabelFor(model => model.categoryId, "Catégorie", new { @class = @labelCss + " catPic"})
                          <!--Edit-->
-                        @Html.DropDownList("categoryId", null, new { @class = @editCss,
-                                                                     @onfocus = "clearCss(this)",
-                                                                     @onchange = "isValid(this)" })
+                        @Html.DropDownList("categoryId", null,"Sélectionner",
+                       new { @class = @editCss + " catPic", @onfocus = "clearCss(this)", @onchange = "isValid(this)" })
                         <!--Label-->
-                        <label class="@controlLabelCss">
+                        <label class="@controlLabelCss catPic">
                             <i class="fas fa-book-open"></i>
                         </label>
                     </div>
