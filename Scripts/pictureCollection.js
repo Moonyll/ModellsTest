@@ -1,8 +1,9 @@
-﻿  $(document).ready(function () {
+﻿$(document).ready(function () {
+
       $(".details").click(function () {
 
             // Get index of selected picture :
-            var indexItem = $(".details").index(this);
+            indexItem = $(".details").index(this);
 
             // Get selected picture elements :
             var mainPictureElements = getPictureElements($(this));
@@ -20,62 +21,77 @@
             // Display button :
             displayButton(indexItem);
 
+            // Display index to check :
+            console.log(
+            "index : ", indexItem,
+            " id : ", selectedPictureId,
+            " main : ", mainPictureElements,
+            );
+
             // Manage the previous button :
             $(".prev").click(function () {
 
                 // Previous index :
-                var prevIndex = ((indexItem - 1) <= 0) ? 0 : (indexItem - 1);
+                indexItem = ((indexItem - 1) < 0) ? 0 : (indexItem - 1);
 
                 // Display button :
-                displayButton(prevIndex);
+                displayButton(indexItem);
 
                 // Previous button :
-                var prevElementButton = $(".details").eq(prevIndex);
+                var prevElementButton = $(".details").eq(indexItem);
 
                 // Previous picture elements :
-                var prevPictureElements = getPictureElements(prevElementButton);
+                mainPictureElements = getPictureElements(prevElementButton);
 
                 // Previous src :
-                selectedPictureFile = prevPictureElements[0];
+                selectedPictureFile = mainPictureElements[0];
 
                 // Previous id :
-                selectedPictureId = prevPictureElements[1];
+                selectedPictureId = mainPictureElements[1];
 
                 // Display previous picture elements :
-                displayPictureElements(prevPictureElements);
+                displayPictureElements(mainPictureElements);
                 displayPictureExifs();
 
-                // Decrement index :
-                indexItem--;
+                // Display index to check :
+                console.log(
+                    "index : ", indexItem,
+                    " id : ", selectedPictureId,
+                    " main : ", mainPictureElements,
+                );
             });
 
             // Manage the next button :
             $(".next").click(function () {
 
                 // Next index :
-                var nextIndex = ((indexItem + 1) >= 7) ? 7 : (indexItem + 1);
+                indexItem = ((indexItem + 1) > 7) ? 7 : (indexItem + 1);
 
                 // Display button :
-                displayButton(nextIndex);
+                displayButton(indexItem);
 
                 // Next button :
-                var nextElementButton = $(".details").eq(nextIndex);
+                var nextElementButton = $(".details").eq(indexItem);
 
                 // Next picture elements :
-                var nextPictureElements = getPictureElements(nextElementButton);
+                mainPictureElements = getPictureElements(nextElementButton);
 
                 // Next src :
-                selectedPictureFile = nextPictureElements[0];
+                selectedPictureFile = mainPictureElements[0];
 
                 // Next id :
-                selectedPictureId = nextPictureElements[1];
+                selectedPictureId = mainPictureElements[1];
 
                 // Display next picture elements :
-                displayPictureElements(nextPictureElements);
+                displayPictureElements(mainPictureElements);
                 displayPictureExifs();
 
-                // Increment index :
-                indexItem++;
+                // Display index to check :
+                console.log(
+                    "index : ", indexItem,
+                    " id : ", selectedPictureId,
+                    " main : ", mainPictureElements,
+                );
             });
 
             // Get picture selected elements :
@@ -134,63 +150,7 @@
                 (buttonIndex == 7) ? $(".next").hide() : $(".next").show();
             }
 
-            // Ajax call to edit the picture :
-            $(".editPicture").click(function () {
-
-                $.ajax({
-                    url: urlPictureEdit,
-                    type: 'GET',
-                    dataType: 'html',
-                    contentType: 'application/json; charset=utf-8',
-                    data: { id: selectedPictureId },
-
-                    // Id is found :
-                    success: function () {
-
-                        // Redirect to edition view page to update picture :
-                        var urlEditPicture = urlPictureEdit +'/'+ selectedPictureId;
-                        console.log(urlEditPicture);
-                        window.location.href = urlEditPicture;
-                    },
-
-                    // Id is not found :
-                    error: function () {
-
-                        // Redirect to error view page :
-                        window.location.href = urlPictureError;
-                    }
-                });
-            });
-
-          //
-          //// Ajax call to delete the picture :
-          $(".deletePicture").click(function () {
-
-              $.ajax({
-                  url: urlPictureDelete,
-                  type: 'GET',
-                  dataType: 'html',
-                  contentType: 'application/json; charset=utf-8',
-                  data: { id: selectedPictureId },
-
-                  // Id is found :
-                  success: function () {
-
-                      // Redirect to edition view page to update picture :
-                      console.log(urlPictureDelete);
-                      window.location.href = urlPictureDeleteOk;
-                  },
-
-                  // Id is not found :
-                  error: function () {
-
-                      // Redirect to error view page :
-                      window.location.href = urlPictureError;
-                  }
-              });
-          });
-
-            // Display picture exifs with an ajax call :
+             // Display picture exifs with an ajax call :
             function displayPictureExifs() {
 
                 $.ajax({
@@ -274,3 +234,66 @@ function topFunction() {
 }
 
 // Tip : sanitize: false, => sanitize property for security reasons !
+
+// Picture Edition Function :
+function pictureToEdit() {
+
+    // Get the selected picture Id to edit :
+    var selectedPictureId = $("#pictureId").text();
+
+    // Ajax call to edit the picture :
+    $.ajax({
+        url: urlPictureEdit,
+        type: 'GET',
+        dataType: 'html',
+        contentType: 'application/json; charset=utf-8',
+        data: { id: selectedPictureId },
+
+        // Id is found :
+        success: function () {
+
+            // Redirect to edition view page to update picture :
+            var urlEditPicture = urlPictureEdit + '/' + selectedPictureId;
+            console.log(urlEditPicture);
+            window.location.href = urlEditPicture;
+        },
+
+        // Id is not found :
+        error: function () {
+
+            // Redirect to error view page :
+            window.location.href = urlPictureError;
+        }
+    });
+}
+
+// Picture Removing Function :
+function pictureToDelete() {
+
+    // Get the selected picture Id to edit :
+    var selectedPictureId = $("#pictureId").text();
+
+    // Ajax call to delete the picture :
+    $.ajax({
+        url: urlPictureDelete,
+        type: 'GET',
+        dataType: 'html',
+        contentType: 'application/json; charset=utf-8',
+        data: { id: selectedPictureId },
+
+        // Id is found :
+        success: function () {
+
+            // Redirect to edition view page to update picture :
+            console.log(urlPictureDelete);
+            window.location.href = urlPictureDeleteOk;
+        },
+
+        // Id is not found :
+        error: function () {
+
+            // Redirect to error view page :
+            window.location.href = urlPictureError;
+        }
+    });
+}
