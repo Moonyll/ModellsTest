@@ -121,11 +121,11 @@ namespace Modells.Controllers
                 {
                     // Load the default picture if database ones not exists :
                     pictureElements[index, 0] = "/Content/Images/Pictures/smile.jpg";
-                    pictureElements[index, 1] = "Default picture main title";
-                    pictureElements[index, 2] = "Default picture alt title";
-                    pictureElements[index, 3] = "Default picture description";
-                    pictureElements[index, 4] = "Default picture category";
-                    pictureElements[index, 5] = "Default picture id";
+                    pictureElements[index, 1] = "Modells";
+                    pictureElements[index, 2] = "Modells";
+                    pictureElements[index, 3] = "Une image";
+                    pictureElements[index, 4] = "Système";
+                    pictureElements[index, 5] = "Référence";
                 }
             }
 
