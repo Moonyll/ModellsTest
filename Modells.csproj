@@ -1738,6 +1738,7 @@
     <Content Include="Content\Icons\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Images\AppPics\404.jpg" />
     <Content Include="Content\Images\AppPics\Arche_LH.jpg" />
+    <Content Include="Content\Images\AppPics\cc-by-nc-nd.png" />
     <Content Include="Content\Images\AppPics\Error.jpg" />
     <Content Include="Content\Images\AppPics\HeaderCL.jpg" />
     <Content Include="Content\Images\AppPics\HeaderNB.jpg" />
