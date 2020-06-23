@@ -25,6 +25,22 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
+    <!--Load Mini Script for "Mentions Légales" popover-->
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $(".menleg").popover({
+                    html: true,
+                    content: function () {
+                        return $('#popover-testcontent').html();
+                    }
+                });
+            });
+
+        });
+    </script>
+
+
     @{
         // Css Templates :
 
@@ -192,47 +208,41 @@
     <!--Mentions Légales" Data-->
     <div id="popover-testcontent" hidden>
         <ul class="justify-content-between">
-            <li class="mx-auto exifSize">Editeur&nbsp;:</li>
+
+            <!--Editor Data-->
+            <li class="mx-auto exifSize font-weight-bold">Editeur&nbsp;:</li>
             <li class="mx-auto exifModel"><i class="fas fa-user"></i>&emsp;Pouwels Stéphane</li>
             <li class="mx-auto exifModel"><i class="fas fa-home"></i>&emsp;27, Rue d'Alsace - Le Havre</li>
             <li class="mx-auto">&emsp;</li>
-            
-            <li class="mx-auto exifSize">Support technique&nbsp;:</li>
+
+            <!--Technical Support Data-->
+            <li class="mx-auto exifSize font-weight-bold">Support technique&nbsp;:</li>
             <li class="mx-auto exifOpen"><i class="fas fa-phone-square"></i>&emsp;06 74 68 49 73</li>
             <li class="mx-auto exifOpen"><i class="fas fa-envelope"></i>&emsp;s.pouwels@laposte.net</li>
             <li class="mx-auto">&emsp;</li>
-            
-            <li class="mx-auto exifSize">Hébergement&nbsp;:</li>
+
+            <!--Server Data-->
+            <li class="mx-auto exifSize font-weight-bold">Hébergement&nbsp;:</li>
             <li class="mx-auto exifIsos"><i class="fas fa-user"></i>&emsp;La Manu</li>
             <li class="mx-auto exifIsos"><i class="fab fa-houzz"></i>&emsp;2, Rue Dombasle - Le Havre</li>
             <li class="mx-auto exifIsos"><i class="fas fa-external-link-square-alt"></i>&emsp;lamanu.fr</li>
             <li class="mx-auto">&emsp;</li>
-            
-            <li class="mx-auto exifSize">Images&nbsp;:</li>
+
+            <!--Picture License Data-->
+            <li class="mx-auto exifSize font-weight-bold">Images&nbsp;:</li>
             <li class="mx-auto exifDims">Les images de ce site sont libre de droits sous licence :</li>
         </ul>
-        <img src="~/Content/Images/AppPics/cc-by-nc-nd.png" alt="" title="" class="mx-auto d-block mw-100 border border-light" />
         
+        <!--Picture License Logo-->
+        <img src="~/Content/Images/AppPics/cc-by-nc-nd.png" alt="" title="" class="mx-auto d-block mw-100 border border-light" />
+
+        <!--More Info Data-->
         <ul class="justify-content-between">
             <li class="mx-auto">&emsp;</li>
-            <li class="mx-auto exifSize">Informations complémentaires&nbsp;:</li>
-            <li class="mx-auto exifDate"><i class="fas fa-images"></i>&emsp;Droit : creativecommons.org</li>
-            <li class="mx-auto exifDate"><i class="fas fa-gavel"></i>&emsp;Législation : cnil.fr</li>
+            <li class="mx-auto exifSize font-weight-bold">Infos complémentaires&nbsp;:</li>
+            <li class="mx-auto exifFlash"><i class="fas fa-images"></i>&emsp;Droit : <span class="exifDims">creativecommons.org</span></li>
+            <li class="mx-auto exifFlash"><i class="fas fa-gavel"></i>&emsp;Législation : <span class="exifDims">cnil.fr</span></li>
         </ul>
     </div>
 </body>
 </html>
-
-<script>
-    $(document).ready(function () {
-        $(function () {
-            $(".menleg").popover({
-                html: true,
-                content: function () {
-                    return $('#popover-testcontent').html();
-                }
-            });
-        });
-
-    });
-</script>
